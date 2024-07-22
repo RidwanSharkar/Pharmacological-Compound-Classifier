@@ -1,8 +1,8 @@
 import pandas as pd
 
 # Path to the CSV file
-file_path = r'C:\Users\Lenovo\Desktop\Psych Analysis\data\psychs.csv'
-file_path2 = r'C:\Users\Lenovo\Desktop\Psych Analysis\data\psychoactive.csv'
+file_path = r'/data/psychoactive compounds.csv'
+file_path2 = r'C:\Users\Lenovo\Desktop\Psychoactive-Compounds-Analysis\src\model\compound_names.csv'
 # Read the CSV file using pandas
 data1 = pd.read_csv(file_path)
 data2 = pd.read_csv(file_path2)
