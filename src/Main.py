@@ -5,48 +5,45 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 import ast  # Safe evaluation of string literals to lists
 
-# Load datasets
+# DATA PROCESSING & FEATURE SELECTION===================================================================================
 dataset = 'C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\data\\psychoactive compounds.csv'
 pharmacologicalActivities = 'C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\data\\compound_info.csv'
-
 data = pd.read_csv(dataset)
 activities = pd.read_csv(pharmacologicalActivities)
 
-# Assuming 'CID' is a common column to merge on, or use index if they are aligned
-merged_data = pd.merge(data, activities, on='CID', how='left')
-
-# Handle missing activities and convert string representations of lists to lists
+merged_data = pd.merge(data, activities, on='PubChem Compound CID', how='left')
 merged_data['Activities'] = merged_data['Activities'].fillna('[]').apply(ast.literal_eval)
-
-# Filter out entries without activities
 merged_data = merged_data[merged_data['Activities'].map(len) > 0]
 
-# MultiLabel Binarizer to transform the 'Activities' column into a binary matrix
+# Transform 'Activities' into binary matrix (Multi-label - Binary Relevance Model with Random Forest ** HAMMING LOSS **
 mlb = MultiLabelBinarizer()
 activities_encoded = mlb.fit_transform(merged_data['Activities'])
 
-# Ensure the molecular properties columns exist and handle missing values if necessary
-features = merged_data[['NumHBD', 'NumHBA', 'ExactMW', 'AMW']].fillna(0)
+# FEATURE SELECTION
+features = merged_data[['SlogP', 'SMR', 'LabuteASA', 'TPSA', 'AMW', 'ExactMW', 'NumLipinskiHBA', 'NumLipinskiHBD', 'NumRotatableBonds', 'NumHBD', 'NumHBA', 'NumAmideBonds', 'NumHeteroAtoms', 'NumHeavyAtoms', 'NumAtoms', 'NumRings', 'NumAromaticRings', 'NumSaturatedRings', 'NumAliphaticRings', 'NumAromaticHeterocycles', 'NumSaturatedHeterocycles', 'NumAliphaticHeterocycles', 'NumAromaticCarbocycles', 'NumSaturatedCarbocycles', 'NumAliphaticCarbocycles', 'FractionCSP3', 'Chi0v', 'Chi1v', 'Chi2v', 'Chi3v', 'Chi4v', 'Chi1n', 'Chi2n', 'Chi3n', 'Chi4n', 'HallKierAlpha', 'kappa1', 'kappa2', 'kappa3', 'slogp_VSA1', 'slogp_VSA2', 'slogp_VSA3', 'slogp_VSA4', 'slogp_VSA5', 'slogp_VSA6', 'slogp_VSA7', 'slogp_VSA8', 'slogp_VSA9', 'slogp_VSA10', 'slogp_VSA11', 'slogp_VSA12', 'smr_VSA1', 'smr_VSA2', 'smr_VSA3', 'smr_VSA4', 'smr_VSA5', 'smr_VSA6', 'smr_VSA7', 'smr_VSA8', 'smr_VSA9', 'smr_VSA10', 'peoe_VSA1', 'peoe_VSA2', 'peoe_VSA3', 'peoe_VSA4', 'peoe_VSA5', 'peoe_VSA6', 'peoe_VSA7', 'peoe_VSA8', 'peoe_VSA9', 'peoe_VSA10', 'peoe_VSA11', 'peoe_VSA12', 'peoe_VSA13', 'peoe_VSA14', 'MQN1', 'MQN2', 'MQN3', 'MQN4', 'MQN5', 'MQN6', 'MQN7', 'MQN8', 'MQN9', 'MQN10', 'MQN11', 'MQN12', 'MQN13', 'MQN14', 'MQN15', 'MQN16', 'MQN17', 'MQN18', 'MQN19', 'MQN20', 'MQN21', 'MQN22', 'MQN23', 'MQN24', 'MQN25', 'MQN26', 'MQN27', 'MQN28', 'MQN29', 'MQN30', 'MQN31', 'MQN32', 'MQN33', 'MQN34', 'MQN35', 'MQN36', 'MQN37', 'MQN38', 'MQN39', 'MQN40', 'MQN41', 'MQN42']].fillna(0)
 
-# Train-test split
+# TRAIN MODEL=============================================================================
 X_train, X_test, y_train, y_test = train_test_split(features, activities_encoded, test_size=0.2, random_state=42)
-
-# Initialize Random Forest Classifier for Binary Relevance method
 model = RandomForestClassifier(n_estimators=100, random_state=42)
-
-# Fit the model on each label (activity) in a Binary Relevance setup
 model.fit(X_train, y_train)
+y_prediction = model.predict(X_test)
 
-# Predict activities
-y_pred = model.predict(X_test)
-
-# Evaluate the model - calculate accuracy for each activity
+# EVALUATE================================================================================
 accuracies = []
 for i, label in enumerate(mlb.classes_):
-    accuracy = accuracy_score(y_test[:, i], y_pred[:, i])
+    accuracy = accuracy_score(y_test[:, i], y_prediction[:, i])
     accuracies.append(accuracy)
     print(f"Accuracy for {label}: {accuracy:.2f}")
 
-# Average accuracy
+# AVERAGE ACCURACY========================================================================
 average_accuracy = sum(accuracies) / len(accuracies)
 print(f"Average Accuracy: {average_accuracy:.2f}")
+
+# EXAMPLE TEST============================================================================
+test_data = data[data['PubChem Compound CID'] == 122130742]
+
+if not test_data.empty:
+    features = test_data[['SlogP', 'SMR', 'LabuteASA', 'TPSA', 'AMW', 'ExactMW', 'NumLipinskiHBA', 'NumLipinskiHBD', 'NumRotatableBonds', 'NumHBD', 'NumHBA', 'NumAmideBonds', 'NumHeteroAtoms', 'NumHeavyAtoms', 'NumAtoms', 'NumRings', 'NumAromaticRings', 'NumSaturatedRings', 'NumAliphaticRings', 'NumAromaticHeterocycles', 'NumSaturatedHeterocycles', 'NumAliphaticHeterocycles', 'NumAromaticCarbocycles', 'NumSaturatedCarbocycles', 'NumAliphaticCarbocycles', 'FractionCSP3', 'Chi0v', 'Chi1v', 'Chi2v', 'Chi3v', 'Chi4v', 'Chi1n', 'Chi2n', 'Chi3n', 'Chi4n', 'HallKierAlpha', 'kappa1', 'kappa2', 'kappa3', 'slogp_VSA1', 'slogp_VSA2', 'slogp_VSA3', 'slogp_VSA4', 'slogp_VSA5', 'slogp_VSA6', 'slogp_VSA7', 'slogp_VSA8', 'slogp_VSA9', 'slogp_VSA10', 'slogp_VSA11', 'slogp_VSA12', 'smr_VSA1', 'smr_VSA2', 'smr_VSA3', 'smr_VSA4', 'smr_VSA5', 'smr_VSA6', 'smr_VSA7', 'smr_VSA8', 'smr_VSA9', 'smr_VSA10', 'peoe_VSA1', 'peoe_VSA2', 'peoe_VSA3', 'peoe_VSA4', 'peoe_VSA5', 'peoe_VSA6', 'peoe_VSA7', 'peoe_VSA8', 'peoe_VSA9', 'peoe_VSA10', 'peoe_VSA11', 'peoe_VSA12', 'peoe_VSA13', 'peoe_VSA14', 'MQN1', 'MQN2', 'MQN3', 'MQN4', 'MQN5', 'MQN6', 'MQN7', 'MQN8', 'MQN9', 'MQN10', 'MQN11', 'MQN12', 'MQN13', 'MQN14', 'MQN15', 'MQN16', 'MQN17', 'MQN18', 'MQN19', 'MQN20', 'MQN21', 'MQN22', 'MQN23', 'MQN24', 'MQN25', 'MQN26', 'MQN27', 'MQN28', 'MQN29', 'MQN30', 'MQN31', 'MQN32', 'MQN33', 'MQN34', 'MQN35', 'MQN36', 'MQN37', 'MQN38', 'MQN39', 'MQN40', 'MQN41', 'MQN42']].fillna(0)
+    predicted_activities_encoded = model.predict(features)
+    predicted_activities_labels = mlb.inverse_transform(predicted_activities_encoded)
+    print("Predicted Activities for CID 122130742:", predicted_activities_labels)
