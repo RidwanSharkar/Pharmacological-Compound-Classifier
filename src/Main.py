@@ -6,8 +6,8 @@ from sklearn.metrics import accuracy_score
 import ast  # Safe evaluation of string literals to lists
 
 # DATA PROCESSING & FEATURE SELECTION===================================================================================
-dataset = 'C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\data\\psychoactive compounds.csv'
-pharmacologicalActivities = 'C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\data\\compound_info.csv'
+dataset = 'C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\data\\psychoactiveCompounds_Dataset.csv'
+pharmacologicalActivities = 'C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\data\\compoundInfo_Scraped.csv'
 data = pd.read_csv(dataset)
 activities = pd.read_csv(pharmacologicalActivities)
 

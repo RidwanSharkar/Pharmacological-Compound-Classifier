@@ -10,7 +10,7 @@ from sklearn.preprocessing import MultiLabelBinarizer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
-data = pd.read_csv('C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\data\\compound_info.csv')
+data = pd.read_csv('/data/compoundInfo_Scraped.csv')
 
 data.dropna(subset=['Activities'], inplace=True)  # Drop entries without activities
 mlb = MultiLabelBinarizer()
@@ -35,7 +35,7 @@ for idx, clf in enumerate(classifiers):
 
 """
 # 1) DATA CLEANING:
-data = pd.read_csv('C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\data\\psychoactive compounds.csv')
+data = pd.read_csv('C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\data\\psychoactiveCompounds_Dataset.csv')
 data.isnull().sum()
 data = data.dropna()  # Example: Dropping rows with missing values
 
