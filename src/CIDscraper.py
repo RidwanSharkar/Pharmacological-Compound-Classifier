@@ -15,7 +15,7 @@ def extract_cids(base_url, total_pages):
     cids = []
     driver.get(base_url)
 
-    for _ in range(total_pages):
+    for page in range(total_pages):
         WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, "a[href*='/compound/']")))
         links = driver.find_elements(By.CSS_SELECTOR, "a[href*='/compound/']")
         unique_urls = {link.get_attribute('href') for link in links if "#section=" not in link.get_attribute('href')}
@@ -30,8 +30,12 @@ def extract_cids(base_url, total_pages):
 
         # More robust handling for clicking the 'Next' button
         try:
-            next_button = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "li.page-item.next:not(.disabled) > a")))
+            next_button = WebDriverWait(driver, 30).until(
+                EC.element_to_be_clickable((By.CSS_SELECTOR, "a.page_link.next"))
+            )
+            driver.execute_script("arguments[0].scrollIntoView(true);", next_button)
             next_button.click()
+            print(f"Clicked on the next button to go to page {page + 2}")
         except Exception as e:
             print(f"Failed to find or click next button: {str(e)}")
             break
@@ -39,8 +43,9 @@ def extract_cids(base_url, total_pages):
     driver.quit()
     return cids
 
-base_url = "https://pubchem.ncbi.nlm.nih.gov/#query=bSrKEVBQNewCxjfftad-99Ay1lJTS4za9v-Xlu3uhZft97k&alias=PubChem%20Compound%20TOC%3A%20MeSH%20Pharmacological%20Classification"
-total_pages = 5   # Adjust as necessary
+
+base_url = "https://www.ncbi.nlm.nih.gov/pccompound?cmd=HistorySearch&hinit=true&query_key=10&WebEnv=MCID_66a1284318636418fb483847"
+total_pages = 2  # Adjust as necessary
 
 all_cids = extract_cids(base_url, total_pages)
 
