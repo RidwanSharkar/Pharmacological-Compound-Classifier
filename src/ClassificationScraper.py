@@ -12,7 +12,7 @@ def get_compound_info(cid):
     url = f"{base_url}/data/compound/{cid}/JSON"
 
     try:
-        response = requests.get(url, timeout=10)
+        response = requests.get(url, timeout=30)
         response.raise_for_status()
         data = response.json()
 
