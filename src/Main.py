@@ -13,7 +13,6 @@ mlb = joblib.load('C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\
 
 
 def fetch_smiles(pubchem_cid):
-    """ Fetch the SMILES string from PubChem using its REST API. """
     url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/{pubchem_cid}/property/CanonicalSMILES/JSON'
     response = requests.get(url)
     data = response.json()
