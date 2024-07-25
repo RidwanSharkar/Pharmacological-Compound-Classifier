@@ -53,4 +53,4 @@ for cid in df['PubChem Compound CID'].tolist():
 info_df = pd.DataFrame.from_dict(compound_info, orient='index')
 info_df.reset_index(inplace=True)
 info_df.columns = ['PubChem Compound CID', 'Compound Name', 'Activities']
-info_df.to_csv('compoundInfo_Scraped.csv', index=False)
+info_df.to_csv('compoundInfo_scraped.csv', index=False)

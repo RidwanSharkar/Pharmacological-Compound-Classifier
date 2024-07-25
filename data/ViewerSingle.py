@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-file_path = r'C:\Users\Lenovo\Desktop\Psychoactive-Compounds-Analysis\data\psychoactiveCompounds_Dataset.csv'
+file_path = r'/data/psychoactiveCompounds_Dataset.csv'
 data = pd.read_csv(file_path)
 
 print("Dataset 1 Columns:", data.columns.tolist())

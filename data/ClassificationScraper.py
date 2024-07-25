@@ -3,7 +3,7 @@ import requests
 import time
 import json
 
-file_path = r'C:\Users\Lenovo\Desktop\Psychoactive-Compounds-Analysis\data\compoundCIDs.csv'
+file_path = r'/data/compoundCIDs_scraped.csv'
 df = pd.read_csv(file_path)
 
 
@@ -53,4 +53,4 @@ for cid in df['cid'].tolist():
 info_df = pd.DataFrame.from_dict(compound_info, orient='index')
 info_df.reset_index(inplace=True)
 info_df.columns = ['PubChem Compound CID', 'Compound Name', 'Activities']
-info_df.to_csv('compoundClassification_Scraped.csv', index=False)
+info_df.to_csv('compoundClassifications_scraped.csv', index=False)

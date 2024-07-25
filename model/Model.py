@@ -8,7 +8,7 @@ import joblib
 
 # DATA PROCESSING & FEATURE SELECTION===================================================================================
 dataset = 'C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\data\\psychoactiveCompounds_Dataset.csv'
-pharmacologicalActivities = 'C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\data\\compoundInfo_Scraped.csv'
+pharmacologicalActivities = 'C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\data\\compoundInfo_scraped.csv'
 data = pd.read_csv(dataset)
 activities = pd.read_csv(pharmacologicalActivities)
 
@@ -30,8 +30,8 @@ model.fit(X_train, y_train)
 y_prediction = model.predict(X_test)
 
 # Save Results
-joblib.dump(model, 'C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\model\\RandomForestModel.pkl')
-joblib.dump(mlb, 'C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\model\\MultiLabelBinarizer.pkl')
+joblib.dump(model, '/model/RandomForestModel.pkl')
+joblib.dump(mlb, '/model/MultiLabelBinarizer.pkl')
 
 # EVALUATE================================================================================
 accuracies = []
