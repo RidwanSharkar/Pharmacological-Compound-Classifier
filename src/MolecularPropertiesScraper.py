@@ -2,7 +2,7 @@ import logging
 import time
 import pandas as pd
 from rdkit import Chem
-from rdkit.Chem import Descriptors, rdMolDescriptors, Crippen
+from rdkit.Chem import Descriptors, rdMolDescriptors, Crippen, Lipinski
 import requests
 from rdkit.Chem.rdchem import BondType
 
@@ -88,8 +88,8 @@ def compute_descriptors(smiles):
         'TopologicalPolarSurfaceArea': Descriptors.TPSA(mol),  # TPSA
         'MolecularWeight': Descriptors.MolWt(mol),  # AMW
         'ExactMW': Descriptors.ExactMolWt(mol),  # ExactMW
-        'NumLipinskiHBA': Descriptors.NumHAcceptors(mol),  # NumLipinskiHBA
-        'NumLipinskiHBD': Descriptors.NumHDonors(mol),  # NumLipinskiHBD
+        'NumLipinskiHBA': Lipinski.NOCount(mol),  # Updated to use Lipinski NOCount
+        'NumLipinskiHBD': Lipinski.NHOHCount(mol),  # Updated to use Lipinski NHOHCount
         'RotatableBondCount': Descriptors.NumRotatableBonds(mol),  # NumRotatableBonds
         'HBondDonorCount': Descriptors.NumHDonors(mol),  # NumHBD
         'HBondAcceptorCount': Descriptors.NumHAcceptors(mol),  # NumHBA
@@ -135,7 +135,7 @@ def main():
     # Prepare to collect data
     results = []
 
-    for cid in df['cid'][:30]: # to test
+    for cid in df['cid'][:100]:  # to test
         logging.debug(f"Processing CID: {cid}")
         print(f"Processing CID: {cid}")
         smiles = fetch_smiles(cid)
