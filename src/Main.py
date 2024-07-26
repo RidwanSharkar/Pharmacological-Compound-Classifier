@@ -1,7 +1,7 @@
 import pandas as pd
 from rdkit import Chem
-from rdkit.Chem import Descriptors, rdMolDescriptors, Crippen
-import joblib  # For loading the model
+from rdkit.Chem import Descriptors, rdMolDescriptors, Crippen, Lipinski
+import joblib
 import requests
 from rdkit.Chem.rdchem import BondType
 
@@ -16,7 +16,13 @@ def fetch_smiles(pubchem_cid):
     url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/{pubchem_cid}/property/CanonicalSMILES/JSON'
     response = requests.get(url)
     data = response.json()
-    return data['PropertyTable']['Properties'][0]['CanonicalSMILES']
+    # Check if 'PropertyTable' and 'Properties' keys exist in the response
+    if 'PropertyTable' in data and 'Properties' in data['PropertyTable'] and len(data['PropertyTable']['Properties']) > 0:
+        return data['PropertyTable']['Properties'][0]['CanonicalSMILES']
+    else:
+        # Handle the case where the expected data isn't available
+        print(f"No data available for CID {pubchem_cid}. Check if the CID is correct.")
+        return None
 
 
 def compute_vsa_descriptors(mol):
@@ -54,13 +60,6 @@ def count_amide_bonds(mol):
                     amide_bond_count += 1
     return amide_bond_count
 
-# def count_amide_bonds(mol):
-#    """Count the number of amide bonds in a molecule."""
-#    amide_bond_count = 0
-#    for bond in mol.GetBonds():
-#        if bond.GetBondType() == BondType.AMIDE:
-#            amide_bond_count += 1
-#    return amide_bond_count
 
 def compute_descriptors(smiles):
     mol = Chem.MolFromSmiles(smiles)
@@ -74,15 +73,15 @@ def compute_descriptors(smiles):
         'TPSA': Descriptors.TPSA(mol),  # TPSA
         'AMW': Descriptors.MolWt(mol),  # AMW
         'ExactMW': Descriptors.ExactMolWt(mol),  # ExactMW
-        'NumLipinskiHBA': Descriptors.NumHAcceptors(mol),  # NumLipinskiHBA
-        'NumLipinskiHBD': Descriptors.NumHDonors(mol),  # NumLipinskiHBD
+        'NumLipinskiHBA': Lipinski.NOCount(mol),  # Updated to use Lipinski NOCount
+        'NumLipinskiHBD': Lipinski.NHOHCount(mol),  # Updated to use Lipinski NHOHCount
         'NumRotatableBonds': Descriptors.NumRotatableBonds(mol),  # NumRotatableBonds
         'NumHBD': Descriptors.NumHDonors(mol),  # NumHBD
         'NumHBA': Descriptors.NumHAcceptors(mol),  # NumHBA
         'NumAmideBonds': count_amide_bonds(mol),
         'NumHeteroAtoms': rdMolDescriptors.CalcNumHeteroatoms(mol),
         'NumHeavyAtoms': Descriptors.HeavyAtomCount(mol),  # NumHeavyAtoms
-        'NumAtoms': mol.GetNumAtoms(),  # NumAtoms
+        'NumAtoms': mol.GetNumAtoms(),  # ***NumAtoms EXCLUDES HYDROGENS***
         'NumRings': rdMolDescriptors.CalcNumRings(mol),  # NumRings
         'NumAromaticRings': rdMolDescriptors.CalcNumAromaticRings(mol),  # NumAromaticRings
         'NumSaturatedRings': rdMolDescriptors.CalcNumSaturatedRings(mol),  # NumSaturatedRings
@@ -98,15 +97,15 @@ def compute_descriptors(smiles):
         'Chi1v': rdMolDescriptors.CalcChi1v(mol),
         'Chi2v': rdMolDescriptors.CalcChi2v(mol),
         'Chi3v': rdMolDescriptors.CalcChi3v(mol),
-        'Chi4v': rdMolDescriptors.CalcChi4v(mol),  # Chi x9
+        'Chi4v': rdMolDescriptors.CalcChi4v(mol),       # Chi x9
         'Chi1n': rdMolDescriptors.CalcChi1n(mol),
         'Chi2n': rdMolDescriptors.CalcChi2n(mol),
         'Chi3n': rdMolDescriptors.CalcChi3n(mol),
         'Chi4n': rdMolDescriptors.CalcChi4n(mol),
         'HallKierAlpha': rdMolDescriptors.CalcHallKierAlpha(mol),  # HallKierAlpha
-        'kappa1': rdMolDescriptors.CalcKappa1(mol),  # kappa1
-        'kappa2': rdMolDescriptors.CalcKappa2(mol),  # kappa2
-        'kappa3': rdMolDescriptors.CalcKappa3(mol),  # kappa3 = 39
+        'kappa1': rdMolDescriptors.CalcKappa1(mol),     # kappa1
+        'kappa2': rdMolDescriptors.CalcKappa2(mol),     # kappa2
+        'kappa3': rdMolDescriptors.CalcKappa3(mol),     # kappa3 = 39
     }
     base_descriptors.update(compute_vsa_descriptors(mol))
     base_descriptors.update(compute_mqn_descriptors(mol))

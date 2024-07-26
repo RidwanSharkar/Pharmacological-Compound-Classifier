@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-file_path = 'C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\data\\computed_descriptors.csv'
+file_path = '/data/computedParameters_scraped.csv'
 data = pd.read_csv(file_path)
 
 print("Dataset 1 Columns:", data.columns.tolist())

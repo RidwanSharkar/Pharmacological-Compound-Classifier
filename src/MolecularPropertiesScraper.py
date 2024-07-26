@@ -129,13 +129,10 @@ def compute_descriptors(smiles):
 
 
 def main():
-    # Load data
     df = pd.read_csv('C:/Users/Lenovo/Desktop/Psychoactive-Compounds-Analysis/data/compoundCIDs_scraped.csv')
-
-    # Prepare to collect data
     results = []
 
-    for cid in df['cid'][:100]:  # to test
+    for cid in df['cid']:  # [:100] to test
         logging.debug(f"Processing CID: {cid}")
         print(f"Processing CID: {cid}")
         smiles = fetch_smiles(cid)
@@ -144,17 +141,15 @@ def main():
             if descriptors:
                 descriptors['Cid'] = cid
                 results.append(descriptors)
-                print(f"Scraped Results for CID {cid}: {descriptors}")  # Print the whole row of scraped results
+                print(f"Scraped Results for CID {cid}: {descriptors}")
 
-    # Create DataFrame from results
     results_df = pd.DataFrame(results)
     cols = ['Cid'] + [col for col in results_df.columns if col != 'Cid']
     results_df = results_df[cols]
     print(results_df)
 
-    # Save the DataFrame to a CSV file
-    results_df.to_csv('C:/Users/Lenovo/Desktop/Psychoactive-Compounds-Analysis/data/computed_descriptors.csv', index=False)
-    print("Completed processing all CIDs and saved to computed_descriptors.csv")
+    results_df.to_csv('C:/Users/Lenovo/Desktop/Psychoactive-Compounds-Analysis/data/computedParameters_scraped.csv', index=False)
+    print("Completed processing all CIDs and saved to computedParameters_scraped.csv")
 
 
 if __name__ == "__main__":
