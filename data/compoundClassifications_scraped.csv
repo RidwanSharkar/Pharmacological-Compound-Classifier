@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 CID,Compound Name,Activities
+=======
+PubChem Compound CID,Compound Name,Activities
+>>>>>>> 0df7d27f77630c38d4d49ebf5048104aa32a8290
 1,Acetyl-DL-carnitine,"['Vitamin B Complex', 'Nootropic Agents']"
 6,"1-Chloro-2,4-dinitrobenzene","['Indicators and Reagents', 'Irritants']"
 15,17-Hydroxyandrostan-3-one,['Androgens']
