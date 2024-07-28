@@ -7,12 +7,12 @@ ________________________________________________________________________________
 
 This project employs Machine Learning to identify the Quantitative Structure-Activity Relationships (QSAR) of chemical compounds based on their extensive molecular properties. Inspired by this dataset of 635 psychoactive compoounds and their molecular properties (117)
 [https://www.kaggle.com/datasets/thedevastator/psychedelic-drug-database?resource=download], 
-a webscraper is set up to retrieve data from all compounds listed under PubChem.ncbi that possess a known 'MeSH Pharmacological Classification' (totaling 17,866 entries):
+a webscraper is set up to retrieve data from all compounds listed under PubChem.ncbi that possess a known 'MeSH Pharmacological Classification' (totaling 17,866 entries) to create and store a custom expanded dataset.
 
 
 [Anti-Psychotic Agents, Serotonin Receptor Agonists, Dopamine Uptake Inhibitors, Protein Kinase Inhibitors, Vasoconstrictor Agents, etc]
 
-RD-Kit (Cheminformatics) is then used to retrieve and compute all scraped compounds' molecular popularties (157), which is fed to a Random Forest/Gradiant Boosting/NLPCl-assifier machine learning model to determine which molecular properties correlate highest with the compounds' pharmacological action. These weighed attributes are then used by the model to predict the pharmacological classification of a novel compound whose 'MeSH Pharmacological Classification' is not listed on PubChem. 
+RD-Kit (Cheminformatics) is then used to retrieve and compute all scraped compounds' molecular popularties (157), which is fed to a Random Forest/Gradiant Boosting/NLP-Classifier machine learning model to determine which molecular properties correlate highest with the compounds' pharmacological action. These weighed attributes are then used by the model to predict the pharmacological classification of a novel compound whose 'MeSH Pharmacological Classification' is not listed on PubChem. 
 
 ________________________________________________________________________________________________________________
 Hamming Loss - Multi-Label Classification - is utilized to allow independent prediction of each activity within the set of pharmacological activities:
