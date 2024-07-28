@@ -23,47 +23,47 @@ ________________________________________________________________________________
 **MOLECULAR PROPERTIES:**
 
 
-'SlogP' - represents the compound's Lipophilicity, predicting how well it can cross cell membranes.
+• 'SlogP' - represents the compound's Lipophilicity, predicting how well it can cross cell membranes.
 
-'SMR' - Molar Refractivity, representing molecule's volume and polarizability (measure of electron cloud's ability to distort)
+• 'SMR' - Molar Refractivity, representing molecule's volume and polarizability (measure of electron cloud's ability to distort)
 
-'LabuteASA' - approx Surface Area
+• 'LabuteASA' - approx Surface Area
 
-'TPSA' - Topological Polar Surface Area  (important for drug bioavailability)
+• 'TPSA' - Topological Polar Surface Area  (important for drug bioavailability)
 
-'AMW' -  Average Molecular Weight of the compound.
+• 'AMW' -  Average Molecular Weight of the compound.
 
-'FractionCSP3' - fraction of carbons that are sp3 hybridized (indicating more Hydrogen saturation and flexibility of the molecule)
+• 'FractionCSP3' - fraction of carbons that are sp3 hybridized (indicating more Hydrogen saturation and flexibility of the molecule)
 
-'EState_VSA1', ... , 'EState_VSA10' - for Electrotopological State of the molecule
+• 'EState_VSA1', ... , 'EState_VSA10' - for Electrotopological State of the molecule
 
-'fr_alkyl_halide', 'fr_amide', 'fr_benzene', etc. - Functional Group count, which correlate chemical behavior and biological receptor activity.
+• 'fr_alkyl_halide', 'fr_amide', 'fr_benzene', etc. - Functional Group count, which correlate chemical behavior and biological receptor activity.
 
-'NumLipinskiHBA' - Number of Hydrogen Bond Acceptors as defined by Lipinski's rule of five (NO Count)
+• 'NumLipinskiHBA' - Number of Hydrogen Bond Acceptors as defined by Lipinski's rule of five (NO Count)
 
-'NumLipinskiHBD' - Number of Hydrogen Bond Donors as defined by Lipinski's rule of five (NHOH Count)
+• 'NumLipinskiHBD' - Number of Hydrogen Bond Donors as defined by Lipinski's rule of five (NHOH Count)
 
-'NumRotatableBonds' - Number of bonds in a molecule that can freely rotate.
+• 'NumRotatableBonds' - Number of bonds in a molecule that can freely rotate.
 
-'NumHeteroAtoms' - Number of atoms other than carbon and hydrogen (e.g., oxygen, nitrogen)
+• 'NumHeteroAtoms' - Number of atoms other than carbon and hydrogen (e.g., oxygen, nitrogen)
 
-'NumAromaticRings', Number of aromatic ring structures (rings with alternating double bonds).
+• 'NumAromaticRings', Number of aromatic ring structures (rings with alternating double bonds).
 
-'NumSaturatedRings', Number of saturated rings (rings that contain single bonds only).
+• 'NumSaturatedRings', Number of saturated rings (rings that contain single bonds only).
 
-'NumAliphaticRings' Number of non-aromatic rings.
+• 'NumAliphaticRings' Number of non-aromatic rings.
 
-'Chi0v', 'Chi1v', 'Chi2v', 'Chi3v', 'Chi4v' - Chi connectivity index, valence state (measure of molecular branching).
+• 'Chi0v', 'Chi1v', 'Chi2v', 'Chi3v', 'Chi4v' - Chi connectivity index in valence state (measure of molecular branching).
 
-'Chi1n', 'Chi2n', 'Chi3n', 'Chi4n' - Different orders of the Chi connectivity index, non-valence state.
+• 'Chi1n', 'Chi2n', 'Chi3n', 'Chi4n' - Different orders of the Chi connectivity index, non-valence state.
 
-'HallKierAlpha' - measure of molecular shape and electron distribution.
+• 'HallKierAlpha' - measure of molecular shape and electron distribution.
 
-'kappa1', 'kappa2', 'kappa3' -  Kappa shape indices reflect molecular shape, symmetry, and branching.
+• 'kappa1', 'kappa2', 'kappa3' -  Kappa shape indices reflect molecular shape, symmetry, and branching.
 
-'peoe_VSA1', 'peoe_VSA2', ... , 'peoe_VSA14' - relate to partial equalization of orbital electronegativity (PEOE).
+• 'peoe_VSA1', 'peoe_VSA2', ... , 'peoe_VSA14' - relate to partial equalization of orbital electronegativity (PEOE).
 
-'MQN1', 'MQN2', ... , 'MQN42' - Molecular Quantum Numbers, series of 42 ints capturing molecular structure information.
+• 'MQN1', 'MQN2', ... , 'MQN42' - Molecular Quantum Numbers, series of 42 ints capturing molecular structure information.
 
 ... + 100
 
