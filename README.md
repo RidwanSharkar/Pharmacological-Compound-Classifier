@@ -17,9 +17,16 @@ RD-Kit (Cheminformatics) is then used to retrieve and compute all scraped compou
 
 
 **Tech Stack:**
+
 Frontend: React, TypeScript
+
 Backend: Flask, Python
+
 Cheminformatics Toolkit: RDKit
+
 Data Storage: AWS S3, Parquet
+
 Machine Learning: Scikit-learn
+
 RESTful API
+
