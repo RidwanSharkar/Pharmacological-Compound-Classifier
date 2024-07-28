@@ -37,7 +37,7 @@ ________________________________________________________________________________
 
 'EState_VSA1', ... , 'EState_VSA10' - for Electrotopological State of the molecule
 
-'fr_alkyl_halide', 'fr_amide', 'fr_benzene', etc. - Functional Group count, which are correlate chemical behavior and biological receptor activity.
+'fr_alkyl_halide', 'fr_amide', 'fr_benzene', etc. - Functional Group count, which correlate chemical behavior and biological receptor activity.
 
 'NumLipinskiHBA' - Number of Hydrogen Bond Acceptors as defined by Lipinski's rule of five (NO Count)
 
