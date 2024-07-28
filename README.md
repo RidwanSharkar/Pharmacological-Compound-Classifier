@@ -2,7 +2,8 @@
 - Predictive Modeling of Chemical Compounds' Classification, Mechanisms of Action, and Therapeutic Potentials using Machine Learning to identify Structure-Activity-Relationships (SAR)
 ________________________________________________________________________________________________________________
 
-OVERVIEW:
+**OVERVIEW:**
+
 This project employs machine learning to identify the Structure-Activity Relationships (SAR) of chemical compounds based on their extensive molecular properties. Inspired by this dataset of 635 psychoactive compoounds and their molecular properties (117)
 [https://www.kaggle.com/datasets/thedevastator/psychedelic-drug-database?resource=download], 
 a webscraper is set up to retrieve data from all compounds listed under PubChem.ncbi that possess a known 'MeSH Pharmacological Classification' (totaling 17,866 entries):
@@ -15,7 +16,7 @@ ________________________________________________________________________________
 
 ________________________________________________________________________________________________________________
 
-TECH STACK:
+**TECH STACK:**
 
 Frontend: React, TypeScript
 
