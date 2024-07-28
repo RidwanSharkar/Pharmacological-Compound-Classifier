@@ -3,9 +3,9 @@
 
 INTRO:
 
-Inspired by this dataset of 635 psychoactive compoounds and their molecular properties(120),
+Inspired by this dataset of 635 psychoactive compoounds and their molecular properties(117),
 https://www.kaggle.com/datasets/thedevastator/psychedelic-drug-database?resource=download
-
+a webscraper is set up to retrieve the data of all compounds listed in PubChem.ncbi.nlm.nih.gov that have data on "
 
 
 FEATURES:
