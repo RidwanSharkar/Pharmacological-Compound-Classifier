@@ -1,3 +1,4 @@
+________________________________________________________________________________________________________________
 **PHARMACOLOGICAL & CHEMICAL COMPOUND CLASSIFIER**
 - Predictive Modeling of Chemical Compounds' Classification, Mechanisms of Action, and Therapeutic Potentials using Machine Learning to identify Structure-Activity-Relationships (SAR)
 ________________________________________________________________________________________________________________
@@ -30,4 +31,4 @@ Data Storage: AWS S3, Parquet
 
 Machine Learning: Scikit-learn
 
-API: RESTful
+________________________________________________________________________________________________________________
