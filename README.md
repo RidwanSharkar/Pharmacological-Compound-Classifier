@@ -2,6 +2,7 @@
 - Predictive Modeling of Chemical Compounds' Classification, Mechanisms of Action, and Therapeutic Potentials using Machine Learning to identify Structure-Activity-Relationships (SAR) 
 
 INTRO:
+
 Inspired by this dataset of 635 psychoactive compoounds and their molecular properties(120),
 https://www.kaggle.com/datasets/thedevastator/psychedelic-drug-database?resource=download
 
