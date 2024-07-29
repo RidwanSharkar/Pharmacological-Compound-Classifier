@@ -3,16 +3,19 @@ ________________________________________________________________________________
 - Predictive Modeling of Chemical Compounds' Classification, Mechanisms of Action, and Therapeutic Potentials using Machine Learning to identify Structure-Activity-Relationships (SAR)
 ________________________________________________________________________________________________________________
 
-**OVERVIEW:**
+**METHODS:**
 
-This project employs Machine Learning to identify the Quantitative Structure-Activity Relationships (QSAR) of chemical compounds based on their extensive molecular properties. Inspired by this dataset of 635 psychoactive compoounds and their molecular properties (117)
+• This project employs Machine Learning to identify the Quantitative Structure-Activity Relationships (QSAR) of chemical compounds based on their extensive molecular properties. Inspired by this dataset of 635 psychoactive compoounds and their 117 molecular properties. 
 [https://www.kaggle.com/datasets/thedevastator/psychedelic-drug-database?resource=download], 
 a webscraper is set up to retrieve data from all compounds listed under PubChem.ncbi that possess a known 'MeSH Pharmacological Classification' (totaling 17,866 entries) to create and store a custom expanded dataset.
 
+• Example Classifications:
 
 [Anti-Psychotic Agents, Serotonin Receptor Agonists, Dopamine Uptake Inhibitors, Protein Kinase Inhibitors, Vasoconstrictor Agents, etc]
 
-RD-Kit (Cheminformatics) is then used to retrieve and compute all scraped compounds' molecular popularties (157), which is fed to a Random Forest/Gradiant Boosting/NLP-Classifier machine learning model to determine which molecular properties correlate highest with the compounds' pharmacological action. These weighed attributes are then used by the model to predict the pharmacological classification of a novel compound whose official 'MeSH Pharmacological Classification' is not listed on PubChem. 
+• RD-Kit is then used to retrieve and compute all scraped compounds' molecular popularties, which have been expanded to include 244 molecular porperties - now including counts of all functional groups (amides, halogens, ketones, etc.) as well as electrotopological states (E-state) information that directly correlate molecular behavior with biological receptor activity.
+
+• All scraped and computed data is then fed to a Random Forest/NLP-Classifier machine learning model to determine which molecular properties correlate highest with the compounds' pharmacological action. These weighed attributes are then used by the model to predict the pharmacological classification of a novel compound whose official 'MeSH Pharmacological Classification' is NOT listed on PubChem. 
 
 ________________________________________________________________________________________________________________
 Hamming Loss - Multi-Label Classification - is utilized to allow independent prediction of each activity within the set of pharmacological activities:
@@ -37,7 +40,7 @@ ________________________________________________________________________________
 
 • 'EState_VSA1', ... , 'EState_VSA10' - for Electrotopological State of the molecule
 
-• 'fr_alkyl_halide', 'fr_amide', 'fr_benzene', etc. - Functional Group count, which correlate chemical behavior and biological receptor activity.
+• 'fr_alkyl_halide', 'fr_amide', 'fr_halogen', 'fr_Imine', etc. - Functional Group counts, which correlate chemical behavior to receptor activity.
 
 • 'NumLipinskiHBA' - Number of Hydrogen Bond Acceptors as defined by Lipinski's rule of five (NO Count)
 
@@ -65,7 +68,7 @@ ________________________________________________________________________________
 
 • 'MQN1', 'MQN2', ... , 'MQN42' - Molecular Quantum Numbers, series of 42 ints capturing molecular structure information.
 
-... + 100
++ ... (244 Total)
 
 
 ________________________________________________________________________________________________________________
