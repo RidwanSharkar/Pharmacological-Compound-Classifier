@@ -263,10 +263,10 @@ def compute_descriptors(smiles):
 
 
 def main():
-    df = pd.read_csv('C:/Users/Lenovo/Desktop/Psychoactive-Compounds-Analysis/data/compoundCIDs_scraped.csv')
+    df = pd.read_csv('C:/Users/Lenovo/Desktop/Pharmacological-Chemical-Compound-Classifier/data/compoundCIDs_scraped.csv')
     results = []
 
-    for cid in df['cid']:  # [:100] to test
+    for cid in df['cid']:  # [:50] to test
         logging.debug(f"Processing CID: {cid}")
         print(f"Processing CID: {cid}")
         smiles = fetch_smiles(cid)
@@ -282,7 +282,7 @@ def main():
     results_df = results_df[cols]
     print(results_df)
 
-    results_df.to_csv('C:/Users/Lenovo/Desktop/Psychoactive-Compounds-Analysis/data/computedParameters_scraped.csv',
+    results_df.to_csv('C:/Users/Lenovo/Desktop/Pharmacological-Chemical-Compound-Classifier/data/computedParameters_scraped.csv',
                       index=False)
     print("Completed processing all CIDs and saved to computedParameters_scraped.csv")
 
