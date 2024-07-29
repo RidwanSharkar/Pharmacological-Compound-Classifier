@@ -7,8 +7,8 @@ import ast  # safe evaluation of string literals to lists
 import joblib
 
 # DATA PROCESSING & FEATURE SELECTION===================================================================================
-dataset = 'C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\data\\computedParameters_scraped.csv'
-pharmacologicalActivities = 'C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\data\\compoundClassifications_scraped.csv'
+dataset = 'C:\\Users\\Lenovo\\Desktop\\Pharmacological-Chemical-Compound-Classifier\\data\\computedParameters_scraped.csv'
+pharmacologicalActivities = 'C:\\Users\\Lenovo\\Desktop\\Pharmacological-Chemical-Compound-Classifier\\data\\compoundClassifications_scraped.csv'
 data = pd.read_csv(dataset)
 activities = pd.read_csv(pharmacologicalActivities)
 
@@ -29,8 +29,8 @@ model.fit(X_train, y_train)
 y_prediction = model.predict(X_test)
 
 # Save Results
-joblib.dump(model, 'C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\model\\RandomForestModel.pkl')
-joblib.dump(mlb, 'C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\model\\MultiLabelBinarizer.pkl')
+joblib.dump(model, 'C:\\Users\\Lenovo\\Desktop\\Pharmacological-Chemical-Compound-Classifier\\model\\RandomForestModel.pkl')
+joblib.dump(mlb, 'C:\\Users\\Lenovo\\Desktop\\Pharmacological-Chemical-Compound-Classifier\\model\\MultiLabelBinarizer.pkl')
 
 # EVALUATE================================================================================
 accuracies = []
@@ -67,3 +67,6 @@ print("\nTop Important Features:")
 top_features = importances_df.head(top_n)
 for index, row in top_features.iterrows():
     print(f"{row['Feature']}: {row['Importance']:.4f}")
+
+
+

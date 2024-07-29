@@ -1,6 +1,5 @@
 import logging
 import time
-import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import Descriptors, rdMolDescriptors, Crippen, Lipinski
 import requests
@@ -16,8 +15,7 @@ def fetch_smiles(pubchem_cid):
         response = requests.get(url)
         response.raise_for_status()  # Raise HTTP Error if bad response
         data = response.json()
-        if 'PropertyTable' in data and 'Properties' in data['PropertyTable'] and len(
-                data['PropertyTable']['Properties']) > 0:
+        if 'PropertyTable' in data and 'Properties' in data['PropertyTable'] and len(data['PropertyTable']['Properties']) > 0:
             smiles = data['PropertyTable']['Properties'][0]['CanonicalSMILES']
             logging.debug(f"SMILES for CID {pubchem_cid}: {smiles}")
             time.sleep(1)  # Delay to manage API rate limits
@@ -40,29 +38,6 @@ def fetch_smiles(pubchem_cid):
     return None
 
 
-def compute_vsa_descriptors(mol):
-    calculated_descriptors = {}
-
-    slogp_vsa = rdMolDescriptors.SlogP_VSA_(mol)
-    for i, value in enumerate(slogp_vsa):
-        calculated_descriptors[f'slogp_VSA{i + 1}'] = value
-
-    smr_vsa = rdMolDescriptors.SMR_VSA_(mol)
-    for i, value in enumerate(smr_vsa):
-        calculated_descriptors[f'smr_VSA{i + 1}'] = value
-
-    peoe_vsa = rdMolDescriptors.PEOE_VSA_(mol)
-    for i, value in enumerate(peoe_vsa):
-        calculated_descriptors[f'peoe_VSA{i + 1}'] = value
-
-    return calculated_descriptors
-
-
-def compute_mqn_descriptors(mol):
-    mqn_descriptors = rdMolDescriptors.MQNs_(mol)
-    return {f'MQN{i + 1}': val for i, val in enumerate(mqn_descriptors)}
-
-
 def count_amide_bonds(mol):
     amide_bond_count = 0
     for bond in mol.GetBonds():
@@ -82,26 +57,26 @@ def compute_descriptors(smiles):
     if mol is None:
         return None
 
-    base_descriptors = {
+    descriptors = {
         # EXPANDED SET                                          COUNTS OF MOLECULES' FUNCTIONAL GROUPS:
-        'fr_Al_COO': Descriptors.fr_Al_COO(mol),                    # aliphatic carboxylic acids
-        'fr_Al_OH': Descriptors.fr_Al_OH(mol),                      # aliphatic hydroxyl groups
-        'fr_Al_OH_noTert': Descriptors.fr_Al_OH_noTert(mol),        # aliphatic hydroxyl groups excluding tertiary-OH
-        'fr_ArN': Descriptors.fr_ArN(mol),                          # N functional groups on aromatic rings
-        'fr_Ar_N': Descriptors.fr_Ar_N(mol),                        # aromatic N atoms
-        'fr_Ar_NH': Descriptors.fr_Ar_NH(mol),                      # aromatic amines
-        'fr_Ar_OH': Descriptors.fr_Ar_OH(mol),                      # aromatic hydroxyl groups
-        'fr_COO': Descriptors.fr_COO(mol),                          # carboxylic acids
-        'fr_COO2': Descriptors.fr_COO2(mol),                        # carboxylic acid derivatives
-        'fr_C_O': Descriptors.fr_C_O(mol),                          # carbonyl O
-        'fr_C_O_noCOO': Descriptors.fr_C_O_noCOO(mol),              # carbonyl O, excluding COOH
-        'fr_C_S': Descriptors.fr_C_S(mol),                          # thiocarbonyl
-        'fr_HOCCN': Descriptors.fr_HOCCN(mol),                      # C(OH)CCN substructures
-        'fr_Imine': Descriptors.fr_Imine(mol),                      # imines
-        'fr_NH0': Descriptors.fr_NH0(mol),                          # tertiary amines
-        'fr_NH1': Descriptors.fr_NH1(mol),                          # secondary amines
-        'fr_NH2': Descriptors.fr_NH2(mol),                          # primary amines
-        'fr_N_O': Descriptors.fr_N_O(mol),                          # N-O bonds
+        'fr_Al_COO': Descriptors.fr_Al_COO(mol),                # aliphatic carboxylic acids
+        'fr_Al_OH': Descriptors.fr_Al_OH(mol),                  # aliphatic hydroxyl groups
+        'fr_Al_OH_noTert': Descriptors.fr_Al_OH_noTert(mol),    # aliphatic hydroxyl groups excluding tertiary-OH
+        'fr_ArN': Descriptors.fr_ArN(mol),                      # N functional groups on aromatic rings
+        'fr_Ar_N': Descriptors.fr_Ar_N(mol),                    # aromatic N atoms
+        'fr_Ar_NH': Descriptors.fr_Ar_NH(mol),                  # aromatic amines
+        'fr_Ar_OH': Descriptors.fr_Ar_OH(mol),                  # aromatic hydroxyl groups
+        'fr_COO': Descriptors.fr_COO(mol),                      # carboxylic acids
+        'fr_COO2': Descriptors.fr_COO2(mol),                    # carboxylic acid derivatives
+        'fr_C_O': Descriptors.fr_C_O(mol),                      # carbonyl O
+        'fr_C_O_noCOO': Descriptors.fr_C_O_noCOO(mol),          # carbonyl O, excluding COOH
+        'fr_C_S': Descriptors.fr_C_S(mol),                      # thiocarbonyl
+        'fr_HOCCN': Descriptors.fr_HOCCN(mol),                  # C(OH)CCN substructures
+        'fr_Imine': Descriptors.fr_Imine(mol),                  # imines
+        'fr_NH0': Descriptors.fr_NH0(mol),                      # tertiary amines
+        'fr_NH1': Descriptors.fr_NH1(mol),                      # secondary amines
+        'fr_NH2': Descriptors.fr_NH2(mol),                      # primary amines
+        'fr_N_O': Descriptors.fr_N_O(mol),                      # N-O bonds
         'fr_Ndealkylation1': Descriptors.fr_Ndealkylation1(mol),    # Count of XCCNR groups
         'fr_Ndealkylation2': Descriptors.fr_Ndealkylation2(mol),    # Count of tert-alicyclic amines
         'fr_Nhpyrrole': Descriptors.fr_Nhpyrrole(mol),              # Count of H-pyrrole nitrogens
@@ -215,76 +190,20 @@ def compute_descriptors(smiles):
         'AvgIpc': Descriptors.AvgIpc(mol),                              # Average information content (neighborhood symmetry of 0-5)***
         'BalabanJ': Descriptors.BalabanJ(mol),                          # Balaban's J index - topological descriptor of molecular shape
         'BertzCT': Descriptors.BertzCT(mol),                            # Bertz CT - a topological complexity index
-
-        'SlogP': Crippen.MolLogP(mol),  # SlogP
-        'SMR': Crippen.MolMR(mol),  # SMR - Molar Refractivity
-        'LabuteASA': rdMolDescriptors.CalcLabuteASA(mol),  # LabuteASA
-        'TPSA': Descriptors.TPSA(mol),  # TPSA - Topological Surface Area
-        'AMW': Descriptors.MolWt(mol),  # AMW
-        'ExactMW': Descriptors.ExactMolWt(mol),  # ExactMW
-        'NumLipinskiHBA': Lipinski.NOCount(mol),  # to use Lipinski Rule of 5 NO
-        'NumLipinskiHBD': Lipinski.NHOHCount(mol),  # to use Lipinski NHOHCount
-        'NumRotatableBonds': Descriptors.NumRotatableBonds(mol),  # NumRotatableBonds
-        'NumHBD': Descriptors.NumHDonors(mol),  # NumHBD
-        'NumHBA': Descriptors.NumHAcceptors(mol),  # NumHBA
-        'NumAmideBonds': count_amide_bonds(mol),
-        'NumHeteroAtoms': rdMolDescriptors.CalcNumHeteroatoms(mol),
-        'NumHeavyAtoms': Descriptors.HeavyAtomCount(mol),  # NumHeavyAtoms
-        'NumAtoms': mol.GetNumAtoms(),  # NumAtoms
-        'NumRings': rdMolDescriptors.CalcNumRings(mol),  # NumRings
-        'NumAromaticRings': rdMolDescriptors.CalcNumAromaticRings(mol),  # NumAromaticRings
-        'NumSaturatedRings': rdMolDescriptors.CalcNumSaturatedRings(mol),  # NumSaturatedRings
-        'NumAliphaticRings': rdMolDescriptors.CalcNumAliphaticRings(mol),  # NumAliphaticRings
-        'NumAromaticHeterocycles': rdMolDescriptors.CalcNumAromaticHeterocycles(mol),  # NumAromaticHeterocycles
-        'NumSaturatedHeterocycles': rdMolDescriptors.CalcNumSaturatedHeterocycles(mol),  # NumSaturatedHeterocycles
-        'NumAliphaticHeterocycles': rdMolDescriptors.CalcNumAliphaticHeterocycles(mol),  # NumAliphaticHeterocycles
-        'NumAromaticCarbocycles': rdMolDescriptors.CalcNumAromaticCarbocycles(mol),  # NumAromaticCarbocycles
-        'NumSaturatedCarbocycles': rdMolDescriptors.CalcNumSaturatedCarbocycles(mol),  # NumSaturatedCarbocycles
-        'NumAliphaticCarbocycles': rdMolDescriptors.CalcNumAliphaticCarbocycles(mol),  # NumAliphaticCarbocycles
-        'FractionCSP3': rdMolDescriptors.CalcFractionCSP3(mol),  # FractionCSP3
-        'Chi0v': rdMolDescriptors.CalcChi0v(mol),
-        'Chi1v': rdMolDescriptors.CalcChi1v(mol),
-        'Chi2v': rdMolDescriptors.CalcChi2v(mol),
-        'Chi3v': rdMolDescriptors.CalcChi3v(mol),
-        'Chi4v': rdMolDescriptors.CalcChi4v(mol),  # Chi x9
-        'Chi1n': rdMolDescriptors.CalcChi1n(mol),
-        'Chi2n': rdMolDescriptors.CalcChi2n(mol),
-        'Chi3n': rdMolDescriptors.CalcChi3n(mol),
-        'Chi4n': rdMolDescriptors.CalcChi4n(mol),
-        'HallKierAlpha': rdMolDescriptors.CalcHallKierAlpha(mol),  # HallKierAlpha
-        'kappa1': rdMolDescriptors.CalcKappa1(mol),  # kappa1
-        'kappa2': rdMolDescriptors.CalcKappa2(mol),  # kappa2
-        'kappa3': rdMolDescriptors.CalcKappa3(mol),  # kappa3 = 39
     }
-    base_descriptors.update(compute_vsa_descriptors(mol))
-    base_descriptors.update(compute_mqn_descriptors(mol))
-
-    return base_descriptors
+    return descriptors
 
 
 def main():
-    df = pd.read_csv('C:/Users/Lenovo/Desktop/Psychoactive-Compounds-Analysis/data/compoundCIDs_scraped.csv')
-    results = []
-
-    for cid in df['cid']:  # [:100] to test
-        logging.debug(f"Processing CID: {cid}")
-        print(f"Processing CID: {cid}")
-        smiles = fetch_smiles(cid)
-        if smiles:
-            descriptors = compute_descriptors(smiles)
-            if descriptors:
-                descriptors['Cid'] = cid
-                results.append(descriptors)
-                print(f"Scraped Results for CID {cid}: {descriptors}")
-
-    results_df = pd.DataFrame(results)
-    cols = ['Cid'] + [col for col in results_df.columns if col != 'Cid']
-    results_df = results_df[cols]
-    print(results_df)
-
-    results_df.to_csv('C:/Users/Lenovo/Desktop/Psychoactive-Compounds-Analysis/data/computedParameters_scraped.csv',
-                      index=False)
-    print("Completed processing all CIDs and saved to computedParameters_scraped.csv")
+    cid = 2196  # TEST CID
+    logging.debug(f"Processing CID: {cid}")
+    smiles = fetch_smiles(cid)
+    if smiles:
+        descriptors = compute_descriptors(smiles)
+        if descriptors:
+            print(f"Computed Descriptors for CID {cid}:")
+            for descriptor, value in descriptors.items():
+                print(f"{descriptor}: {value}")
 
 
 if __name__ == "__main__":

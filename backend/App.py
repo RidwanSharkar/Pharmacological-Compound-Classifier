@@ -24,8 +24,8 @@ def upload_to_s3():
 
 
 # Load the model and the MultiLabelBinarizer
-model = joblib.load('C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\model\\RandomForestModel.pkl')
-mlb = joblib.load('C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\model\\MultiLabelBinarizer.pkl')
+model = joblib.load('C:\\Users\\Lenovo\\Desktop\\Pharmacological-Chemical-Compound-Classifier\\model\\RandomForestModel.pkl')
+mlb = joblib.load('C:\\Users\\Lenovo\\Desktop\\Pharmacological-Chemical-Compound-Classifier\\model\\MultiLabelBinarizer.pkl')
 
 app = Flask(__name__)
 

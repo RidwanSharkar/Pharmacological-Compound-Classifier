@@ -6,10 +6,10 @@ import requests
 from rdkit.Chem.rdchem import BondType
 
 # LOAD
-model = joblib.load('C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\model\\RandomForestModel.pkl')
-mlb = joblib.load('C:\\Users\\Lenovo\\Desktop\\Psychoactive-Compounds-Analysis\\model\\MultiLabelBinarizer.pkl')
-# all_descriptors = [desc[0] for desc in Descriptors.descList]
-# print(all_descriptors)
+model = joblib.load('C:\\Users\\Lenovo\\Desktop\\Pharmacological-Chemical-Compound-Classifier\\model\\RandomForestModel.pkl')
+mlb = joblib.load('C:\\Users\\Lenovo\\Desktop\\Pharmacological-Chemical-Compound-Classifier\\model\\MultiLabelBinarizer.pkl')
+all_descriptors = [desc[0] for desc in Descriptors.descList]
+print(all_descriptors)
 
 
 def fetch_smiles(pubchem_cid):
@@ -122,14 +122,24 @@ def predict_activities(descriptors):
 
 
 def main():
-    cid = input("Enter CID: ")
-    smiles = fetch_smiles(cid)
-    descriptors = compute_descriptors(smiles)
-    if descriptors:
+    while True:
+        cid = input("Enter CID (or type 'exit' to quit): ")
+        if cid.lower() == 'exit' or cid.strip() == '':
+            print("Exiting the program.")
+            break
+
+        smiles = fetch_smiles(cid)
+        if not smiles:
+            print(f"Error: SMILES could not be fetched with given CID {cid}.")
+            continue
+
+        descriptors = compute_descriptors(smiles)
+        if not descriptors:
+            print("Error: Invalid SMILES or descriptors could not be computed.")
+            continue
+
         activities = predict_activities(descriptors)
         print(f"Predicted Activities for CID {cid}: {activities}")
-    else:
-        print("Error: Invalid SMILES or CID not found.")
 
 
 if __name__ == "__main__":
