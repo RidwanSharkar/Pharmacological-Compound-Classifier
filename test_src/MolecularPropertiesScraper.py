@@ -5,7 +5,7 @@ from rdkit import Chem
 from rdkit.Chem import Descriptors, rdMolDescriptors, Crippen, Lipinski
 import requests
 from rdkit.Chem.rdchem import BondType
-
+import concurrent.futures
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
@@ -20,7 +20,7 @@ def fetch_smiles(pubchem_cid):
                 data['PropertyTable']['Properties']) > 0:
             smiles = data['PropertyTable']['Properties'][0]['CanonicalSMILES']
             logging.debug(f"SMILES for CID {pubchem_cid}: {smiles}")
-            time.sleep(1)  # Delay to manage API rate limits
+            time.sleep(0.2)  # Delay to manage API rate limits
             return smiles
         else:
             logging.error(f"No SMILES data found for CID {pubchem_cid}. Response: {data}")
@@ -168,7 +168,7 @@ def compute_descriptors(smiles):
         'fr_thiophene': Descriptors.fr_thiophene(mol),                      # Count of thiophene rings
         'fr_unbrch_alkane': Descriptors.fr_unbrch_alkane(mol),              # Count of unbranched alkanes
         'fr_urea': Descriptors.fr_urea(mol),                                # Count of urea groups
-        'EState_VSA1': Descriptors.EState_VSA1(mol),
+        'EState_VSA1': Descriptors.EState_VSA1(mol),                        
         'EState_VSA2': Descriptors.EState_VSA2(mol),
         'EState_VSA3': Descriptors.EState_VSA3(mol),
         'EState_VSA4': Descriptors.EState_VSA4(mol),
@@ -178,7 +178,7 @@ def compute_descriptors(smiles):
         'EState_VSA8': Descriptors.EState_VSA8(mol),
         'EState_VSA9': Descriptors.EState_VSA9(mol),
         'EState_VSA10': Descriptors.EState_VSA10(mol),
-        'EState_VSA11': Descriptors.EState_VSA11(mol),
+        'EState_VSA11': Descriptors.EState_VSA11(mol),                      # electrotopological state (E-state)
         'VSA_EState1': Descriptors.VSA_EState1(mol),
         'VSA_EState2': Descriptors.VSA_EState2(mol),
         'VSA_EState3': Descriptors.VSA_EState3(mol),
@@ -262,30 +262,36 @@ def compute_descriptors(smiles):
     return base_descriptors
 
 
+def fetch_and_process(cid):
+    print(f"Processing CID: {cid}")
+    smiles = fetch_smiles(cid)
+    if smiles:
+        descriptors = compute_descriptors(smiles)
+        if descriptors:
+            descriptors['Cid'] = cid
+            print(f"Scraped Results for CID {cid}: {descriptors}")
+            return descriptors
+    return None
+
+
 def main():
     df = pd.read_csv('C:/Users/Lenovo/Desktop/Pharmacological-Chemical-Compound-Classifier/data/compoundCIDs_scraped.csv')
+    cids = df['cid'].tolist()
     results = []
 
-    for cid in df['cid']:  # [:50] to test
-        logging.debug(f"Processing CID: {cid}")
-        print(f"Processing CID: {cid}")
-        smiles = fetch_smiles(cid)
-        if smiles:
-            descriptors = compute_descriptors(smiles)
-            if descriptors:
-                descriptors['Cid'] = cid
-                results.append(descriptors)
-                print(f"Scraped Results for CID {cid}: {descriptors}")
+    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+        futures = {executor.submit(fetch_and_process, cid): cid for cid in cids}
+        for future in concurrent.futures.as_completed(futures):
+            result = future.result()
+            if result:
+                results.append(result)
 
     results_df = pd.DataFrame(results)
-    cols = ['Cid'] + [col for col in results_df.columns if col != 'Cid']
-    results_df = results_df[cols]
-    print(results_df)
-
-    results_df.to_csv('C:/Users/Lenovo/Desktop/Pharmacological-Chemical-Compound-Classifier/data/computedParameters_scraped.csv',
-                      index=False)
+    results_df.to_csv('C:/Users/Lenovo/Desktop/Pharmacological-Chemical-Compound-Classifier/data/computedParameters_scraped.csv', index=False)
     print("Completed processing all CIDs and saved to computedParameters_scraped.csv")
 
 
 if __name__ == "__main__":
     main()
+
+
