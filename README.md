@@ -29,9 +29,20 @@ METHODS 2:
 
 After consulting the literature,  [ https://pubs.acs.org/doi/10.1021/ci500747n ] Random Forest Model is swapped for a Deep Neural Network (DNN) with the following parameters:
 
-• Normalization of 244 Molecular Properties using StandardScalar()
+• Normalization of 244 Molecular Properties using StandardScalar() (scaling to unit variance) 
 
-• Neuron Count: 2048
+• 1st Layer: 2048 Neuron Count
+
+• 2nd Layer: 1024 Neuron Count
+
+• 3rd Layer: 512 Neuron Count
+
+• 4th Layer: 256 Neuron Count
+
+• 5th Layer: 128 Neuron Count
+
+• Output layer: Sigmoid
+
 
 • Dropout Rate: 0.5 
 
