@@ -21,7 +21,8 @@ Example 'MeSH Pharmacological Classification':
 
 Hamming Loss - Multi-Label Classification - is utilized to allow independent prediction of each activity within the set of pharmacological activities:
 
-![test2](https://github.com/user-attachments/assets/c96fb577-adc7-4f75-87f3-fbc0345e2481)
+![Predicting Activity INITIAL TEST](https://github.com/user-attachments/assets/f3ae078e-09d2-407b-8baa-08cdd6ff606f)
+
 ________________________________________________________________________________________________________________
 
 **MOLECULAR PROPERTIES:**
