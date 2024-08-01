@@ -3,7 +3,7 @@ ________________________________________________________________________________
 - Predictive Modeling of Chemical Compounds' Classification, Mechanisms of Action, and Therapeutic Potentials using Machine Learning to identify Structure-Activity-Relationships (SAR)
 ________________________________________________________________________________________________________________
 
-**METHODS:**
+**METHODS 1:**
 
 • This project employs Machine Learning to identify the Quantitative Structure-Activity Relationships (QSAR) of chemical compounds based on their extensive molecular properties. Inspired by this dataset of 635 psychoactive compoounds and their 117 molecular properties. 
 [https://www.kaggle.com/datasets/thedevastator/psychedelic-drug-database?resource=download], 
@@ -11,7 +11,7 @@ a webscraper is set up to retrieve data from all compounds listed under PubChem.
 
 • RD-Kit is then used to retrieve and compute all scraped compounds' molecular popularties, which have been expanded to include 244 molecular porperties - now including counts of all functional groups (amides, halogens, ketones, etc.) as well as electrotopological states (E-state) information that directly correlate molecular behavior with biological receptor activity.
 
-• All scraped and computed data is then fed to a Random Forest/NLP-Classifier machine learning model to determine which molecular properties correlate highest with the compounds' pharmacological action. These weighed attributes are then used by the model to predict the pharmacological classification of a novel compound whose official 'MeSH Pharmacological Classification' is NOT listed on PubChem. 
+• All scraped and computed data is then fed to a Random Forest machine learning model to determine which molecular properties correlate highest with the compounds' pharmacological action. These weighed attributes are then used by the model to predict the pharmacological classification of a novel compound whose official 'MeSH Pharmacological Classification' is NOT listed on PubChem. 
 
 ________________________________________________________________________________________________________________
 
@@ -22,6 +22,31 @@ Example 'MeSH Pharmacological Classification':
 Hamming Loss - Multi-Label Classification - is utilized to allow independent prediction of each activity within the set of pharmacological activities:
 
 ![Predicting Activity INITIAL TEST](https://github.com/user-attachments/assets/f3ae078e-09d2-407b-8baa-08cdd6ff606f)
+
+________________________________________________________________________________________________________________
+
+METHODS 2: 
+
+After consulting the literature,  [ https://pubs.acs.org/doi/10.1021/ci500747n ] Random Forest Model is swapped for a Deep Neural Network (DNN) with the following parameters:
+
+• Normalization of 244 Molecular Properties using StandardScalar()
+
+• Neuron Count: 2048
+
+• Dropout Rate: 0.5 
+
+• Loss Function: Binary Crossentropy
+
+• Learning Rate: 0.001
+
+• with Gradient Clipping & Early Stopping 
+
+• BatchNormalization() and L2 Regularizers were noted to reduce accuracy for this dataset
+
+
+
+
+
 
 ________________________________________________________________________________________________________________
 
