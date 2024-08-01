@@ -47,7 +47,7 @@ After consulting the literature,  [ https://pubs.acs.org/doi/10.1021/ci500747n ]
 
 • Epochs: 120
 
-• Dropout Rate: 0.3 
+• Dropout Layers: 0.3 
 
 • Loss Function: Binary Crossentropy
 
