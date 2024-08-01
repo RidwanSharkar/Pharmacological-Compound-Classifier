@@ -84,6 +84,5 @@ Cheminformatics Toolkit: RDKit
 
 Data Storage: AWS S3, Parquet
 
-Machine Learning: Scikit-learn
+Machine Learning: TensorFlow, Keras, Scikit-learn
 
-________________________________________________________________________________________________________________
