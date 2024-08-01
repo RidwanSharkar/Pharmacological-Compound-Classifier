@@ -29,7 +29,7 @@ METHODS 2:
 
 After consulting the literature,  [ https://pubs.acs.org/doi/10.1021/ci500747n ] Random Forest Model is swapped for a Deep Neural Network (DNN) with the following parameters:
 
-• Normalization of 244 Molecular Properties using StandardScalar() (scaling to unit variance) 
+• Normalization of Molecular Properties using StandardScalar() (scaling to unit variance) 
 
 • 1st Layer: 2048 Neuron Count
 
@@ -43,8 +43,11 @@ After consulting the literature,  [ https://pubs.acs.org/doi/10.1021/ci500747n ]
 
 • Output layer: Sigmoid
 
+• Batch Size: 244
 
-• Dropout Rate: 0.5 
+• Epochs: 120
+
+• Dropout Rate: 0.3 
 
 • Loss Function: Binary Crossentropy
 
@@ -53,9 +56,6 @@ After consulting the literature,  [ https://pubs.acs.org/doi/10.1021/ci500747n ]
 • with Gradient Clipping & Early Stopping 
 
 • BatchNormalization() and L2 Regularizers were noted to reduce accuracy for this dataset
-
-
-
 
 
 
