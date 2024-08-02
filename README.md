@@ -45,10 +45,9 @@ After consulting the literature,  [ https://pubs.acs.org/doi/10.1021/ci500747n ]
 
 • Batch Size: 244  |  Epochs: 120
 
+• Loss Function: Binary Crossentropy (to be compatible with Multi-Label-Classification setup)
 
-• Loss Function: Binary Crossentropy
-
-• Learning Rate: 0.001
+• Learning Rate: 0.001 with Adam Optimizer 
 
 • with Gradient Clipping & Early Stopping 
 
