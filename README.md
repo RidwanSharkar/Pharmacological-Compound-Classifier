@@ -55,7 +55,7 @@ After consulting the literature,  [ https://pubs.acs.org/doi/10.1021/ci500747n ]
 
 ![60% ACCURACY](https://github.com/user-attachments/assets/28884b71-9270-4074-9239-d2e2a8713abf)
 
-DNN Paramters currently undergoing Optuna Trials for hyperparameter optimization (Getting all the above parameters callibrated to output the model with the highest accuracy) 
+DNN currently undergoing Optuna Trials for hyperparameter optimization (Testing combinations of the above parameters to output the the highest model accuracy) 
 
 ________________________________________________________________________________________________________________
 
