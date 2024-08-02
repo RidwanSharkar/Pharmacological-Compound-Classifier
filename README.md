@@ -5,7 +5,7 @@ ________________________________________________________________________________
 
 **METHODS 1:**
 
-• This project employs Machine Learning to identify the Quantitative Structure-Activity Relationships (QSAR) of chemical compounds based on their extensive molecular properties. Inspired by this dataset of 635 psychoactive compoounds and their 117 molecular properties. 
+• This project employs a Deep Neural Network (DNN) to identify the Quantitative Structure-Activity Relationships (QSAR) of chemical compounds based on their extensive molecular properties. Inspired by this dataset of 635 psychoactive compoounds and their 117 molecular properties. 
 [https://www.kaggle.com/datasets/thedevastator/psychedelic-drug-database?resource=download], 
 a webscraper is set up to retrieve data from all compounds listed under PubChem.ncbi that possess a known 'MeSH Pharmacological Classification' (totaling 17,866 entries) to create and store a custom expanded dataset.
 
@@ -15,7 +15,7 @@ a webscraper is set up to retrieve data from all compounds listed under PubChem.
 
 ________________________________________________________________________________________________________________
 
-Example 'MeSH Pharmacological Classification':
+**Example 'MeSH Pharmacological Classification':**
 
 [Anti-Psychotic Agents, Serotonin Receptor Agonists, Dopamine Uptake Inhibitors, Protein Kinase Inhibitors, Vasoconstrictor Agents, etc.]
 
@@ -25,7 +25,7 @@ Hamming Loss - Multi-Label Classification - is utilized to allow independent pre
 
 ________________________________________________________________________________________________________________
 
-METHODS 2: 
+**METHODS 2: **
 
 After consulting the literature,  [ https://pubs.acs.org/doi/10.1021/ci500747n ] Random Forest Model is swapped for a Deep Neural Network (DNN) with the following parameters:
 
