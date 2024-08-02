@@ -25,7 +25,7 @@ Hamming Loss - Multi-Label Classification - is utilized to allow independent pre
 
 ________________________________________________________________________________________________________________
 
-**METHODS 2: **
+**METHODS 2:**
 
 After consulting the literature,  [ https://pubs.acs.org/doi/10.1021/ci500747n ] Deep Neural Network (DNN) is set up with the following parameters:
 
@@ -49,14 +49,13 @@ After consulting the literature,  [ https://pubs.acs.org/doi/10.1021/ci500747n ]
 
 • Learning Rate: 0.001 with Adam Optimizer 
 
-• with Gradient Clipping & Early Stopping 
+• Gradient Clipping & Early Stopping 
 
 • BatchNormalization() and L2 Regularizers were noted to reduce accuracy for this dataset:
 
 ![60% ACCURACY](https://github.com/user-attachments/assets/28884b71-9270-4074-9239-d2e2a8713abf)
 
-
-
+DNN Paramters currently undergoing Optuna Trials for hyperparameter optimization (Getting all the above parameters callibrated to output the model with the highest accuracy) 
 
 ________________________________________________________________________________________________________________
 
