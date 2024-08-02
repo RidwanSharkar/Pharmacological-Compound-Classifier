@@ -27,7 +27,7 @@ ________________________________________________________________________________
 
 **METHODS 2:**
 
-After consulting the literature,  [ https://pubs.acs.org/doi/10.1021/ci500747n ] Deep Neural Network (DNN) is set up with the following parameters:
+(https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422)] Deep Neural Network (DNN) is set up with the following parameters:
 
 • Normalization of Molecular Properties using StandardScalar() (scaling to unit variance) 
 
