@@ -27,7 +27,7 @@ ________________________________________________________________________________
 
 **METHODS 2:**
 
-(https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422)] Deep Neural Network (DNN) is set up with the following parameters:
+([https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422](https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422)) Deep Neural Network (DNN) is set up with the following parameters:
 
 • Normalization of Molecular Properties using StandardScalar() (scaling to unit variance) 
 
@@ -76,7 +76,7 @@ ________________________________________________________________________________
 
 • 'EState_VSA1', ... , 'EState_VSA10' - for Electrotopological State of the molecule
 
-• 'fr_alkyl_halide', 'fr_amide', 'fr_halogen', 'fr_Imine', etc. - Functional Group counts, which correlate chemical behavior to receptor activity.
+• 'fr_alkyl_halide', 'fr_amide', 'fr_halogen', 'fr_Imine', etc. - Functional Group counts, which correlate chemical behavior to potential receptor activition.
 
 • 'NumLipinskiHBA' - Number of Hydrogen Bond Acceptors as defined by Lipinski's rule of five (NO Count)
 
