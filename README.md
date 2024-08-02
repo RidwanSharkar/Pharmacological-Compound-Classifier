@@ -5,7 +5,7 @@ ________________________________________________________________________________
 
 **METHODS 1:**
 
-• This project employs a Deep Neural Network (DNN) to identify the Quantitative Structure-Activity Relationships (QSAR) of chemical compounds based on their extensive molecular properties. Inspired by this dataset of 635 psychoactive compoounds and their 117 molecular properties. 
+• This project employs a Deep Neural Network (DNN) ensembled with Random Forest to identify the Quantitative Structure-Activity Relationships (QSAR) of chemical compounds based on their extensive molecular properties. Inspired by this dataset of 635 psychoactive compoounds and their 117 molecular properties. 
 [https://www.kaggle.com/datasets/thedevastator/psychedelic-drug-database?resource=download], 
 a webscraper is set up to retrieve data from all compounds listed under PubChem.ncbi that possess a known 'MeSH Pharmacological Classification' (totaling 17,866 entries) to create and store a custom expanded dataset.
 
@@ -27,7 +27,7 @@ ________________________________________________________________________________
 
 **METHODS 2: **
 
-After consulting the literature,  [ https://pubs.acs.org/doi/10.1021/ci500747n ] Random Forest Model is swapped for a Deep Neural Network (DNN) with the following parameters:
+After consulting the literature,  [ https://pubs.acs.org/doi/10.1021/ci500747n ] Deep Neural Network (DNN) is set up with the following parameters:
 
 • Normalization of Molecular Properties using StandardScalar() (scaling to unit variance) 
 
@@ -41,13 +41,10 @@ After consulting the literature,  [ https://pubs.acs.org/doi/10.1021/ci500747n ]
 
 • 5th Layer: 128 Neuron Count
 
-• Output layer: Sigmoid
+• Output layer: Sigmoid Activation  |  Dropout Layers: 0.3 
 
-• Batch Size: 244
+• Batch Size: 244  |  Epochs: 120
 
-• Epochs: 120
-
-• Dropout Layers: 0.3 
 
 • Loss Function: Binary Crossentropy
 
@@ -55,7 +52,10 @@ After consulting the literature,  [ https://pubs.acs.org/doi/10.1021/ci500747n ]
 
 • with Gradient Clipping & Early Stopping 
 
-• BatchNormalization() and L2 Regularizers were noted to reduce accuracy for this dataset
+• BatchNormalization() and L2 Regularizers were noted to reduce accuracy for this dataset:
+
+![60% ACCURACY](https://github.com/user-attachments/assets/28884b71-9270-4074-9239-d2e2a8713abf)
+
 
 
 
