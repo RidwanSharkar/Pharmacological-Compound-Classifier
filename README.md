@@ -3,25 +3,59 @@ ________________________________________________________________________________
 - Predictive Modeling of Chemical Compounds' Classification, Mechanisms of Action, and Therapeutic Potentials using Machine Learning to identify Structure-Activity-Relationships (SAR)
 ________________________________________________________________________________________________________________
 
-**METHODS:**
+**METHODS 1:**
 
-• This project employs Machine Learning to identify the Quantitative Structure-Activity Relationships (QSAR) of chemical compounds based on their extensive molecular properties. Inspired by this dataset of 635 psychoactive compoounds and their 117 molecular properties. 
+• This project employs a Deep Neural Network (DNN) ensembled with Random Forest to identify the Quantitative Structure-Activity Relationships (QSAR) of chemical compounds based on their extensive molecular properties. Inspired by this dataset of 635 psychoactive compoounds and their 117 molecular properties. 
 [https://www.kaggle.com/datasets/thedevastator/psychedelic-drug-database?resource=download], 
 a webscraper is set up to retrieve data from all compounds listed under PubChem.ncbi that possess a known 'MeSH Pharmacological Classification' (totaling 17,866 entries) to create and store a custom expanded dataset.
 
 • RD-Kit is then used to retrieve and compute all scraped compounds' molecular popularties, which have been expanded to include 244 molecular porperties - now including counts of all functional groups (amides, halogens, ketones, etc.) as well as electrotopological states (E-state) information that directly correlate molecular behavior with biological receptor activity.
 
-• All scraped and computed data is then fed to a Random Forest/NLP-Classifier machine learning model to determine which molecular properties correlate highest with the compounds' pharmacological action. These weighed attributes are then used by the model to predict the pharmacological classification of a novel compound whose official 'MeSH Pharmacological Classification' is NOT listed on PubChem. 
+• All scraped and computed data is then fed to a Random Forest machine learning model to determine which molecular properties correlate highest with the compounds' pharmacological action. These weighed attributes are then used by the model to predict the pharmacological classification of a novel compound whose official 'MeSH Pharmacological Classification' is NOT listed on PubChem. 
 
 ________________________________________________________________________________________________________________
 
-Example 'MeSH Pharmacological Classification':
+**Example 'MeSH Pharmacological Classification':**
 
 [Anti-Psychotic Agents, Serotonin Receptor Agonists, Dopamine Uptake Inhibitors, Protein Kinase Inhibitors, Vasoconstrictor Agents, etc.]
 
 Hamming Loss - Multi-Label Classification - is utilized to allow independent prediction of each activity within the set of pharmacological activities:
 
 ![Predicting Activity INITIAL TEST](https://github.com/user-attachments/assets/f3ae078e-09d2-407b-8baa-08cdd6ff606f)
+
+________________________________________________________________________________________________________________
+
+**METHODS 2:**
+
+([https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422](https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422)) Deep Neural Network (DNN) is set up with the following parameters:
+
+• Normalization of Molecular Properties using StandardScalar() (scaling to unit variance) 
+
+• 1st Layer: 2048 Neuron Count
+
+• 2nd Layer: 1024 Neuron Count
+
+• 3rd Layer: 512 Neuron Count
+
+• 4th Layer: 256 Neuron Count
+
+• 5th Layer: 128 Neuron Count
+
+• Output layer: Sigmoid Activation  |  Dropout Layers: 0.3 
+
+• Batch Size: 244  |  Epochs: 120
+
+• Loss Function: Binary Crossentropy (to be compatible with Multi-Label-Classification setup)
+
+• Learning Rate: 0.001 with Adam Optimizer 
+
+• Gradient Clipping & Early Stopping 
+
+• BatchNormalization() and L2 Regularizers were noted to reduce accuracy for this dataset:
+
+![60% ACCURACY](https://github.com/user-attachments/assets/28884b71-9270-4074-9239-d2e2a8713abf)
+
+DNN currently undergoing Optuna Trials for hyperparameter optimization (Testing combinations of the above parameters to output the the highest model accuracy) 
 
 ________________________________________________________________________________________________________________
 
@@ -42,7 +76,7 @@ ________________________________________________________________________________
 
 • 'EState_VSA1', ... , 'EState_VSA10' - for Electrotopological State of the molecule
 
-• 'fr_alkyl_halide', 'fr_amide', 'fr_halogen', 'fr_Imine', etc. - Functional Group counts, which correlate chemical behavior to receptor activity.
+• 'fr_alkyl_halide', 'fr_amide', 'fr_halogen', 'fr_Imine', etc. - Functional Group counts, which correlate chemical behavior to potential receptor activition.
 
 • 'NumLipinskiHBA' - Number of Hydrogen Bond Acceptors as defined by Lipinski's rule of five (NO Count)
 
@@ -72,6 +106,7 @@ ________________________________________________________________________________
 
 • ... (244 Total)
 
+[https://cadaster.eu/sites/cadaster.eu/files/challenge/descr.htm]
 
 ________________________________________________________________________________________________________________
 **TECH STACK:**
@@ -84,6 +119,5 @@ Cheminformatics Toolkit: RDKit
 
 Data Storage: AWS S3, Parquet
 
-Machine Learning: Scikit-learn
+Machine Learning: TensorFlow, Keras, Optuna, Scikit-learn
 
-________________________________________________________________________________________________________________
