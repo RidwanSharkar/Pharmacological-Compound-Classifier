@@ -1,75 +1,102 @@
-/* frontend\src\App.tsx: */
-
 import React, { useState } from 'react';
-import './App.css'; 
+import axios from 'axios';
+import './App.css';
+
+const FLASK_SERVER_URL = 'http://localhost:5000';
+
+interface Compound {
+  CID: number;
+  'Compound Name': string;
+}
+
+interface ActivityResult {
+  CID: number;
+  'Compound Name': string;
+  Activities: string[];
+}
+
+interface PredictionResult {
+  CID: number;
+  'Predicted Activities': string[];
+}
 
 const App: React.FC = () => {
-  const [cid, setCid] = useState('');
-  const [result, setResult] = useState<any>(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [results, setResults] = useState<Compound[] | ActivityResult | PredictionResult | null>(null);
   const [error, setError] = useState('');
 
   const handleSearch = async () => {
-    if (!cid.trim()) {
-      alert('Please enter a CID.');
+    if (!searchTerm.trim()) {
+      setError('Please enter a search term.');
       return;
     }
-
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ cid })
-    };
-
+  
     try {
-      const response = await fetch('http://127.0.0.1:5000/predict', requestOptions);
-      const data = await response.json();
-      if (response.ok) {
-        setResult(data);
-        setError('');
+      const response = await axios.post(`${FLASK_SERVER_URL}/search`, { searchTerm });
+      if (response.data.error) {
+          setError(response.data.error);
+          setResults(null);
       } else {
-        throw new Error(data.error || 'Error fetching data');
+          setResults(response.data);
+          setError('');
       }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        setError(`Failed to fetch: ${error.message}`);
+  } catch (error) {
+      if (axios.isAxiosError(error)) {
+          setError(`Error: ${error.response ? error.response.data.error : 'Server not reachable'}`);
       } else {
-        setError('Failed to fetch: An unexpected error occurred');
+          setError('An unexpected error occurred. Please try again.');
       }
-      setResult(null);
-    }
-  };
+      setResults(null);
+  }
+};
+
+const renderResults = () => {
+  if (!results) {
+      return <p>No results found.</p>;
+  }
+
+  if (Array.isArray(results)) {
+      return (
+          <ul>
+              {results.map((compound) => (
+                  <li key={compound.CID}>
+                      CID: {compound.CID} - {compound['Compound Name']}
+                  </li>
+              ))}
+          </ul>
+      );
+  } else if ('Activities' in results) {
+      return (
+          <div>
+              <p>CID: {results.CID}</p>
+              <p>Compound Name: {results['Compound Name']}</p>
+              <p>Activities: {Array.isArray(results.Activities) ? results.Activities.join(', ') : results.Activities}</p>
+          </div>
+      );
+  } else {
+      return <p>No matching results.</p>;
+  }
+};
 
   return (
     <div className="container">
-      <h1>Pharmacological & Chemical Compound Classifier</h1>
+      <h1>Compound Activity Search</h1>
       <div className="search-bar">
         <input
           type="text"
-          value={cid}
-          onChange={(e) => setCid(e.target.value)}
-          placeholder="Enter CID"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Enter activity or CID"
         />
         <button onClick={handleSearch}>Search</button>
       </div>
-      <div className="results-container">
-        {result && (
-          <>
-            <div className="result-box">
-              <h3>Chemical Structure</h3>
-              <img src={result.image} alt="Chemical Structure" />
-            </div>
-            <div className="result-box">
-              <h3>Molecule Data</h3>
-              <p>{result.data}</p>
-            </div>
-            <div className="result-box">
-              <h3>Predicted Action</h3>
-              <p>{result.action}</p>
-            </div>
-          </>
-        )}
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-      </div>
+      {error && <p className="error">{error}</p>}
+      {results && (
+        <div className="results-container">
+          <h2>Results for "{searchTerm}":</h2>
+          {renderResults()}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,3 +1,5 @@
+/* frontend/src/App.css */
+
 body {
   background-color: #333; /* actual background */
   color: #fff; 
@@ -42,11 +44,11 @@ body {
 .result-box {
   width: 30%;
   padding: 10px;
-  background-color: #222; /* Darker grey for result boxes */
-  border: 1px solid #444; /* Dark grey border for some depth */
-  box-shadow: 0 0 10px #000; /* Soft black shadow for 3D effect */
+  background-color: #ffffff; 
+  border: 1px solid #ffffff; 
+  box-shadow: 0 0 10px #ffffff; 
 }
 
 .result-box h3 {
-  border-bottom: 1px solid #555; /* Subtle line under headers for visibility */
+  border-bottom: 1px solid #555; 
 }

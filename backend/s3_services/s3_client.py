@@ -12,5 +12,6 @@ def upload_file_to_s3(file_name, bucket, object_name=None):
 
 
 if __name__ == "__main__":
-    upload_file_to_s3('../temp/compoundClassifications_scraped.parquet', 'molecular-and-pharmacological-data', 'parquet/compoundClassifications_scraped.parquet')
-    upload_file_to_s3('../temp/computedParameters_scraped.parquet', 'molecular-and-pharmacological-data', 'parquet/computedParameters_scraped.parquet')
+    upload_file_to_s3('C:\\Users\\Lenovo\\Desktop\\Pharmacological-Chemical-Compound-Classifier\\backend\\temp\\compoundClassifications_scraped.parquet', 'molecular-and-pharmacological-data', 'parquet/compoundClassifications_scraped.parquet')
+    upload_file_to_s3('C:\\Users\\Lenovo\\Desktop\\Pharmacological-Chemical-Compound-Classifier\\backend\\temp\\computedParameters_scraped.parquet', 'molecular-and-pharmacological-data', 'parquet/computedParameters_scraped.parquet')
+    upload_file_to_s3('C:\\Users\\Lenovo\\Desktop\\Pharmacological-Chemical-Compound-Classifier\\backend\\temp\\compoundCIDs_scraped.parquet', 'molecular-and-pharmacological-data', 'parquet/compoundCIDs_scraped.parquet')
