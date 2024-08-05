@@ -13,6 +13,8 @@ s3 = boto3.client('s3')
 bucket_name = 'molecular-and-pharmacological-data'
 file_key = 'parquet/compoundClassifications_scraped.parquet'
 
+#==========================================================================================
+
 def read_parquet_from_s3():
     try:
         obj = s3.get_object(Bucket=bucket_name, Key=file_key)
@@ -28,6 +30,37 @@ def read_parquet_from_s3():
     except Exception as e:
         print(f"Failed to read from S3: {str(e)}")
     return pd.DataFrame() 
+
+#==========================================================================================
+
+@app.route('/activities', methods=['GET'])
+def get_activities():
+    try:
+        df = read_parquet_from_s3()
+        if df.empty:
+            return jsonify({'error': 'No data found in Parquet'}), 500
+
+        activity_counts = {}
+        total_count = 0
+        for activities_str in df['Activities'].dropna():
+            try:
+                activities = ast.literal_eval(activities_str)
+                for activity in activities:
+                    if activity in activity_counts:
+                        activity_counts[activity] += 1
+                    else:
+                        activity_counts[activity] = 1
+                    total_count += 1 
+            except ValueError:
+                continue
+
+        activity_list = [{'activity': k, 'count': v} for k, v in sorted(activity_counts.items())]
+        activity_list.append({'activity': 'Total', 'count': total_count})  # total
+        return jsonify(activity_list)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+#==========================================================================================    
 
 @app.route('/search', methods=['POST'])
 def search():

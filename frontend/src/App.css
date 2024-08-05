@@ -1,5 +1,65 @@
 /* frontend/src/App.css */
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #868686;
+}
+
+td:hover {
+  background-color: #868686; 
+}
+
+/*-----------------------------------------------------------------------------
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+}
+
+td {
+  background-color: #f9f9f9; 
+  cursor: pointer; 
+}
+
+*/
+
+/*-----------------------------------------------------------------------------*/
+
+table td button {
+  background-color: #4CAF50; 
+  color: white; 
+  border: none;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px; 
+  transition: background-color 0.3s; 
+}
+
+table td button:hover {
+  background-color: #45a049; 
+}
+
+/*=======================================================================================*/
+
 body {
   background-color: #333; /* actual background */
   color: #fff; 
@@ -44,9 +104,9 @@ body {
 .result-box {
   width: 30%;
   padding: 10px;
-  background-color: #ffffff; 
-  border: 1px solid #ffffff; 
-  box-shadow: 0 0 10px #ffffff; 
+  background-color: #7c7c7c; 
+  border: 1px solid #7c7c7c; 
+  box-shadow: 0 0 10px #7c7c7c; 
 }
 
 .result-box h3 {
