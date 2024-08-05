@@ -31,29 +31,23 @@ ________________________________________________________________________________
 
 • Normalization of Molecular Properties using StandardScalar() (scaling to unit variance) 
 
-• 1st Layer: 2048 Neuron Count
+• 1st Layer: 1760 Neuron Count
 
 • 2nd Layer: 1024 Neuron Count
 
 • 3rd Layer: 512 Neuron Count
 
-• 4th Layer: 256 Neuron Count
-
-• 5th Layer: 128 Neuron Count
-
 • Output layer: Sigmoid Activation  |  Dropout Layers: 0.3 
 
-• Batch Size: 244  |  Epochs: 120
+• Batch Size: 64  |  Epochs: 120
 
 • Loss Function: Binary Crossentropy (to be compatible with Multi-Label-Classification setup)
 
-• Learning Rate: 0.001 with Adam Optimizer 
+• Learning Rate: 0.00035 with Adam Optimizer 
 
 • Gradient Clipping & Early Stopping 
 
 • BatchNormalization() and L2 Regularizers were noted to reduce accuracy for this dataset:
-
-![60% ACCURACY](https://github.com/user-attachments/assets/28884b71-9270-4074-9239-d2e2a8713abf)
 
 DNN currently undergoing Optuna Trials for hyperparameter optimization (Testing combinations of the above parameters to output the the highest model accuracy) 
 
@@ -121,3 +115,4 @@ Data Storage: AWS S3, Parquet
 
 Machine Learning: TensorFlow, Keras, Optuna, Scikit-learn
 
+RESTful API
