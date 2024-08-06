@@ -64,7 +64,7 @@ table td button:hover {
 body {
   background-color: #333; /* actual background */
   color: #fff; 
-  font-family: Arial, sans-serif; /* font */
+  font-family: 'Times New Roman', Times, serif, sans-serif; /* font */
 }
 
 .container {

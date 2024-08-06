@@ -45,6 +45,7 @@ const App: React.FC = () => {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [imageUrl, setImageUrl] = useState('');
   
+  /* SEPARATE ACTIVITY SEARCH FROM PIC process */
   const handleSearch = async (cid?: string) => {
     const searchId = cid || searchTerm; // FOR CLICKING VS SEARCHING
 
@@ -212,7 +213,7 @@ const App: React.FC = () => {
                   Pharmacological Classification:
                 </button>
               </th>
-              <th>
+              <th style={{ width: '50px', textAlign: 'center' }}>
                 <button onClick={() => requestSort('count')} style={{ border: 'none', background: 'none' }}>
                   Entries
                 </button>
@@ -272,7 +273,7 @@ const App: React.FC = () => {
             <tbody>
             {results.map((item, index) => (
                 <tr key={index}>
-                    <td onClick={() => handleCIDClick(item.CID)} style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}>
+                    <td onClick={() => handleCIDClick(item.CID)} style={{ cursor: 'pointer', color: '#45a049', textDecoration: 'underline' }}>
                         {item.CID}
                     </td>
                     <td>{item['Compound Name']}</td>
@@ -290,15 +291,15 @@ const App: React.FC = () => {
 
     return (
             <div className="container">
-                <h1>Compound ⌬ Classifier</h1>
+                <h1>🧪℃omρound ⌬ Classifiε℞💊</h1>
                 <div className="search-bar">
                     <input
                         type="text"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        placeholder="Enter activity or CID"
+                        placeholder="Enter Compound Name, CID, or Activity"
                     />
-                    <button onClick={() => handleSearch()}>Search</button>
+                    <button onClick={() => handleSearch()} style={{ marginRight: '10px' }}>Search</button>
                     <button onClick={fetchActivities}>Browse</button>
                 </div>
                 {error && <p className="error">{error}</p>}

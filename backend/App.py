@@ -68,16 +68,15 @@ def get_activities():
 def search():
     content = request.json
     search_term = content.get('searchTerm')
-
     if not search_term:
         return jsonify({'error': 'No search term provided'}), 400
-
     try:
         df = read_parquet_from_s3()
         if df.empty:
             return jsonify({'error': 'No data found in Parquet'}), 500
 
         if search_term.isdigit():
+            # CID SEARCH
             cid = int(search_term)
             result = df[df['CID'] == cid]
 
@@ -104,11 +103,21 @@ def search():
             else:
                 return jsonify({'error': 'CID not found'}), 404
         else:
-            # ***SEARCH BY ACTIVITY ***
-            activity = search_term
-            filtered_results = df[df['Activities'].apply(lambda x: activity in ast.literal_eval(x) if isinstance(x, str) else False)]
-            response_data = filtered_results[['CID', 'Compound Name']].to_dict(orient='records')
-            return jsonify(response_data)
+            # COMPOUND NAME SEARCH
+            compound_name_results = df[df['Compound Name'].str.contains(search_term, case=False, na=False)]
+            
+            if not compound_name_results.empty:
+                response_data = compound_name_results[['CID', 'Compound Name']].to_dict(orient='records')
+                return jsonify(response_data)
+            else:
+                # ACTIVITY SEARCH
+                activity = search_term
+                filtered_results = df[df['Activities'].apply(lambda x: activity in ast.literal_eval(x) if isinstance(x, str) else False)]
+                if not filtered_results.empty:
+                    response_data = filtered_results[['CID', 'Compound Name']].to_dict(orient='records')
+                    return jsonify(response_data)
+                else:
+                    return jsonify({'error': 'No matching compounds or activities found'}), 404
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
