@@ -3,6 +3,7 @@
 table {
   width: 100%;
   border-collapse: collapse;
+  margin-bottom: 40px;
 }
 
 table, th, td {
@@ -10,8 +11,9 @@ table, th, td {
 }
 
 th, td {
-  padding: 8px;
+  padding: 2px;
   text-align: left;
+  font-size: 14px;
 }
 
 th {
@@ -35,7 +37,6 @@ td {
   cursor: pointer; 
 }
 
-*/
 
 /*-----------------------------------------------------------------------------*/
 
@@ -43,12 +44,12 @@ table td button {
   background-color: #4CAF50; 
   color: white; 
   border: none;
-  padding: 8px 16px;
+  padding: 4px 8px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
+  font-size: 14px;
+  margin: 2px 1px;
   cursor: pointer;
   border-radius: 4px; 
   transition: background-color 0.3s; 

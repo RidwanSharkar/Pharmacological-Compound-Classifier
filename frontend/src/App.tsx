@@ -1,11 +1,11 @@
+/* frontend/src/App.tsx: */
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 
 const FLASK_SERVER_URL = 'http://localhost:5000';
-
 
 interface Compound {
   CID: number;
@@ -29,7 +29,7 @@ interface Activity {
 }
 
 interface SortConfig {
-  key: keyof Activity;  // 'activity' or 'count'
+  key: keyof Activity;  // to oscillate
   direction: 'ascending' | 'descending';
 }
 
@@ -41,13 +41,12 @@ const App: React.FC = () => {
   const [results, setResults] = useState<Compound[] | ActivityResult | PredictionResult | null>(null);
   const [error, setError] = useState('');
   const [isBrowsing, setIsBrowsing] = useState(false);  // Swap Table <-> Search View
-  const [sortConfig, setSortConfig] = useState<SortConfig>({ key: 'count', direction: 'ascending' }); // Sort
+  const [sortConfig, setSortConfig] = useState<SortConfig>({ key: 'count', direction: 'descending' }); 
   const [activities, setActivities] = useState<Activity[]>([]);
-
   const [imageUrl, setImageUrl] = useState('');
   
   const handleSearch = async (cid?: string) => {
-    const searchId = cid || searchTerm; // Use the provided CID if available, otherwise use the current searchTerm state
+    const searchId = cid || searchTerm; // FOR CLICKING VS SEARCHING
 
     if (!searchId.trim()) {
         setError('Please enter a search term.');
@@ -63,9 +62,9 @@ const App: React.FC = () => {
             setResults(detailResponse.data);
             setError('');
 
-            // Fetch the image URL using the CID from searchTerm
+            // SCRAPES IMAGE FROM PUBCHEM
             const imageUrl = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/CID/${searchId}/PNG`;
-            setImageUrl(imageUrl); // Set the image URL directly without additional request
+            invertImageColors(imageUrl).then(setImageUrl).catch((error) => setError('Failed to process image'));
         }
     } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -143,6 +142,56 @@ const App: React.FC = () => {
     window.history.pushState({}, '', `/compound/${cid}`);
 };
 
+  /* INVERTER =======================================================================================*/
+
+  const invertImageColors = async (imageSrc: string) => {
+    const image = new Image();
+    image.crossOrigin = 'Anonymous'; 
+    image.src = imageSrc;
+
+    return new Promise<string>((resolve, reject) => {
+        image.onload = () => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            if (!ctx) {
+                reject('Failed to get canvas context');
+                return;
+            }
+
+            canvas.width = image.width;
+            canvas.height = image.height;
+            
+            ctx.drawImage(image, 0, 0);
+            
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+
+            for (let i = 0; i < data.length; i += 4) {
+              data[i] = 255 - data[i];        // R
+              data[i + 1] = 255 - data[i + 1];  // G
+              data[i + 2] = 255 - data[i + 2];  // B
+            }
+            // NOT EXACTLY BLACK AFTER INVERSION (#0a0a0a)
+            for (let i = 0; i < data.length; i += 4) {
+              if (data[i] < 15 && data[i + 1] < 15 && data[i + 2] < 15) {
+                  data[i] = 51;     
+                  data[i + 1] = 51; 
+                  data[i + 2] = 51; 
+              }
+          }
+            
+            ctx.putImageData(imageData, 0, 0);
+            resolve(canvas.toDataURL());
+        };
+
+        image.onerror = (error) => {
+            reject(error);
+        };
+    });
+  };
+
+
   /*========================================================================================================*/
 
   const renderActivities = () => {
@@ -154,18 +203,18 @@ const App: React.FC = () => {
 
     return (
       <div>
-        <h2>Available Activities:</h2>
+        <h2> </h2>
         <table>
           <thead>
             <tr>
               <th>
                 <button onClick={() => requestSort('activity')} style={{ border: 'none', background: 'none' }}>
-                  Activity
+                  Pharmacological Classification:
                 </button>
               </th>
               <th>
                 <button onClick={() => requestSort('count')} style={{ border: 'none', background: 'none' }}>
-                  Count
+                  Entries
                 </button>
               </th>
             </tr>
@@ -187,8 +236,7 @@ const App: React.FC = () => {
     );
   };
 
-
-
+  /*========================================================================================================*/
 
   const renderResults = () => {
     if (!results) {
@@ -197,10 +245,16 @@ const App: React.FC = () => {
     if ('Activities' in results) {
       return (
         <div>
-          <h2>CID: {results.CID}</h2>
-          <p>Compound Name:   {results['Compound Name']}</p>
-          <p>Activities:   {Array.isArray(results.Activities) ? results.Activities.join(', ') : 'No activities listed'}</p>
+
+          <h2>{results['Compound Name']}</h2>
+          <p>CID: {results.CID}</p>
           {imageUrl && <img src={imageUrl} alt="Compound Structure" />}
+          <p>Pharmacological Classifications:</p>
+          <h2>{
+            Array.isArray(results.Activities) && results.Activities.length > 0
+              ? `[${results.Activities.join(' - ')}]`
+              : 'No activities listed'
+            }</h2>
         </div>
       );
     } 
@@ -235,9 +289,8 @@ const App: React.FC = () => {
   };
 
     return (
-        <Router>
             <div className="container">
-                <h1>Compound Activity Search</h1>
+                <h1>Compound ⌬ Classifier</h1>
                 <div className="search-bar">
                     <input
                         type="text"
@@ -256,7 +309,6 @@ const App: React.FC = () => {
                     </div>
                 )}
             </div>
-        </Router>
     );
 };
 
