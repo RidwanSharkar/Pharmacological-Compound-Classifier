@@ -45,7 +45,7 @@ ________________________________________________________________________________
 
 • 3rd Layer: 512 Neuron Count
 
-• Output layer: Sigmoid Activation (for independent label predictions)  |  Dropout Layers: 0.3-9.4 
+• Output layer: Sigmoid Activation (for independent label predictions)  |  Dropout Layers: 0.3-0.4 
 
 • Batch Size: 64  |  Epochs: 120
 
