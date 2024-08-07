@@ -271,9 +271,7 @@ model = Sequential([
     #Dropout(0.35),
     #Dense(256, activation='relu',),
     #Dropout(0.35),
-    
     Dense(mlb.classes_.shape[0], activation='sigmoid')
-
 ])
 
 adam_optimizer = Adam(learning_rate=0.0004, clipnorm=1.0)                                                     # GRADIENT CLIPPING
@@ -291,7 +289,6 @@ auc = metrics[2]
 precision = metrics[3]
 recall = metrics[4]
 
-# Now, you can print all these values:
 print(f"Test loss: {loss}")
 print(f"Test accuracy: {accuracy}")
 print(f"Test AUC: {auc}")
@@ -300,13 +297,3 @@ print(f"Test recall: {recall}")
 
 model.save('C:\\Users\\Lenovo\\Desktop\\Pharmacological-Chemical-Compound-Classifier\\model\\DNNModel.h5')
 joblib.dump(mlb, 'C:\\Users\\Lenovo\\Desktop\\Pharmacological-Chemical-Compound-Classifier\\model\\MultiLabelBinarizer.pkl')
-
-
-# SHAP EXPLANATION==============================================================================================================
-# X_train_np = X_train.flatten()
-# X_test_np = X_test.flatten() -> 2D cant
-# explainer = shap.DeepExplainer(model, X_train[:100]) 
-# try:
-#     shap_values = explainer.shap_values(X_test[:10])
-# except Exception as e:
-#    print("Error with SHAP computation:", e)

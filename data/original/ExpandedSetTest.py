@@ -13,12 +13,12 @@ def fetch_smiles(pubchem_cid):
         logging.debug(f"Fetching SMILES for CID: {pubchem_cid}")
         url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/{pubchem_cid}/property/CanonicalSMILES/JSON'
         response = requests.get(url)
-        response.raise_for_status()  # Raise HTTP Error if bad response
+        response.raise_for_status()
         data = response.json()
         if 'PropertyTable' in data and 'Properties' in data['PropertyTable'] and len(data['PropertyTable']['Properties']) > 0:
             smiles = data['PropertyTable']['Properties'][0]['CanonicalSMILES']
             logging.debug(f"SMILES for CID {pubchem_cid}: {smiles}")
-            time.sleep(1)  # Delay to manage API rate limits
+            time.sleep(1)  
             return smiles
         else:
             logging.error(f"No SMILES data found for CID {pubchem_cid}. Response: {data}")

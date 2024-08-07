@@ -16,10 +16,10 @@ def get_compound_info(cid):
         response.raise_for_status()
         data = response.json()
 
-        # Extract compound name
+        # Compound Name
         compound_name = data['Record']['RecordTitle']
 
-        # Extract MeSH Pharmacological Classifications
+        # MeSH Pharmacological Classifications
         compound_activities = []
         sections = data['Record'].get('Section', [])
         for section in sections:
