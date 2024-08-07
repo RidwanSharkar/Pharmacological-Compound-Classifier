@@ -3,6 +3,14 @@ ________________________________________________________________________________
 - Predictive Modeling of Chemical Compounds' Classification, Mechanisms of Action, and Therapeutic Potentials using Machine Learning to identify Structure-Activity-Relationships (SAR)
 ________________________________________________________________________________________________________________
 
+![Compounds 1](https://github.com/user-attachments/assets/1930c6ad-1e00-4408-997f-b58843c70cf2)
+![Compunds 3](https://github.com/user-attachments/assets/0a092992-f292-48c9-8893-52d2ebdbf6da)
+![Compounds 2](https://github.com/user-attachments/assets/5ced9b27-c232-4c4c-a830-ccd1e69e7e24)
+![Activities 3](https://github.com/user-attachments/assets/acc0be8d-1225-4b9e-a87a-c82c4ce21dd7)
+![Activities 1 5](https://github.com/user-attachments/assets/94f69d9d-de56-41bd-be19-bb1672cdaf56)
+
+
+
 **METHODS 1:**
 
 • This project employs a Deep Neural Network (DNN) ensembled with Random Forest to identify the Quantitative Structure-Activity Relationships (QSAR) of chemical compounds based on their extensive molecular properties. Inspired by this dataset of 635 psychoactive compoounds and their 117 molecular properties. 
