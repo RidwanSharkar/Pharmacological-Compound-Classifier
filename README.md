@@ -117,8 +117,6 @@ Frontend: React, TypeScript
 
 Backend: Flask, Python
 
-Cheminformatics Toolkit: RDKit
-
 Data Storage: AWS S3, Parquet
 
 Machine Learning: TensorFlow, Keras, Optuna, Scikit-learn
