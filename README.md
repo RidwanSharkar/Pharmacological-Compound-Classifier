@@ -45,7 +45,7 @@ ________________________________________________________________________________
 
 • 3rd Layer: 512 Neuron Count
 
-• Output layer: Sigmoid Activation  |  Dropout Layers: 0.3 
+• Output layer: Sigmoid Activation (for independent label predictions)  |  Dropout Layers: 0.3-0.4 
 
 • Batch Size: 64  |  Epochs: 120
 
@@ -116,8 +116,6 @@ ________________________________________________________________________________
 Frontend: React, TypeScript
 
 Backend: Flask, Python
-
-Cheminformatics Toolkit: RDKit
 
 Data Storage: AWS S3, Parquet
 
