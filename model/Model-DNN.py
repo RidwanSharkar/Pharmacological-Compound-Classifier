@@ -1,91 +1,93 @@
 # model\Model-DeepNeuralNetwork.py:
+#    tensorflow.python.keras.layers - import bug
+from tensorflow.keras.layers import Dense, Dropout, BatchNormalization # type: ignore
+from tensorflow.keras.models import Sequential # type: ignore
+from tensorflow.keras.optimizers import Adam # type: ignore
+from tensorflow.keras.regularizers import l2 # type: ignore
+from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau # type: ignore
+from tensorflow.keras.metrics import AUC, Precision, Recall # type: ignore
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MultiLabelBinarizer, StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 import ast 
-import shap
 import joblib
 import tensorflow as tf
-from tensorflow.keras.layers import Dense, Dropout, BatchNormalization
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.regularizers import l2
-from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
-from tensorflow.keras.metrics import AUC, Precision, Recall
-# from tensorflow.python.keras.layers import Dense, Dropout - Import Bug*
-import optuna
 
 
-# DATA PROCESSING & FEATURE SELECTION===================================================================================
+# DATA PROCESSING & FEATURES + IMPORTANCES =======================================================================================
 dataset = 'C:\\Users\\Lenovo\\Desktop\\Pharmacological-Chemical-Compound-Classifier\\data\\computedParameters_scraped.csv'
 pharmacologicalActivities = 'C:\\Users\\Lenovo\\Desktop\\Pharmacological-Chemical-Compound-Classifier\\data\\compoundClassifications_scraped.csv'
+
 data = pd.read_csv(dataset)
-activities = pd.read_csv(pharmacologicalActivities)
+activities_unfiltered = pd.read_csv(pharmacologicalActivities)
+psychoactiveCIDs = pd.read_csv('C:\\Users\\Lenovo\\Desktop\\Pharmacological-Chemical-Compound-Classifier\\data\\psychoactiveCIDs.csv')
+
+activities = activities_unfiltered[activities_unfiltered['CID'].isin(psychoactiveCIDs['CID'])]
 
 merged_data = pd.merge(data, activities, on='CID', how='left')
 merged_data['Activities'] = merged_data['Activities'].fillna('[]').apply(ast.literal_eval)
 merged_data = merged_data[merged_data['Activities'].map(len) > 0]
 
-# Transform 'Activities' into binary matrix (Multi-label) - ** HAMMING LOSS **
+# Transform 'Activities' column into binary matrix (Multi-label) - ** HAMMING LOSS **
 mlb = MultiLabelBinarizer()
 activities_encoded = mlb.fit_transform(merged_data['Activities'])
 
 features = merged_data[[
-    #'fr_Al_COO',
-    # 'fr_Al_OH',            # 94
-    #'fr_Al_OH_noTert',     # 109
-    #'fr_ArN',
-    #'fr_Ar_N',
-    #'fr_Ar_NH',
-    #'fr_Ar_OH',
-    #'fr_COO',
-    #'fr_COO2',
-    # 'fr_C_O',                      # 115
-    #'fr_C_O_noCOO',
+    'fr_Al_COO',
+    'fr_Al_OH',            # 94
+    'fr_Al_OH_noTert',     # 109
+    'fr_ArN',
+    'fr_Ar_N',
+    'fr_Ar_NH',
+    'fr_Ar_OH',
+    'fr_COO',
+    'fr_COO2',
+    'fr_C_O',                      # 115
+    'fr_C_O_noCOO',
     #'fr_C_S',
-    #'fr_HOCCN',
-    #'fr_Imine',
-    # 'fr_NH0',                   # 98
-    #'fr_NH1',                  # 114 
-    #'fr_NH2',
+    'fr_HOCCN',
+    'fr_Imine',
+    'fr_NH0',                   # 98
+    'fr_NH1',                  # 114 
+    'fr_NH2',
     #'fr_N_O',
-    #'fr_Ndealkylation1',       # 111
-    #'fr_Ndealkylation2',
-    #'fr_Nhpyrrole',
+    'fr_Ndealkylation1',       # 111
+    'fr_Ndealkylation2',
+    'fr_Nhpyrrole',
     #'fr_SH',
     #'fr_aldehyde',
     #'fr_alkyl_carbamate',
     #'fr_alkyl_halide',
-    #'fr_allylic_oxid',             # 97
-    #'fr_amide',
+    'fr_allylic_oxid',             # 97
+    'fr_amide',
     #'fr_amidine',
-    #'fr_aniline',
-    #'fr_aryl_methyl',
+    'fr_aniline',
+    'fr_aryl_methyl',
     #'fr_azide',
     #'fr_azo',
-    #'fr_benzene',                  # 116
-    # 'fr_bicyclic',                 # 90
+    'fr_benzene',                  # 116
+    'fr_bicyclic',                 # 90
     #'fr_diazo',
     #'fr_dihydropyridine',
-    #'fr_epoxide',
-    #'fr_ester',                    
-    # 'fr_ether',                    # 102
+    'fr_epoxide',
+    'fr_ester',                    
+    'fr_ether',                    # 102
     #'fr_furan',
-    #'fr_guanido',
-    #'fr_halogen',
+    'fr_guanido',
+    'fr_halogen',
     #'fr_hdrzine',
     #'fr_hdrzone',
     #'fr_imidazole',
     #'fr_imide',
     #'fr_isocyan',
     #'fr_isothiocyan',
-    #'fr_ketone',
-    #'fr_ketone_Topliss',
+    'fr_ketone',
+    'fr_ketone_Topliss',
     #'fr_lactam',
     #'fr_lactone',
-    #'fr_methoxy',
+    'fr_methoxy',
     #'fr_morpholine',
     #'fr_nitrile',
     #'fr_nitro',
@@ -93,27 +95,27 @@ features = merged_data[[
     #'fr_nitro_arom_nonortho',
     #'fr_nitroso',
     #'fr_oxazole',
-    #'fr_oxime',
-    #'fr_para_hydroxylation',
-    #'fr_phenol',
-    #'fr_phenol_noOrthoHbond',
+    'fr_oxime',
+    'fr_para_hydroxylation',
+    'fr_phenol',
+    'fr_phenol_noOrthoHbond',
     #'fr_phos_acid',
     #'fr_phos_ester',
-    #'fr_piperdine',
+    'fr_piperdine',
     #'fr_piperzine',
     #'fr_priamide',
     #'fr_prisulfonamd',
-    #'fr_pyridine',
+    'fr_pyridine',
     #'fr_quatN',
-    #'fr_sulfide',
+    'fr_sulfide',
     #'fr_sulfonamd',
     #'fr_sulfone',
-    #'fr_term_acetylene',
+    'fr_term_acetylene',
     #'fr_tetrazole',
     #'fr_thiazole',
     #'fr_thiocyan',
     #'fr_thiophene',
-    #'fr_unbrch_alkane',
+    'fr_unbrch_alkane',
     #'fr_urea',
     'EState_VSA1',              # 53   
     'EState_VSA2',              # 77
@@ -125,7 +127,7 @@ features = merged_data[[
     'EState_VSA8',              # 37
     'EState_VSA9',              # 71
     'EState_VSA10',             # 78
-    'EState_VSA11',
+    #'EState_VSA11',
     'VSA_EState1',              # 67
     'VSA_EState2',              # 15
     'VSA_EState3',              # 17
@@ -143,7 +145,7 @@ features = merged_data[[
     'qed',                      # 20
     'HeavyAtomMolWt',           # 74
     'NumValenceElectrons',      # 79    
-    # 'NumRadicalElectrons',
+    #'NumRadicalElectrons',
     'MaxPartialCharge',         # 34       
     'MinPartialCharge',         # 47
     'MaxAbsPartialCharge',      # 54       
@@ -166,7 +168,7 @@ features = merged_data[[
     'SMR',                      # 63
     'LabuteASA',                # 69
     'TPSA',                     # 32
-    # 'AMW',
+    #'AMW',
     'ExactMW',                  # 66
     'NumLipinskiHBA',           # 88
     'NumLipinskiHBD',           # 99
@@ -209,18 +211,18 @@ features = merged_data[[
     'slogp_VSA6',           # 49
     'slogp_VSA7',
     'slogp_VSA8',           # 103 
-    # 'slogp_VSA9',
+    #'slogp_VSA9',
     'slogp_VSA10',              # 112
     'slogp_VSA11',
     'slogp_VSA12',
     'smr_VSA1',             # 81
-    'smr_VSA2',
+    #'smr_VSA2',
     'smr_VSA3',             # 84
     'smr_VSA4',             # 80
     'smr_VSA5',             # 33
     'smr_VSA6',             # 43 
     'smr_VSA7',             # 45
-    'smr_VSA8',
+    #'smr_VSA8',
     'smr_VSA9',             # 106
     'smr_VSA10',                    # 65
     'peoe_VSA1',                    # 63
@@ -234,54 +236,72 @@ features = merged_data[[
     'peoe_VSA9',                    # 50
     'peoe_VSA10',                   # 64
     'peoe_VSA11',                   # 86
-    'peoe_VSA12',                   # 105
+    'peoe_VSA12',                   # 105 
     'peoe_VSA13',
     'peoe_VSA14',                   # 111
-    'MQN1', 'MQN2', 'MQN3', 'MQN4', 'MQN5', 'MQN6',
-    'MQN7', 'MQN8', 'MQN9', 'MQN10', 'MQN11', 'MQN12',
-    'MQN13', 
-    'MQN14', 'MQN15', 'MQN16', 'MQN17', 'MQN18',
-    'MQN19', 'MQN20', 'MQN21', 'MQN22', 'MQN23', 'MQN24',
+    'MQN1', 'MQN2', 'MQN3', # 'MQN4', # 'MQN5', 
+    'MQN6', # 'MQN7', 
+    'MQN8', 'MQN9', 'MQN10', 'MQN11', 'MQN12',
+    'MQN13', 'MQN14', # 'MQN15', 
+    'MQN16', 'MQN17', # 'MQN18',
+    'MQN19', 'MQN20', 'MQN21', 'MQN22', 'MQN23', # 'MQN24',
     'MQN25', 'MQN26', 'MQN27', 'MQN28', 'MQN29', 
     'MQN30', # 70
     'MQN31', # 62
-    'MQN32', 'MQN33', 'MQN34', 'MQN35', 'MQN36',
-    'MQN37', 'MQN38', 'MQN39', 'MQN40', 'MQN41', 'MQN42'
+    'MQN32', 'MQN33', # 'MQN34', 
+    'MQN35', 'MQN36',
+    'MQN37', #'MQN38', # 'MQN39', # 'MQN40', 
+    'MQN41', 'MQN42'
 ]].fillna(0)
 
 
 
 
-# TRAIN MODEL===================================================================================================================
+# TRAIN MODEL=====================================================================================================================
 scaler = StandardScaler()
-features = scaler.fit_transform(features)                                                                        # NORMALIZATION 
+features = scaler.fit_transform(features)                                                                          # NORMALIZATION 
 X_train, X_test, y_train, y_test = train_test_split(features, activities_encoded, test_size=0.2, random_state=42)
 
 model = Sequential([
-    Dense(1536, activation='relu', input_shape=(X_train.shape[1],),),
+    Dense(1240, activation='relu', input_shape=(X_train.shape[1],),),
+    BatchNormalization(),
+    Dropout(0.20), 
+    Dense(1024, activation='relu',), # TRY L2
+    BatchNormalization(), 
+    Dropout(0.20),
+    Dense(1024, activation='relu',), # TRY L2
+    BatchNormalization(), 
+    Dropout(0.30),
+    #Dense(768, activation='relu',),
     #BatchNormalization(),
-    Dropout(0.30), 
-    Dense(1024, activation='relu',),
-    #BatchNormalization(),
-    Dropout(0.35),
-    #Dense(176, activation='relu',),
-    #BatchNormalization(),
-    # Dropout(0.35),
-    #Dense(512, activation='relu',),
-    #Dropout(0.35),
-    #Dense(256, activation='relu',),
-    #Dropout(0.35),
-    Dense(mlb.classes_.shape[0], activation='sigmoid')
-])
-
-adam_optimizer = Adam(learning_rate=0.0004, clipnorm=1.0)                                                     # GRADIENT CLIPPING
+    #Dropout(0.20),
+    Dense(mlb.classes_.shape[0], activation='sigmoid')])  # Output layer with 1 neuron/class                   # SIGMOID ACTIVATION
+adam_optimizer = Adam(learning_rate=0.00035, clipnorm=1.0)                                                      # GRADIENT CLIPPING
 model.compile(optimizer=adam_optimizer, loss='binary_crossentropy', metrics=['accuracy', AUC(), Precision(), Recall()])       
+reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=5, min_lr=0.00001)                # LEARNING RATE SCHEDULING 
+#early_stopping = EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)  , callbacks=[early_stopping] # EARLY STOPPING 
+model.fit(X_train, y_train, epochs=70, batch_size=24, validation_split = 0.20)  
 
-reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=5, min_lr=0.00001)                     # LEARNING RATE SCHEDULING on PLATEAU
-# early_stopping = EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)                      # EARLY STOPPING , callbacks=[early_stopping]
-model.fit(X_train, y_train, epochs=100, batch_size=128, validation_split = 0.20)          
 
-# ACCURACY======================================================================================================================
+# OG MODEL========================================================================================================================
+# model = Sequential([
+#    Dense(1536, activation='relu', input_shape=(X_train.shape[1],),),
+#    BatchNormalization(),
+#    Dropout(0.30), 
+#    Dense(1024, activation='relu',),
+#    BatchNormalization(),
+#    Dropout(0.35),
+#    Dense(256, activation='relu',),
+#    BatchNormalization(),
+#    Dropout(0.35),
+#    Dense(mlb.classes_.shape[0], activation='sigmoid')])               # Output layer with 1 neuron/class       SIGMOID ACTIVATION
+#adam_optimizer = Adam(learning_rate=0.0004, clipnorm=1.0)                                                      # GRADIENT CLIPPING
+#model.compile(optimizer=adam_optimizer, loss='binary_crossentropy', metrics=['accuracy', AUC(), Precision(), Recall()])       
+#reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=5, min_lr=0.00001)   # (OnPlateau) LEARNING RATE SCHEDULING 
+#early_stopping = EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)                        # EARLY STOPPING 
+#model.fit(X_train, y_train, epochs=100, batch_size=128, validation_split = 0.20, callbacks=[early_stopping])          
+
+# ACCURACY========================================================================================================================
 metrics = model.evaluate(X_test, y_test)
 loss = metrics[0]
 accuracy = metrics[1]

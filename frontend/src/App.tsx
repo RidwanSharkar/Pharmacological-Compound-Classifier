@@ -20,6 +20,7 @@ interface ActivityResult {
 
 interface PredictionResult {
   CID: number;
+  'Compound Name': string;
   'Predicted Activities': string[];
 }
 
@@ -33,8 +34,10 @@ interface SortConfig {
   direction: 'ascending' | 'descending';
 }
 
-/*========================================================================================================*/
 
+
+
+/*========================================================================================================*/
 
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -45,6 +48,8 @@ const App: React.FC = () => {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [imageUrl, setImageUrl] = useState('');
   
+/*========================================================================================================*/
+
   /* SEPARATE ACTIVITY SEARCH FROM PIC process */
   const handleSearch = async (cid?: string) => {
     const searchId = cid || searchTerm; // FOR CLICKING VS SEARCHING
@@ -53,6 +58,8 @@ const App: React.FC = () => {
         setError('Please enter a search term.');
         return;
     }
+
+    setIsBrowsing(false);
 
     try {
         const detailResponse = await axios.post(`${FLASK_SERVER_URL}/search`, { searchTerm: searchId });
@@ -246,11 +253,10 @@ const App: React.FC = () => {
     if ('Activities' in results) {
       return (
         <div>
-
           <h2>{results['Compound Name']}</h2>
           <p>CID: {results.CID}</p>
           {imageUrl && <img src={imageUrl} alt="Compound Structure" />}
-          <p>Pharmacological Classifications:</p>
+          <p>Known Pharmacological Classifications:</p>
           <h2>{
             Array.isArray(results.Activities) && results.Activities.length > 0
               ? `[${results.Activities.join(' - ')}]`
@@ -259,6 +265,22 @@ const App: React.FC = () => {
         </div>
       );
     } 
+    else if ('Predicted Activities' in results) {
+      return (
+        <div>
+          <h2>{results['Compound Name']}</h2>
+          <p>CID: {results.CID}</p>
+          {imageUrl && <img src={imageUrl} alt="Compound Structure" />}
+          <p>Predicted Pharmacological Classifications:</p>
+          <h2>{
+            Array.isArray(results['Predicted Activities']) && results['Predicted Activities'].length > 0
+              ? `[${results['Predicted Activities'].join(' - ')}]`
+              : 'No activities listed'
+            }</h2>
+        </div>
+      );
+    }
+
     else if (Array.isArray(results)) {
       return (
         <div>
@@ -291,7 +313,7 @@ const App: React.FC = () => {
 
     return (
             <div className="container">
-                <h1>🧪℃omρound ⌬ Classifiε℞💊</h1>
+                <h1>༺🧪℃ompound ⌬ Classifie℞💊༻</h1>
                 <div className="search-bar">
                     <input
                         type="text"

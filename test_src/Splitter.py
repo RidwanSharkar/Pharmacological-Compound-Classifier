@@ -93,7 +93,7 @@ categories = {
     "Cannabinoid Receptor Agonists",
     "Cannabinoid Receptor Antagonists",
 
-    "Adjuvants, Pharmaceutic",
+    #"Adjuvants, Pharmaceutic",
 
     "Nootropic Agents",
     "Neuroprotective Agents",
@@ -138,20 +138,20 @@ categories = {
 
     "Narcotics",
     "Narcotic Antagonists",
-    "Smoking Cessation Agents",
-    "Anti-Obesity Agents",
+    #"Smoking Cessation Agents",
+    #"Anti-Obesity Agents",
 
-    "Peripheral Nervous System Agents",
-    "Wakefulness-Promoting Agents",
+    #"Peripheral Nervous System Agents",
+    #"Wakefulness-Promoting Agents",
     #"Acetaldehyde Dehydrogenase Inhibitors",
 
-    "Purinergic P1 Receptor Agonists",
+    #"Purinergic P1 Receptor Agonists",
     "Purinergic P1 Receptor Antagonists",
-    "Purinergic P2 Receptor Agonists",
-    "Purinergic P2 Receptor Antagonists",
-    "Purinergic Agonists",
-    "Purinergic Antagonists",
-    "Purinergic P2X Receptor Antagonists",
+    #"Purinergic P2 Receptor Agonists",
+    #"Purinergic P2 Receptor Antagonists",
+    #"Purinergic Agonists",
+    #"Purinergic Antagonists",
+    #"Purinergic P2X Receptor Antagonists",
     "Purinergic P2Y Receptor Antagonists"
 }
 
