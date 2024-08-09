@@ -6,7 +6,7 @@ ________________________________________________________________________________
 
 **OVERVIEW:**
 
-• This project employs machine learning to identify the Quantitative Structure-Activity Relationships (QSAR) of chemical compounds based on their extensive molecular properties. 
+• This project employs various machine learning models to identify the Quantitative Structure-Activity Relationships (QSAR) of chemical compounds based on their extensive molecular properties. 
 
 • Users can search and sort the database for classifications and compounds - Classifications that are NOT listed on PubChem will predicted by the model, if possible. 
 
@@ -22,11 +22,11 @@ ________________________________________________________________________________
 
 **METHODS 1:**
 
-• Inspired by this dataset of 635 psychoactive compoounds and their 117 molecular properties. 
+• Inspired by this dataset of 635 psychoactive compounds and their 117 molecular properties. 
 [https://www.kaggle.com/datasets/thedevastator/psychedelic-drug-database?resource=download], 
 a webscraper is set up to retrieve data from all compounds listed under PubChem.ncbi that possess a known 'MeSH Pharmacological Classification' (totaling 17,866 entries) to create and store a custom expanded dataset.
 
-• RD-Kit is then used to retrieve and compute all scraped compounds' molecular popularties, which have been expanded to include 244 molecular porperties - now including counts of all functional groups (amides, halogens, ketones, etc.) as well as electrotopological states (E-state) information that directly correlate molecular behavior with biological receptor activity.
+• RD-Kit (Cheminformatics) is then used to retrieve and compute all scraped compounds' molecular popularties, which have been expanded to include 244 molecular porperties - now including counts of all functional groups (amides, halogens, ketones, etc.) as well as electrotopological states (E-state) information that directly correlate molecular behavior with biological receptor activity.
 
 • All scraped and computed data is then fed to a Random Forest machine learning model to determine which molecular properties correlate highest with the compounds' pharmacological action. These weighed attributes are then used by the model to predict the pharmacological classification of a novel compound whose official 'MeSH Pharmacological Classification' is NOT listed on PubChem. 
 
@@ -76,8 +76,13 @@ ________________________________________________________________________________
 
 ________________________________________________________________________________________________________________
 
-**MOLECULAR PROPERTIES:**
+**METHODS 3:**
 
+• To enhance prediction accuracy for Psychoactive Compounds ONLY, the original dataset of 17,866 compounds was pruned down to 5,107 compounds that include Neurotransmitter Receptors as Classifications: 
+
+________________________________________________________________________________________________________________
+
+**EXAMPLE MOLECULAR PROPERTIES:**
 
 • 'SlogP' - represents the compound's Lipophilicity, predicting how well it can cross cell membranes.
 
