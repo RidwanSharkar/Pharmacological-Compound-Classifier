@@ -118,7 +118,7 @@ To enhance model prediction accuracy for Psychoactive Compounds in particular, t
 • ... (119 Categories Total)
 ________________________________________________________________________________________________________________
 
-**EXAMPLE MOLECULAR PROPERTIES:**
+**Example Molecular Properties:**
 
 • 'SlogP' - represents the compound's Lipophilicity, predicting how well it can cross cell membranes<br>
 • 'SMR' - Molar Refractivity, representing molecule's volume and polarizability (measure of electron cloud's ability to distort)<br>
