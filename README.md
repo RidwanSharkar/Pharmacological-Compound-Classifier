@@ -36,9 +36,9 @@ ________________________________________________________________________________
 
 **Example 'MeSH Pharmacological Classification':**
 
-[Anti-Psychotic Agents, Serotonin Receptor Agonists, Dopamine Uptake Inhibitors, Protein Kinase Inhibitors, Vasoconstrictor Agents, etc.]
+• [Anti-Psychotic Agents, Serotonin Receptor Agonists, Dopamine Uptake Inhibitors, Protein Kinase Inhibitors, Vasoconstrictor Agents, etc.]
 
-Hamming Loss - Multi-Label Classification - is utilized to allow independent prediction of each activity within the set of pharmacological activities:
+• Hamming Loss - Multi-Label Classification - is utilized to allow independent prediction of each activity within the set of pharmacological activities:
 
 ![1](https://github.com/user-attachments/assets/5f151664-3c4a-40bf-be7c-adf9fece44b5)
 
@@ -80,7 +80,7 @@ ________________________________________________________________________________
 
 **METHODS 3:**
 
-To enhance model prediction accuracy for Psychoactive Compounds in particular, the original dataset of 17,866 compounds was pruned down to 5,107 compounds that ONLY include Neurotransmitter Receptors as Classifications: 
+To enhance model prediction accuracy for Psychoactive Compounds in particular, the original dataset of 17,866 compounds was pruned down to 5,107 compounds that ONLY include information relevant to Neurotransmitter Receptors within their Classifications: 
 
 • Adenosine A1/2 Receptor Agonists<br>
 • Adenosine A1/2 Receptor Antagonists<br>
@@ -114,8 +114,8 @@ To enhance model prediction accuracy for Psychoactive Compounds in particular, t
 • Adrenergic alpha-2 Receptor Agonists<br>
 • Adrenergic alpha-2 Receptor Antagonists<br>
 • Histamine H1 Antagonists<br>
-• Histamine H2 Antagonists
-
+• Histamine H2 Antagonists<br>
+• ... (119 Categories Total)
 ________________________________________________________________________________________________________________
 
 **EXAMPLE MOLECULAR PROPERTIES:**
@@ -137,7 +137,7 @@ ________________________________________________________________________________
 • 'kappa1', 'kappa2', 'kappa3' -  Kappa shape indices reflect molecular shape, symmetry, and branching<br>
 • 'peoe_VSA1', 'peoe_VSA2', ... , 'peoe_VSA14' - relate to partial equalization of orbital electronegativity (PEOE)<br>
 • 'MQN1', 'MQN2', ... , 'MQN42' - Molecular Quantum Numbers, series of 42 ints capturing molecular structure information<br>
-• ... (244 Total)
+• ... (244 Propeties Total)
 
 [https://cadaster.eu/sites/cadaster.eu/files/challenge/descr.htm]
 
