@@ -47,6 +47,7 @@ const App: React.FC = () => {
   const [sortConfig, setSortConfig] = useState<SortConfig>({ key: 'count', direction: 'descending' }); 
   const [activities, setActivities] = useState<Activity[]>([]);
   const [imageUrl, setImageUrl] = useState('');
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null); 
   
 /*========================================================================================================*/
 
@@ -212,33 +213,48 @@ const App: React.FC = () => {
     return (
       <div>
         <h2> </h2>
-        <table>
+        <table style={{ borderRadius: '22px', overflow: 'hidden', }}>
           <thead>
             <tr>
-              <th>
-                <button onClick={() => requestSort('activity')} style={{ border: 'none', background: 'none' }}>
-                  Pharmacological Classification:
+              <th style={{ textAlign: 'center' }}>
+                <button 
+                  onClick={() => requestSort('activity')}
+                  style={{ border: 'none', background: 'none', color: 'white', textAlign: 'center', fontSize: '20px' }}
+                >
+                  PubChem Pharmacological Classification:
                 </button>
               </th>
               <th style={{ width: '50px', textAlign: 'center' }}>
-                <button onClick={() => requestSort('count')} style={{ border: 'none', background: 'none' }}>
+                <button 
+                  onClick={() => requestSort('count')}
+                  style={{ border: 'none', background: 'none', color: 'white', textAlign: 'center', fontSize: '14px' }}
+                >
                   Entries
                 </button>
               </th>
             </tr>
           </thead>
+
           <tbody>
             {sortedActivities.map((item, index) => (
-              <tr key={index}>
-                <td>
-                  <button onClick={() => handleActivityClick(item.activity)} style={{ textTransform: 'capitalize' }}>
+              <tr key={index}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}>
+                <td style={{ background: hoveredIndex === index ? '#45a049' : '#575757' }}>
+                  <button 
+                    onClick={() => handleActivityClick(item.activity)}
+                    style={{ textTransform: 'capitalize', border: 'none', background: 'none', fontSize: '15px' }}>
                     {item.activity}
                   </button>
                 </td>
-                <td>{item.count}</td>  
+                <td style={{ fontFamily: 'Arial, sans-serif', textAlign: 'center', background: hoveredIndex === index ? '#45a049' : '#575757' }}>
+                  {item.count}
+                </td>
               </tr>
             ))}
           </tbody>
+
+
         </table>
       </div>
     );
@@ -253,30 +269,49 @@ const App: React.FC = () => {
     if ('Activities' in results) {
       return (
         <div>
-          <h2>{results['Compound Name']}</h2>
-          <p>CID: {results.CID}</p>
+          <h2 style={{
+            fontFamily: 'Arial, sans-serif', marginTop: '5px', marginBottom: '0px' }}>
+            {results['Compound Name']}
+          </h2>
+          <p style={{
+            fontFamily: 'Arial, sans-serif', marginTop: '5px', marginBottom: '10px' }}>
+            CID: {results.CID}
+          </p>
           {imageUrl && <img src={imageUrl} alt="Compound Structure" />}
-          <p>Known Pharmacological Classifications:</p>
+          
+          <div className="classifications-container">
+          <p style={{ color: '#4CAF50', fontSize: '20px' }}> PubChem Pharmacological Classifications:</p>
           <h2>{
             Array.isArray(results.Activities) && results.Activities.length > 0
               ? `[${results.Activities.join(' - ')}]`
               : 'No activities listed'
             }</h2>
         </div>
+        </div>
       );
     } 
     else if ('Predicted Activities' in results) {
       return (
         <div>
-          <h2>{results['Compound Name']}</h2>
-          <p>CID: {results.CID}</p>
+          <h2 style={{
+            fontFamily: 'Arial, sans-serif', marginTop: '5px' }}>
+            {results['Compound Name']}
+          </h2>
+          <p style={{
+            fontFamily: 'Arial, sans-serif', marginBottom: '0px' }}>
+            CID: {results.CID}
+          </p>
           {imageUrl && <img src={imageUrl} alt="Compound Structure" />}
-          <p>Predicted Pharmacological Classifications:</p>
-          <h2>{
+
+          <div className="classifications-container">
+          <p style={{ color: '#47a3ce'}}> Classification Unknown on PubChem </p>
+          <p style={{ color: '#47a3ce', fontSize: '20px' }}> Predicted Pharmacological Classifications:</p>
+            <h2>{
             Array.isArray(results['Predicted Activities']) && results['Predicted Activities'].length > 0
               ? `[${results['Predicted Activities'].join(' - ')}]`
-              : 'No activities listed'
+              : 'Unable to Predict'
             }</h2>
+          </div>
         </div>
       );
     }
@@ -284,26 +319,46 @@ const App: React.FC = () => {
     else if (Array.isArray(results)) {
       return (
         <div>
-          <h2>Results for "{searchTerm}":</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>CID</th>
-                <th>Compound Name</th>
+        <h2>Results for "{searchTerm}":</h2>
+        <table style={{ borderRadius: '22px', overflow: 'hidden' }}>
+          <thead>
+            <tr>
+              <th style={{ textAlign: 'center' }}>
+                CID
+              </th>
+              <th style={{ textAlign: 'center', fontSize: '18px' }}>
+                Compound Name
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+          {results.map((item, index) => (
+              <tr key={index}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}>
+                  <td onClick={() => handleCIDClick(item.CID)} 
+                      style={{ 
+                        cursor: 'pointer', 
+                        color: hoveredIndex === index ? 'white' : '#45a049', 
+                        textDecoration: 'underline',
+                        textAlign: 'center',
+                        fontFamily: 'Arial, sans-serif',
+                        background: hoveredIndex === index ? '#45a049' : '#575757' 
+                      }}>
+                      {item.CID}
+                  </td>
+                  <td style={{ 
+                        fontFamily: 'Arial, sans-serif',
+                        fontSize: '15px',
+                        background: hoveredIndex === index ? '#45a049' : '#575757' 
+                      }}>
+                    {item['Compound Name']}
+                  </td>
               </tr>
-            </thead>
-            <tbody>
-            {results.map((item, index) => (
-                <tr key={index}>
-                    <td onClick={() => handleCIDClick(item.CID)} style={{ cursor: 'pointer', color: '#45a049', textDecoration: 'underline' }}>
-                        {item.CID}
-                    </td>
-                    <td>{item['Compound Name']}</td>
-                </tr>
-            ))}
-            </tbody>
-          </table>
-        </div>
+          ))}
+          </tbody>
+        </table>
+      </div>
       );
     } 
     else {
@@ -313,7 +368,7 @@ const App: React.FC = () => {
 
     return (
             <div className="container">
-                <h1>༺🧪℃ompound ⌬ Classifie℞💊༻</h1>
+                <h1>🧪 ℃ompound ⌬ Classifie℞ 💊</h1>
                 <div className="search-bar">
                     <input
                         type="text"

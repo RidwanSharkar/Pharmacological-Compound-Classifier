@@ -122,7 +122,14 @@ def search():
 
             else:
                 # IF *CID* NOT FOUND, ML PREDICT
-                compound_name = 'N/A'
+                base_url = "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view"
+                url = f"{base_url}/data/compound/{cid}/JSON"
+                response = requests.get(url, timeout=10)
+                response.raise_for_status()
+                data = response.json()
+
+                # Scraped Compound Name
+                compound_name = data['Record']['RecordTitle']
                 smiles = fetch_smiles(cid)
                 if smiles:
                     descriptors = compute_descriptors(smiles)
