@@ -8,7 +8,7 @@ ________________________________________________________________________________
 
 • This project employs various machine learning models to identify the Quantitative Structure-Activity Relationships (QSAR) of chemical compounds based on their extensive molecular properties. 
 
-• Users can search and sort the database for classifications and compounds - Classifications that are NOT listed on PubChem will predicted by the model, if possible. 
+• Users can search and sort the database for pharmacological classifications & compounds - Compounds that DO NOT have any classification data avilable on PubChem will predicted by the model, if possible. 
 
 ![image](https://github.com/user-attachments/assets/c5e3794e-f6be-465d-9870-b9c55c131a11)
 ![Screenshot 2024-08-09 132916](https://github.com/user-attachments/assets/d33657c3-0700-42d5-bd8b-11eb557b3eac)
@@ -56,7 +56,7 @@ Deep Neural Network (DNN) is set up with the following parameters:
 
 • 3rd Layer: 512 Neuron Count
 
-• Output layer: Sigmoid Activation (for independent label predictions)  |  Dropout Layers: 0.3-0.4 
+• Output layer: Sigmoid Activation (for independent label predictions)  |  Dropout Layers: 0.25-0.4 
 
 • Batch Size: 64  |  Epochs: 120
 
@@ -88,17 +88,13 @@ ________________________________________________________________________________
 
 • 'SMR' - Molar Refractivity, representing molecule's volume and polarizability (measure of electron cloud's ability to distort)
 
-• 'LabuteASA' - approx Surface Area
-
 • 'TPSA' - Topological Polar Surface Area  (important for drug bioavailability)
-
-• 'AMW' -  Average Molecular Weight of the compound.
 
 • 'FractionCSP3' - fraction of carbons that are sp3 hybridized (indicating more Hydrogen saturation and flexibility of the molecule)
 
 • 'EState_VSA1', ... , 'EState_VSA10' - for Electrotopological State of the molecule
 
-• 'fr_alkyl_halide', 'fr_amide', 'fr_halogen', 'fr_Imine', etc. - Functional Group counts, which correlate chemical behavior to potential receptor activition.
+• 'fr_alkyl_halide', 'fr_amide', 'fr_halogen', 'fr_Imine', etc. - Functional Group counts
 
 • 'NumLipinskiHBA' - Number of Hydrogen Bond Acceptors as defined by Lipinski's rule of five (NO Count)
 
@@ -110,13 +106,9 @@ ________________________________________________________________________________
 
 • 'NumAromaticRings', Number of aromatic ring structures (rings with alternating double bonds).
 
-• 'NumSaturatedRings', Number of saturated rings (rings that contain single bonds only).
-
-• 'NumAliphaticRings' Number of non-aromatic rings.
+• 'NumSaturatedRings', Number of saturated rings (rings that contain single bonds only - H saturation).
 
 • 'Chi0v', 'Chi1v', 'Chi2v', 'Chi3v', 'Chi4v' - Chi connectivity index in valence state (measure of molecular branching).
-
-• 'Chi1n', 'Chi2n', 'Chi3n', 'Chi4n' - Different orders of the Chi connectivity index, non-valence state.
 
 • 'HallKierAlpha' - measure of molecular shape and electron distribution.
 
