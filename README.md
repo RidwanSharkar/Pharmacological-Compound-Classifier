@@ -10,6 +10,8 @@ ________________________________________________________________________________
 
 • Users can search and sort the database for pharmacological classifications & compounds - Compounds that DO NOT have any classification data avilable on PubChem will predicted by the model, if possible. 
 
+________________________________________________________________________________________________________________
+
 ![image](https://github.com/user-attachments/assets/c5e3794e-f6be-465d-9870-b9c55c131a11)
 ![Screenshot 2024-08-09 132916](https://github.com/user-attachments/assets/d33657c3-0700-42d5-bd8b-11eb557b3eac)
 
@@ -68,7 +70,7 @@ Deep Neural Network (DNN) is set up with the following parameters:
 
 • BatchNormalization() & L2 Regularizers*
 
-DNN currently undergoing hyperparameter optimization (Testing combinations of the above parameters to output the the highest model accuracy) 
+DNN undergoing hyperparameter optimization (Testing combinations of the above parameters to output the the highest model accuracy) 
 
 ________________________________________________________________________________________________________________
 
@@ -78,7 +80,45 @@ ________________________________________________________________________________
 
 **METHODS 3:**
 
-• To enhance prediction accuracy for Psychoactive Compounds ONLY, the original dataset of 17,866 compounds was pruned down to 5,107 compounds that include Neurotransmitter Receptors as Classifications: 
+To enhance prediction accuracy for Psychoactive Compounds ONLY, the original dataset of 17,866 compounds was pruned down to 5,107 compounds that include Neurotransmitter Receptors as Classifications: 
+
+• Adenosine A1/2 Receptor Agonists..
+• Adenosine A1/2 Receptor Antagonists..
+• Cholinergic Agonists..
+• Cholinergic Antagonists..
+• Nicotinic Agonists..
+• Nicotinic Antagonists..
+• Muscarinic Agonists..
+• Muscarinic Antagonists..
+• GABA-A Receptor Agonists
+• GABA-A Receptor Antagonists
+• GABA-B Receptor Agonists
+• GABA-B Receptor Antagonists
+• Serotonin 5-HT1 Receptor Agonists
+• Serotonin 5-HT1 Receptor Antagonists
+• Serotonin 5-HT2 Receptor Agonists
+• Serotonin 5-HT2 Receptor Antagonists
+• Selective Serotonin Reuptake Inhibitors
+• Dopamine Agonists
+• Dopamine Antagonists
+• Dopamine Uptake Inhibitors
+• Cannabinoid Receptor Agonists
+• Cannabinoid Receptor Antagonists
+• Nootropic Agents
+• Neuroprotective Agents
+• Monoamine Oxidase Inhibitors
+• Psychotropic Drugs
+• Antipsychotic Agents
+• Adrenergic beta-1 Receptor Agonists
+• Adrenergic beta-1 Receptor Antagonists
+• Adrenergic alpha-2 Receptor Agonists
+• Adrenergic alpha-2 Receptor Antagonists
+• Histamine H1 Antagonists
+• Histamine H2 Antagonists
+
+
+
+
 
 ________________________________________________________________________________________________________________
 
