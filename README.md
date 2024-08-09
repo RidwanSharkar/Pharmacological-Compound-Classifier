@@ -7,13 +7,16 @@ ________________________________________________________________________________
 **OVERVIEW:**
 
 • This project employs machine learning to identify the Quantitative Structure-Activity Relationships (QSAR) of chemical compounds based on their extensive molecular properties. 
+
+• Users can search and sort the database for classifications and compounds - Classifications that are NOT listed on PubChem will predicted by the model, if possible. 
+
 ![image](https://github.com/user-attachments/assets/c5e3794e-f6be-465d-9870-b9c55c131a11)
 ![Screenshot 2024-08-09 132916](https://github.com/user-attachments/assets/d33657c3-0700-42d5-bd8b-11eb557b3eac)
 
-• Users can search and sort the database for classifications and compounds - Classifications that are NOT listed on PubChem will predicted by the model, if possible. 
+________________________________________________________________________________________________________________
+
 ![Screenshot 2024-08-09 132153](https://github.com/user-attachments/assets/f93ea499-dae5-4680-945b-c931e4d41072)
 ![Screenshot 2024-08-09 132745](https://github.com/user-attachments/assets/46e86eea-333d-4350-87eb-781ea396024e)
-
 
 ________________________________________________________________________________________________________________
 
