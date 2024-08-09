@@ -39,15 +39,14 @@ ________________________________________________________________________________
 Hamming Loss - Multi-Label Classification - is utilized to allow independent prediction of each activity within the set of pharmacological activities:
 
 ![1](https://github.com/user-attachments/assets/5f151664-3c4a-40bf-be7c-adf9fece44b5)
-![2](https://github.com/user-attachments/assets/a55920cb-d1cf-4c30-a347-6b709b1cd671)
-
-
 
 ________________________________________________________________________________________________________________
 
 **METHODS 2:**
 
-([https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422](https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422)) Deep Neural Network (DNN) is set up with the following parameters:
+([https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422](https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422)) 
+
+Deep Neural Network (DNN) is set up with the following parameters:
 
 • Normalization of Molecular Properties using StandardScalar() (scaling to unit variance) 
 
@@ -67,9 +66,13 @@ ________________________________________________________________________________
 
 • Gradient Clipping & Early Stopping 
 
-• BatchNormalization() and L2 Regularizers were noted to reduce accuracy for this dataset:
+• BatchNormalization() & L2 Regularizers*
 
-DNN currently undergoing Optuna Trials for hyperparameter optimization (Testing combinations of the above parameters to output the the highest model accuracy) 
+DNN currently undergoing hyperparameter optimization (Testing combinations of the above parameters to output the the highest model accuracy) 
+
+________________________________________________________________________________________________________________
+
+![2](https://github.com/user-attachments/assets/a55920cb-d1cf-4c30-a347-6b709b1cd671)
 
 ________________________________________________________________________________________________________________
 
