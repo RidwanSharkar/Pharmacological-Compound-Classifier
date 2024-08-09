@@ -1,19 +1,25 @@
 ________________________________________________________________________________________________________________
 **PHARMACOLOGICAL & CHEMICAL COMPOUND CLASSIFIER**
-- Predictive Modeling of Chemical Compounds' Classification, Mechanisms of Action, and Therapeutic Potentials using Machine Learning to identify Structure-Activity-Relationships (SAR)
+- Predictive Modeling of Chemical Compounds' Classifications and Therapeutic Potentials
+- Using Machine Learning to identify Structure-Activity-Relationships (SAR)
 ________________________________________________________________________________________________________________
 
-![Compounds 1](https://github.com/user-attachments/assets/1930c6ad-1e00-4408-997f-b58843c70cf2)
-![Compunds 3](https://github.com/user-attachments/assets/0a092992-f292-48c9-8893-52d2ebdbf6da)
-![Compounds 2](https://github.com/user-attachments/assets/5ced9b27-c232-4c4c-a830-ccd1e69e7e24)
-![Activities 3](https://github.com/user-attachments/assets/acc0be8d-1225-4b9e-a87a-c82c4ce21dd7)
-![Activities 1 5](https://github.com/user-attachments/assets/94f69d9d-de56-41bd-be19-bb1672cdaf56)
+**OVERVIEW:**
+• This project employs machine learning to identify the Quantitative Structure-Activity Relationships (QSAR) of chemical compounds based on their extensive molecular properties. 
+![image](https://github.com/user-attachments/assets/a6ec329a-c907-4811-92f9-bd8823e5d0b4)
+![Screenshot 2024-08-09 132916](https://github.com/user-attachments/assets/d33657c3-0700-42d5-bd8b-11eb557b3eac)
+
+• Users can search and sort the database for classifications and compounds - Classifications that are NOT listed on PubChem will predicted by the model, if possible. 
+![Screenshot 2024-08-09 132153](https://github.com/user-attachments/assets/f93ea499-dae5-4680-945b-c931e4d41072)
+![Screenshot 2024-08-09 132745](https://github.com/user-attachments/assets/46e86eea-333d-4350-87eb-781ea396024e)
 
 
+
+________________________________________________________________________________________________________________
 
 **METHODS 1:**
 
-• This project employs a Deep Neural Network (DNN) ensembled with Random Forest to identify the Quantitative Structure-Activity Relationships (QSAR) of chemical compounds based on their extensive molecular properties. Inspired by this dataset of 635 psychoactive compoounds and their 117 molecular properties. 
+• Inspired by this dataset of 635 psychoactive compoounds and their 117 molecular properties. 
 [https://www.kaggle.com/datasets/thedevastator/psychedelic-drug-database?resource=download], 
 a webscraper is set up to retrieve data from all compounds listed under PubChem.ncbi that possess a known 'MeSH Pharmacological Classification' (totaling 17,866 entries) to create and store a custom expanded dataset.
 
@@ -29,7 +35,10 @@ ________________________________________________________________________________
 
 Hamming Loss - Multi-Label Classification - is utilized to allow independent prediction of each activity within the set of pharmacological activities:
 
-![Predicting Activity INITIAL TEST](https://github.com/user-attachments/assets/f3ae078e-09d2-407b-8baa-08cdd6ff606f)
+![1](https://github.com/user-attachments/assets/5f151664-3c4a-40bf-be7c-adf9fece44b5)
+![2](https://github.com/user-attachments/assets/a55920cb-d1cf-4c30-a347-6b709b1cd671)
+
+
 
 ________________________________________________________________________________________________________________
 
