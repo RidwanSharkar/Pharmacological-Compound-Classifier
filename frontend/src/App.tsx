@@ -280,6 +280,7 @@ const App: React.FC = () => {
           {imageUrl && <img src={imageUrl} alt="Compound Structure" />}
           
           <div className="classifications-container">
+          <p style={{ color: '#4CAF50'}}> Classification Found on PubChem </p>
           <p style={{ color: '#4CAF50', fontSize: '20px' }}> PubChem Pharmacological Classifications:</p>
           <h2>{
             Array.isArray(results.Activities) && results.Activities.length > 0

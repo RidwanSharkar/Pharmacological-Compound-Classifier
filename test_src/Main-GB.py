@@ -158,7 +158,7 @@ def compute_descriptors(smiles):
         'EState_VSA8': Descriptors.EState_VSA8(mol),
         'EState_VSA9': Descriptors.EState_VSA9(mol),
         'EState_VSA10': Descriptors.EState_VSA10(mol),
-        'EState_VSA11': Descriptors.EState_VSA11(mol),                      # electrotopological state (E-state)
+        #'EState_VSA11': Descriptors.EState_VSA11(mol),                      # electrotopological state (E-state)
         'VSA_EState1': Descriptors.VSA_EState1(mol),
         'VSA_EState2': Descriptors.VSA_EState2(mol),
         'VSA_EState3': Descriptors.VSA_EState3(mol),
@@ -176,7 +176,7 @@ def compute_descriptors(smiles):
         'qed': Descriptors.qed(mol),                                    # Quantitative Estimate of Drug-likeness
         'HeavyAtomMolWt': Descriptors.HeavyAtomMolWt(mol),              # Molecular weight of heavy atoms
         'NumValenceElectrons': Descriptors.NumValenceElectrons(mol),    # Number of valence electrons
-        'NumRadicalElectrons': Descriptors.NumRadicalElectrons(mol),    # Number of radical electrons
+        #'NumRadicalElectrons': Descriptors.NumRadicalElectrons(mol),    # Number of radical electrons
         'MaxPartialCharge': Descriptors.MaxPartialCharge(mol),          # Maximum partial charge
         'MinPartialCharge': Descriptors.MinPartialCharge(mol),          # Minimum partial charge
         'MaxAbsPartialCharge': Descriptors.MaxAbsPartialCharge(mol),    # Maximum absolute partial charge
@@ -255,7 +255,7 @@ def compute_descriptors(smiles):
         'smr_VSA5' : rdMolDescriptors.SMR_VSA_(mol)[4],
         'smr_VSA6' : rdMolDescriptors.SMR_VSA_(mol)[5],
         'smr_VSA7' : rdMolDescriptors.SMR_VSA_(mol)[6],
-        'smr_VSA8' : rdMolDescriptors.SMR_VSA_(mol)[7],
+        #'smr_VSA8' : rdMolDescriptors.SMR_VSA_(mol)[7],
         'smr_VSA9' : rdMolDescriptors.SMR_VSA_(mol)[8],
         'smr_VSA10' : rdMolDescriptors.SMR_VSA_(mol)[9],
         'peoe_VSA1' : rdMolDescriptors.PEOE_VSA_(mol)[0],
@@ -276,8 +276,8 @@ def compute_descriptors(smiles):
         'MQN1' : rdMolDescriptors.MQNs_(mol)[0],
         'MQN2' : rdMolDescriptors.MQNs_(mol)[1],
         'MQN3' : rdMolDescriptors.MQNs_(mol)[2],
-        'MQN4' : rdMolDescriptors.MQNs_(mol)[3],
-        'MQN5' : rdMolDescriptors.MQNs_(mol)[4],
+        #'MQN4' : rdMolDescriptors.MQNs_(mol)[3],
+        #'MQN5' : rdMolDescriptors.MQNs_(mol)[4],
         'MQN6' : rdMolDescriptors.MQNs_(mol)[5],
         'MQN7' : rdMolDescriptors.MQNs_(mol)[6],
         'MQN8' : rdMolDescriptors.MQNs_(mol)[7],
@@ -290,7 +290,7 @@ def compute_descriptors(smiles):
         'MQN15' : rdMolDescriptors.MQNs_(mol)[14],
         'MQN16' : rdMolDescriptors.MQNs_(mol)[15],
         'MQN17' : rdMolDescriptors.MQNs_(mol)[16],
-        'MQN18' : rdMolDescriptors.MQNs_(mol)[17],
+        #'MQN18' : rdMolDescriptors.MQNs_(mol)[17],
         'MQN19' : rdMolDescriptors.MQNs_(mol)[18],
         'MQN20' : rdMolDescriptors.MQNs_(mol)[19],
         'MQN21' : rdMolDescriptors.MQNs_(mol)[20],
@@ -310,102 +310,20 @@ def compute_descriptors(smiles):
         'MQN35' : rdMolDescriptors.MQNs_(mol)[34],
         'MQN36' : rdMolDescriptors.MQNs_(mol)[35],
         'MQN37' : rdMolDescriptors.MQNs_(mol)[36],
-        'MQN38' : rdMolDescriptors.MQNs_(mol)[37],
-        'MQN39' : rdMolDescriptors.MQNs_(mol)[38],
+        #'MQN38' : rdMolDescriptors.MQNs_(mol)[37],
+        #'MQN39' : rdMolDescriptors.MQNs_(mol)[38],
         'MQN40' : rdMolDescriptors.MQNs_(mol)[39],
         'MQN41' : rdMolDescriptors.MQNs_(mol)[40],
         'MQN42' : rdMolDescriptors.MQNs_(mol)[41]
     }
-    base_descriptors.update(compute_vsa_descriptors(mol))
-    base_descriptors.update(compute_mqn_descriptors(mol))
+    #base_descriptors.update(compute_vsa_descriptors(mol))
+    #base_descriptors.update(compute_mqn_descriptors(mol))
     return base_descriptors
 
 
 def predict_activities(descriptors):
     df = pd.DataFrame([descriptors])
     expected_feature_order = [
-    #'fr_Al_COO',
-    #'fr_Al_OH',            # 94
-    #'fr_Al_OH_noTert',     # 109
-    #'fr_ArN',
-    #'fr_Ar_N',
-    #'fr_Ar_NH',
-    #'fr_Ar_OH',
-    #'fr_COO',
-    #'fr_COO2',
-    #'fr_C_O',                      # 115
-    #'fr_C_O_noCOO',
-    #'fr_C_S',
-    #'fr_HOCCN',
-    #'fr_Imine',
-    #'fr_NH0',                   # 98
-    #'fr_NH1',                  # 114 
-    #'fr_NH2',
-    #'fr_N_O',
-    #'fr_Ndealkylation1',       # 111
-    #'fr_Ndealkylation2',
-    #'fr_Nhpyrrole',
-    #'fr_SH',
-    #'fr_aldehyde',
-    #'fr_alkyl_carbamate',
-    #'fr_alkyl_halide',
-    #'fr_allylic_oxid',             # 97
-    #'fr_amide',
-    #'fr_amidine',
-    #'fr_aniline',
-    #'fr_aryl_methyl',
-    #'fr_azide',
-    #'fr_azo',
-    #'fr_benzene',                  # 116
-    #'fr_bicyclic',                 # 90
-    #'fr_diazo',
-    #'fr_dihydropyridine',
-    #'fr_epoxide',
-    #'fr_ester',                    
-    #'fr_ether',                    # 102
-    #'fr_furan',
-    #'fr_guanido',
-    #'fr_halogen',
-    #'fr_hdrzine',
-    #'fr_hdrzone',
-    #'fr_imidazole',
-    #'fr_imide',
-    #'fr_isocyan',
-    #'fr_isothiocyan',
-    #'fr_ketone',
-    #'fr_ketone_Topliss',
-    #'fr_lactam',
-    #'fr_lactone',
-    #'fr_methoxy',
-    #'fr_morpholine',
-    #'fr_nitrile',
-    #'fr_nitro',
-    #'fr_nitro_arom',
-    #'fr_nitro_arom_nonortho',
-    #'fr_nitroso',
-    #'fr_oxazole',
-    #'fr_oxime',
-    #'fr_para_hydroxylation',
-    #'fr_phenol',
-    #'fr_phenol_noOrthoHbond',
-    #'fr_phos_acid',
-    #'fr_phos_ester',
-    #'fr_piperdine',
-    #'fr_piperzine',
-    #'fr_priamide',
-    #'fr_prisulfonamd',
-    #'fr_pyridine',
-    #'fr_quatN',
-    #'fr_sulfide',
-    #'fr_sulfonamd',
-    #'fr_sulfone',
-    #'fr_term_acetylene',
-    #'fr_tetrazole',
-    #'fr_thiazole',
-    #'fr_thiocyan',
-    #'fr_thiophene',
-    #'fr_unbrch_alkane',
-    #'fr_urea',
     'EState_VSA1',              # 53   
     'EState_VSA2',              # 77
     'EState_VSA3',              # 58
@@ -416,7 +334,7 @@ def predict_activities(descriptors):
     'EState_VSA8',              # 37
     'EState_VSA9',              # 71
     'EState_VSA10',             # 78
-    'EState_VSA11',
+    #'EState_VSA11',
     'VSA_EState1',              # 67
     'VSA_EState2',              # 15
     'VSA_EState3',              # 17
@@ -434,7 +352,7 @@ def predict_activities(descriptors):
     'qed',                      # 20
     'HeavyAtomMolWt',           # 74
     'NumValenceElectrons',      # 79    
-    'NumRadicalElectrons',
+    #'NumRadicalElectrons',
     'MaxPartialCharge',         # 34       
     'MinPartialCharge',         # 47
     'MaxAbsPartialCharge',      # 54       
@@ -457,7 +375,7 @@ def predict_activities(descriptors):
     'SMR',                      # 63
     'LabuteASA',                # 69
     'TPSA',                     # 32
-    # 'AMW',
+    #'AMW',
     'ExactMW',                  # 66
     'NumLipinskiHBA',           # 88
     'NumLipinskiHBD',           # 99
@@ -500,7 +418,7 @@ def predict_activities(descriptors):
     'slogp_VSA6',           # 49
     'slogp_VSA7',
     'slogp_VSA8',           # 103 
-    # 'slogp_VSA9',
+    #'slogp_VSA9',
     'slogp_VSA10',              # 112
     'slogp_VSA11',
     'slogp_VSA12',
@@ -511,7 +429,7 @@ def predict_activities(descriptors):
     'smr_VSA5',             # 33
     'smr_VSA6',             # 43 
     'smr_VSA7',             # 45
-    'smr_VSA8',
+    #'smr_VSA8',
     'smr_VSA9',             # 106
     'smr_VSA10',                    # 65
     'peoe_VSA1',                    # 63
@@ -528,16 +446,19 @@ def predict_activities(descriptors):
     'peoe_VSA12',                   # 105 
     'peoe_VSA13',
     'peoe_VSA14',                   # 111
-    'MQN1', 'MQN2', 'MQN3', 'MQN4', 'MQN5', 'MQN6',
-    'MQN7', 'MQN8', 'MQN9', 'MQN10', 'MQN11', 'MQN12',
-    'MQN13', 
-    'MQN14', 'MQN15', 'MQN16', 'MQN17', 'MQN18',
+    'MQN1', 'MQN2', 'MQN3', # 'MQN4', 'MQN5', 
+    'MQN6', 'MQN7', 
+    'MQN8', 'MQN9', 'MQN10', 'MQN11', 'MQN12',
+    'MQN13', 'MQN14', 'MQN15', 
+    'MQN16', 'MQN17', #'MQN18',
     'MQN19', 'MQN20', 'MQN21', 'MQN22', 'MQN23', 'MQN24',
     'MQN25', 'MQN26', 'MQN27', 'MQN28', 'MQN29', 
     'MQN30', # 70
     'MQN31', # 62
-    'MQN32', 'MQN33', 'MQN34', 'MQN35', 'MQN36',
-    'MQN37', 'MQN38', 'MQN39', 'MQN40', 'MQN41', 'MQN42'
+    'MQN32', 'MQN33', 'MQN34', 
+    'MQN35', 'MQN36',
+    'MQN37', #'MQN38', 'MQN39', 
+    'MQN40', 'MQN41', 'MQN42'
     ]
     prediction_features = df[expected_feature_order]
     prediction = model.predict(prediction_features)
@@ -545,26 +466,33 @@ def predict_activities(descriptors):
     return predicted_labels
 
 
+def process_compounds(df):
+    results = []
+    for index, row in df.iterrows():
+        if row['Activities'] == '[]':
+            cid = row['CID']
+            smiles = fetch_smiles(cid)
+            if smiles:
+                descriptors = compute_descriptors(smiles)
+                if descriptors:
+                    predicted_activities = predict_activities(descriptors)
+                    predicted_activities_str = ','.join(predicted_activities[0]) if predicted_activities else ''
+                    results.append([cid, predicted_activities_str])
+                else:
+                    results.append([cid, 'Descriptors could not be computed'])
+            else:
+                results.append([cid, 'SMILES not found'])
+    return results
+
+def save_results(results):
+    result_df = pd.DataFrame(results, columns=['CID', 'Predicted Activities'])
+    result_df.to_csv('C:\\Users\\Lenovo\\Desktop\\Pharmacological-Chemical-Compound-Classifier\\data\\original\\predictedActivities.csv', index=False)
+    print("Results saved to 'predicted_activities.csv'.")
+
 def main():
-    while True:
-        cid = input("Enter CID (or type 'exit' to quit): ")
-        if cid.lower() == 'exit' or cid.strip() == '':
-            print("Exiting the program.")
-            break
-
-        smiles = fetch_smiles(cid)
-        if not smiles:
-            print(f"Error: SMILES could not be fetched with given CID {cid}.")
-            continue
-
-        descriptors = compute_descriptors(smiles)
-        if not descriptors:
-            print("Error: Invalid SMILES or descriptors could not be computed.")
-            continue
-
-        activities = predict_activities(descriptors)
-        print(f"Predicted Activities for CID {cid}: {activities}")
-
+    df = pd.read_csv('C:\\Users\\Lenovo\\Desktop\\Pharmacological-Chemical-Compound-Classifier\\data\\original\\compoundInfo_scraped.csv')
+    results = process_compounds(df)
+    save_results(results)
 
 if __name__ == "__main__":
     main()

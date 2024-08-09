@@ -27,88 +27,6 @@ mlb = MultiLabelBinarizer()
 activities_encoded = mlb.fit_transform(merged_data['Activities'])
 
 features = merged_data[[
-    'fr_Al_COO',
-    'fr_Al_OH',            # 94
-    'fr_Al_OH_noTert',     # 109
-    'fr_ArN',
-    'fr_Ar_N',
-    'fr_Ar_NH',
-    'fr_Ar_OH',
-    'fr_COO',
-    'fr_COO2',
-    'fr_C_O',                      # 115
-    'fr_C_O_noCOO',
-    #'fr_C_S',
-    'fr_HOCCN',
-    'fr_Imine',
-    'fr_NH0',                   # 98
-    'fr_NH1',                  # 114 
-    'fr_NH2',
-    #'fr_N_O',
-    'fr_Ndealkylation1',       # 111
-    'fr_Ndealkylation2',
-    'fr_Nhpyrrole',
-    #'fr_SH',
-    #'fr_aldehyde',
-    #'fr_alkyl_carbamate',
-    #'fr_alkyl_halide',
-    'fr_allylic_oxid',             # 97
-    'fr_amide',
-    #'fr_amidine',
-    'fr_aniline',
-    'fr_aryl_methyl',
-    #'fr_azide',
-    #'fr_azo',
-    'fr_benzene',                  # 116
-    'fr_bicyclic',                 # 90
-    #'fr_diazo',
-    #'fr_dihydropyridine',
-    'fr_epoxide',
-    'fr_ester',                    
-    'fr_ether',                    # 102
-    #'fr_furan',
-    'fr_guanido',
-    'fr_halogen',
-    #'fr_hdrzine',
-    #'fr_hdrzone',
-    #'fr_imidazole',
-    #'fr_imide',
-    #'fr_isocyan',
-    #'fr_isothiocyan',
-    'fr_ketone',
-    'fr_ketone_Topliss',
-    #'fr_lactam',
-    #'fr_lactone',
-    'fr_methoxy',
-    #'fr_morpholine',
-    #'fr_nitrile',
-    #'fr_nitro',
-    #'fr_nitro_arom',
-    #'fr_nitro_arom_nonortho',
-    #'fr_nitroso',
-    #'fr_oxazole',
-    'fr_oxime',
-    'fr_para_hydroxylation',
-    'fr_phenol',
-    'fr_phenol_noOrthoHbond',
-    #'fr_phos_acid',
-    #'fr_phos_ester',
-    'fr_piperdine',
-    #'fr_piperzine',
-    #'fr_priamide',
-    #'fr_prisulfonamd',
-    'fr_pyridine',
-    #'fr_quatN',
-    'fr_sulfide',
-    #'fr_sulfonamd',
-    #'fr_sulfone',
-    'fr_term_acetylene',
-    #'fr_tetrazole',
-    #'fr_thiazole',
-    #'fr_thiocyan',
-    #'fr_thiophene',
-    'fr_unbrch_alkane',
-    #'fr_urea',
     'EState_VSA1',              # 53   
     'EState_VSA2',              # 77
     'EState_VSA3',              # 58
@@ -208,7 +126,7 @@ features = merged_data[[
     'slogp_VSA11',
     'slogp_VSA12',
     'smr_VSA1',             # 81
-    #'smr_VSA2',
+    'smr_VSA2',
     'smr_VSA3',             # 84
     'smr_VSA4',             # 80
     'smr_VSA5',             # 33
@@ -231,19 +149,19 @@ features = merged_data[[
     'peoe_VSA12',                   # 105 
     'peoe_VSA13',
     'peoe_VSA14',                   # 111
-    'MQN1', 'MQN2', 'MQN3', # 'MQN4', # 'MQN5', 
-    'MQN6', # 'MQN7', 
+    'MQN1', 'MQN2', 'MQN3', # 'MQN4', 'MQN5', 
+    'MQN6', 'MQN7', 
     'MQN8', 'MQN9', 'MQN10', 'MQN11', 'MQN12',
-    'MQN13', 'MQN14', # 'MQN15', 
-    'MQN16', 'MQN17', # 'MQN18',
-    'MQN19', 'MQN20', 'MQN21', 'MQN22', 'MQN23', # 'MQN24',
+    'MQN13', 'MQN14', 'MQN15', 
+    'MQN16', 'MQN17', #'MQN18',
+    'MQN19', 'MQN20', 'MQN21', 'MQN22', 'MQN23', 'MQN24',
     'MQN25', 'MQN26', 'MQN27', 'MQN28', 'MQN29', 
     'MQN30', # 70
     'MQN31', # 62
-    'MQN32', 'MQN33', # 'MQN34', 
+    'MQN32', 'MQN33', 'MQN34', 
     'MQN35', 'MQN36',
-    'MQN37', #'MQN38', # 'MQN39', # 'MQN40', 
-    'MQN41', 'MQN42'
+    'MQN37', #'MQN38', 'MQN39', 
+    'MQN40', 'MQN41', 'MQN42'
     ]].fillna(0)
 
 # TRAIN MODEL=============================================================================
@@ -270,59 +188,59 @@ print(f"Average Accuracy: {average_accuracy:.2f}")
 
 # FEATURE IMPORTANCES=====================================================================
 feature_names = merged_data[[
-    'fr_Al_COO',
-    'fr_Al_OH',            # 94
-    'fr_Al_OH_noTert',     # 109
-    'fr_ArN',
-    'fr_Ar_N',
-    'fr_Ar_NH',
-    'fr_Ar_OH',
-    'fr_COO',
-    'fr_COO2',
-    'fr_C_O',                      # 115
-    'fr_C_O_noCOO',
+    #'fr_Al_COO',
+    #'fr_Al_OH',            # 94
+    #'fr_Al_OH_noTert',     # 109
+    #'fr_ArN',
+    #'fr_Ar_N',
+    #'fr_Ar_NH',
+    #'fr_Ar_OH',
+    #'fr_COO',
+    #'fr_COO2',
+    #'fr_C_O',                      # 115
+    #'fr_C_O_noCOO',
     #'fr_C_S',
-    'fr_HOCCN',
-    'fr_Imine',
-    'fr_NH0',                   # 98
-    'fr_NH1',                  # 114 
-    'fr_NH2',
+    #'fr_HOCCN',
+    #'fr_Imine',
+    #'fr_NH0',                   # 98
+    #'fr_NH1',                  # 114 
+    #'fr_NH2',
     #'fr_N_O',
-    'fr_Ndealkylation1',       # 111
-    'fr_Ndealkylation2',
-    'fr_Nhpyrrole',
+    #'fr_Ndealkylation1',       # 111
+    #'fr_Ndealkylation2',
+    #'fr_Nhpyrrole',
     #'fr_SH',
     #'fr_aldehyde',
     #'fr_alkyl_carbamate',
     #'fr_alkyl_halide',
-    'fr_allylic_oxid',             # 97
-    'fr_amide',
+    #'fr_allylic_oxid',             # 97
+    #'fr_amide',
     #'fr_amidine',
-    'fr_aniline',
-    'fr_aryl_methyl',
+    #'fr_aniline',
+    #'fr_aryl_methyl',
     #'fr_azide',
     #'fr_azo',
-    'fr_benzene',                  # 116
-    'fr_bicyclic',                 # 90
+    #'fr_benzene',                  # 116
+    #'fr_bicyclic',                 # 90
     #'fr_diazo',
     #'fr_dihydropyridine',
-    'fr_epoxide',
-    'fr_ester',                    
-    'fr_ether',                    # 102
+    #'fr_epoxide',
+    #'fr_ester',                    
+    #'fr_ether',                    # 102
     #'fr_furan',
-    'fr_guanido',
-    'fr_halogen',
+    #'fr_guanido',
+    #'fr_halogen',
     #'fr_hdrzine',
     #'fr_hdrzone',
     #'fr_imidazole',
     #'fr_imide',
     #'fr_isocyan',
     #'fr_isothiocyan',
-    'fr_ketone',
-    'fr_ketone_Topliss',
+    #'fr_ketone',
+    #'fr_ketone_Topliss',
     #'fr_lactam',
     #'fr_lactone',
-    'fr_methoxy',
+    #'fr_methoxy',
     #'fr_morpholine',
     #'fr_nitrile',
     #'fr_nitro',
@@ -330,27 +248,27 @@ feature_names = merged_data[[
     #'fr_nitro_arom_nonortho',
     #'fr_nitroso',
     #'fr_oxazole',
-    'fr_oxime',
-    'fr_para_hydroxylation',
-    'fr_phenol',
-    'fr_phenol_noOrthoHbond',
+    #'fr_oxime',
+    #'fr_para_hydroxylation',
+    #'fr_phenol',
+    #'fr_phenol_noOrthoHbond',
     #'fr_phos_acid',
     #'fr_phos_ester',
-    'fr_piperdine',
+    #'fr_piperdine',
     #'fr_piperzine',
     #'fr_priamide',
     #'fr_prisulfonamd',
-    'fr_pyridine',
+    #'fr_pyridine',
     #'fr_quatN',
-    'fr_sulfide',
+    #'fr_sulfide',
     #'fr_sulfonamd',
     #'fr_sulfone',
-    'fr_term_acetylene',
+    #'fr_term_acetylene',
     #'fr_tetrazole',
     #'fr_thiazole',
     #'fr_thiocyan',
     #'fr_thiophene',
-    'fr_unbrch_alkane',
+    #'fr_unbrch_alkane',
     #'fr_urea',
     'EState_VSA1',              # 53   
     'EState_VSA2',              # 77
@@ -451,7 +369,7 @@ feature_names = merged_data[[
     'slogp_VSA11',
     'slogp_VSA12',
     'smr_VSA1',             # 81
-    #'smr_VSA2',
+    'smr_VSA2',
     'smr_VSA3',             # 84
     'smr_VSA4',             # 80
     'smr_VSA5',             # 33
@@ -474,19 +392,19 @@ feature_names = merged_data[[
     'peoe_VSA12',                   # 105 
     'peoe_VSA13',
     'peoe_VSA14',                   # 111
-    'MQN1', 'MQN2', 'MQN3', # 'MQN4', # 'MQN5', 
-    'MQN6', # 'MQN7', 
+    'MQN1', 'MQN2', 'MQN3', # 'MQN4', 'MQN5', 
+    'MQN6', 'MQN7', 
     'MQN8', 'MQN9', 'MQN10', 'MQN11', 'MQN12',
-    'MQN13', 'MQN14', # 'MQN15', 
-    'MQN16', 'MQN17', # 'MQN18',
-    'MQN19', 'MQN20', 'MQN21', 'MQN22', 'MQN23', # 'MQN24',
+    'MQN13', 'MQN14', 'MQN15', 
+    'MQN16', 'MQN17', #'MQN18',
+    'MQN19', 'MQN20', 'MQN21', 'MQN22', 'MQN23', 'MQN24',
     'MQN25', 'MQN26', 'MQN27', 'MQN28', 'MQN29', 
     'MQN30', # 70
     'MQN31', # 62
-    'MQN32', 'MQN33', # 'MQN34', 
+    'MQN32', 'MQN33', 'MQN34', 
     'MQN35', 'MQN36',
-    'MQN37', #'MQN38', # 'MQN39', # 'MQN40', 
-    'MQN41', 'MQN42'
+    'MQN37', #'MQN38', 'MQN39', 
+    'MQN40', 'MQN41', 'MQN42'
     ]].columns
 
 importances = model.feature_importances_
@@ -496,7 +414,7 @@ importances_df = importances_df.sort_values(by='Importance', ascending=False)
 
 print("Feature Importances:")
 for index, row in importances_df.iterrows():
-    print(f"{row['Feature']}: {row['Importance']:.6f}")
+    print(f"{row['Feature']}: {row['Importance']:.7f}")
 
 
 
