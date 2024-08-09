@@ -82,13 +82,13 @@ ________________________________________________________________________________
 
 To enhance prediction accuracy for Psychoactive Compounds ONLY, the original dataset of 17,866 compounds was pruned down to 5,107 compounds that include Neurotransmitter Receptors as Classifications: 
 
-• Adenosine A1/2 Receptor Agonists..
-• Adenosine A1/2 Receptor Antagonists..
-• Cholinergic Agonists..
-• Cholinergic Antagonists..
-• Nicotinic Agonists..
-• Nicotinic Antagonists..
-• Muscarinic Agonists..
+• Adenosine A1/2 Receptor Agonists<br>
+• Adenosine A1/2 Receptor Antagonists<br>
+• Cholinergic Agonists<br>
+• Cholinergic Antagonists<br>
+• Nicotinic Agonists<br>
+• Nicotinic Antagonists<br>
+• Muscarinic Agonists<br>
 • Muscarinic Antagonists..
 • GABA-A Receptor Agonists
 • GABA-A Receptor Antagonists
