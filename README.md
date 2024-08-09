@@ -46,7 +46,7 @@ ________________________________________________________________________________
 
 **METHODS 2:**
 
-([https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422](https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422)) 
+([https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422](https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422)) <br>
 
 Deep Neural Network (DNN) is set up with the following parameters:
 
@@ -80,7 +80,7 @@ ________________________________________________________________________________
 
 **METHODS 3:**
 
-To enhance prediction accuracy for Psychoactive Compounds ONLY, the original dataset of 17,866 compounds was pruned down to 5,107 compounds that include Neurotransmitter Receptors as Classifications: 
+To enhance model prediction accuracy for Psychoactive Compounds in particular, the original dataset of 17,866 compounds was pruned down to 5,107 compounds that ONLY include Neurotransmitter Receptors as Classifications: 
 
 • Adenosine A1/2 Receptor Agonists<br>
 • Adenosine A1/2 Receptor Antagonists<br>
@@ -89,75 +89,54 @@ To enhance prediction accuracy for Psychoactive Compounds ONLY, the original dat
 • Nicotinic Agonists<br>
 • Nicotinic Antagonists<br>
 • Muscarinic Agonists<br>
-• Muscarinic Antagonists..
-• GABA-A Receptor Agonists
-• GABA-A Receptor Antagonists
-• GABA-B Receptor Agonists
-• GABA-B Receptor Antagonists
-• Serotonin 5-HT1 Receptor Agonists
-• Serotonin 5-HT1 Receptor Antagonists
-• Serotonin 5-HT2 Receptor Agonists
-• Serotonin 5-HT2 Receptor Antagonists
-• Selective Serotonin Reuptake Inhibitors
-• Dopamine Agonists
-• Dopamine Antagonists
-• Dopamine Uptake Inhibitors
-• Cannabinoid Receptor Agonists
-• Cannabinoid Receptor Antagonists
-• Nootropic Agents
-• Neuroprotective Agents
-• Monoamine Oxidase Inhibitors
-• Psychotropic Drugs
-• Antipsychotic Agents
-• Adrenergic beta-1 Receptor Agonists
-• Adrenergic beta-1 Receptor Antagonists
-• Adrenergic alpha-2 Receptor Agonists
-• Adrenergic alpha-2 Receptor Antagonists
-• Histamine H1 Antagonists
+• Muscarinic Antagonists<br>
+• GABA-A Receptor Agonists<br>
+• GABA-A Receptor Antagonists<br>
+• GABA-B Receptor Agonists<br>
+• GABA-B Receptor Antagonists<br>
+• Serotonin 5-HT1 Receptor Agonists<br>
+• Serotonin 5-HT1 Receptor Antagonists<br>
+• Serotonin 5-HT2 Receptor Agonists<br>
+• Serotonin 5-HT2 Receptor Antagonists<br>
+• Selective Serotonin Reuptake Inhibitors<br>
+• Dopamine Agonists<br>
+• Dopamine Antagonists<br>
+• Dopamine Uptake Inhibitors<br>
+• Cannabinoid Receptor Agonists<br>
+• Cannabinoid Receptor Antagonists<br>
+• Nootropic Agents<br>
+• Neuroprotective Agents<br>
+• Monoamine Oxidase Inhibitors<br>
+• Psychotropic Drugs<br>
+• Antipsychotic Agents<br>
+• Adrenergic beta-1 Receptor Agonists<br>
+• Adrenergic beta-1 Receptor Antagonists<br>
+• Adrenergic alpha-2 Receptor Agonists<br>
+• Adrenergic alpha-2 Receptor Antagonists<br>
+• Histamine H1 Antagonists<br>
 • Histamine H2 Antagonists
-
-
-
-
 
 ________________________________________________________________________________________________________________
 
 **EXAMPLE MOLECULAR PROPERTIES:**
 
-• 'SlogP' - represents the compound's Lipophilicity, predicting how well it can cross cell membranes.
-
-• 'SMR' - Molar Refractivity, representing molecule's volume and polarizability (measure of electron cloud's ability to distort)
-
-• 'TPSA' - Topological Polar Surface Area  (important for drug bioavailability)
-
-• 'FractionCSP3' - fraction of carbons that are sp3 hybridized (indicating more Hydrogen saturation and flexibility of the molecule)
-
-• 'EState_VSA1', ... , 'EState_VSA10' - for Electrotopological State of the molecule
-
-• 'fr_alkyl_halide', 'fr_amide', 'fr_halogen', 'fr_Imine', etc. - Functional Group counts
-
-• 'NumLipinskiHBA' - Number of Hydrogen Bond Acceptors as defined by Lipinski's rule of five (NO Count)
-
-• 'NumLipinskiHBD' - Number of Hydrogen Bond Donors as defined by Lipinski's rule of five (NHOH Count)
-
-• 'NumRotatableBonds' - Number of bonds in a molecule that can freely rotate.
-
-• 'NumHeteroAtoms' - Number of atoms other than carbon and hydrogen (e.g., oxygen, nitrogen)
-
-• 'NumAromaticRings', Number of aromatic ring structures (rings with alternating double bonds).
-
-• 'NumSaturatedRings', Number of saturated rings (rings that contain single bonds only - H saturation).
-
-• 'Chi0v', 'Chi1v', 'Chi2v', 'Chi3v', 'Chi4v' - Chi connectivity index in valence state (measure of molecular branching).
-
-• 'HallKierAlpha' - measure of molecular shape and electron distribution.
-
-• 'kappa1', 'kappa2', 'kappa3' -  Kappa shape indices reflect molecular shape, symmetry, and branching.
-
-• 'peoe_VSA1', 'peoe_VSA2', ... , 'peoe_VSA14' - relate to partial equalization of orbital electronegativity (PEOE).
-
-• 'MQN1', 'MQN2', ... , 'MQN42' - Molecular Quantum Numbers, series of 42 ints capturing molecular structure information.
-
+• 'SlogP' - represents the compound's Lipophilicity, predicting how well it can cross cell membranes<br>
+• 'SMR' - Molar Refractivity, representing molecule's volume and polarizability (measure of electron cloud's ability to distort)<br>
+• 'TPSA' - Topological Polar Surface Area  (important for drug bioavailability)<br>
+• 'FractionCSP3' - fraction of carbons that are sp3 hybridized (indicating more Hydrogen saturation and flexibility of the molecule)<br>
+• 'EState_VSA1', ... , 'EState_VSA10' - for Electrotopological State of the molecule<br>
+• 'fr_alkyl_halide', 'fr_amide', 'fr_halogen', 'fr_Imine', etc. - Functional Group counts<br>
+• 'NumLipinskiHBA' - Number of Hydrogen Bond Acceptors as defined by Lipinski's rule of five (NO Count)<br>
+• 'NumLipinskiHBD' - Number of Hydrogen Bond Donors as defined by Lipinski's rule of five (NHOH Count)<br>
+• 'NumRotatableBonds' - Number of bonds in a molecule that can freely rotate<br>
+• 'NumHeteroAtoms' - Number of atoms other than carbon and hydrogen (e.g., oxygen, nitrogen)<br>
+• 'NumAromaticRings', Number of aromatic ring structures (rings with alternating double bonds)<br>
+• 'NumSaturatedRings', Number of saturated rings (rings that contain single bonds only - H saturation)<br>
+• 'Chi0v', 'Chi1v', 'Chi2v', 'Chi3v', 'Chi4v' - Chi connectivity index in valence state (measure of molecular branching)<br>
+• 'HallKierAlpha' - measure of molecular shape and electron distribution<br>
+• 'kappa1', 'kappa2', 'kappa3' -  Kappa shape indices reflect molecular shape, symmetry, and branching<br>
+• 'peoe_VSA1', 'peoe_VSA2', ... , 'peoe_VSA14' - relate to partial equalization of orbital electronegativity (PEOE)<br>
+• 'MQN1', 'MQN2', ... , 'MQN42' - Molecular Quantum Numbers, series of 42 ints capturing molecular structure information<br>
 • ... (244 Total)
 
 [https://cadaster.eu/sites/cadaster.eu/files/challenge/descr.htm]
