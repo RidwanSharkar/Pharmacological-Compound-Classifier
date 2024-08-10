@@ -20,7 +20,7 @@ s3 = boto3.client('s3')
 bucket_name = 'molecular-and-pharmacological-data'
 file_key = 'parquet/compoundClassifications_scraped.parquet'
 
-#==========================================================================================
+#reducedAccuracy MODEL FOR LOAD SIZE======================================================
 
 model_key = 'Model2/RandomForestModel.pkl'
 mlb_key = 'Model2/MultiLabelBinarizer.pkl'
@@ -198,89 +198,7 @@ def compute_descriptors(smiles):
         return None
 
     base_descriptors = {
-        # EXPANDED SET                                          COUNTS OF MOLECULES' FUNCTIONAL GROUPS:
-        'fr_Al_COO': Descriptors.fr_Al_COO(mol),                    # aliphatic carboxylic acids
-        'fr_Al_OH': Descriptors.fr_Al_OH(mol),                      # aliphatic hydroxyl groups
-        'fr_Al_OH_noTert': Descriptors.fr_Al_OH_noTert(mol),        # aliphatic hydroxyl groups excluding tertiary-OH
-        'fr_ArN': Descriptors.fr_ArN(mol),                          # N functional groups on aromatic rings
-        'fr_Ar_N': Descriptors.fr_Ar_N(mol),                        # aromatic N atoms
-        'fr_Ar_NH': Descriptors.fr_Ar_NH(mol),                      # aromatic amines
-        'fr_Ar_OH': Descriptors.fr_Ar_OH(mol),                      # aromatic hydroxyl groups
-        'fr_COO': Descriptors.fr_COO(mol),                          # carboxylic acids
-        'fr_COO2': Descriptors.fr_COO2(mol),                        # carboxylic acid derivatives
-        'fr_C_O': Descriptors.fr_C_O(mol),                          # carbonyl O
-        'fr_C_O_noCOO': Descriptors.fr_C_O_noCOO(mol),              # carbonyl O, excluding COOH
-        #'fr_C_S': Descriptors.fr_C_S(mol),                          # thiocarbonyl
-        'fr_HOCCN': Descriptors.fr_HOCCN(mol),                      # C(OH)CCN substructures
-        'fr_Imine': Descriptors.fr_Imine(mol),                      # imines
-        'fr_NH0': Descriptors.fr_NH0(mol),                          # tertiary amines
-        'fr_NH1': Descriptors.fr_NH1(mol),                          # secondary amines
-        'fr_NH2': Descriptors.fr_NH2(mol),                          # primary amines
-        #'fr_N_O': Descriptors.fr_N_O(mol),                          # N-O bonds
-        'fr_Ndealkylation1': Descriptors.fr_Ndealkylation1(mol),    # Count of XCCNR groups
-        'fr_Ndealkylation2': Descriptors.fr_Ndealkylation2(mol),    # Count of tert-alicyclic amines
-        'fr_Nhpyrrole': Descriptors.fr_Nhpyrrole(mol),              # Count of H-pyrrole nitrogens
-        #'fr_SH': Descriptors.fr_SH(mol),                            # Count of thiol groups
-        #'fr_aldehyde': Descriptors.fr_aldehyde(mol),                # Count of aldehydes
-        #'fr_alkyl_carbamate': Descriptors.fr_alkyl_carbamate(mol),  # Count of alkyl carbamates
-        #'fr_alkyl_halide': Descriptors.fr_alkyl_halide(mol),        # Count of alkyl halides
-        'fr_allylic_oxid': Descriptors.fr_allylic_oxid(mol),        # Count of allylic oxidation sites
-        'fr_amide': Descriptors.fr_amide(mol),                      # Count of amides
-        #'fr_amidine': Descriptors.fr_amidine(mol),                  # Count of amidines
-        'fr_aniline': Descriptors.fr_aniline(mol),                  # Count of anilines
-        'fr_aryl_methyl': Descriptors.fr_aryl_methyl(mol),          # Count of aryl methyl sites
-        #'fr_azide': Descriptors.fr_azide(mol),                      # Count of azides
-        #'fr_azo': Descriptors.fr_azo(mol),                          # Count of azo groups
-        'fr_benzene': Descriptors.fr_benzene(mol),                  # Count of benzene rings
-        'fr_bicyclic': Descriptors.fr_bicyclic(mol),                # Count of bicyclic structures
-        #'fr_diazo': Descriptors.fr_diazo(mol),                      # Count of diazo groups
-        #'fr_dihydropyridine': Descriptors.fr_dihydropyridine(mol),  # Count of dihydropyridines
-        'fr_epoxide': Descriptors.fr_epoxide(mol),                  # Count of epoxide rings
-        'fr_ester': Descriptors.fr_ester(mol),                      # Count of esters
-        'fr_ether': Descriptors.fr_ether(mol),                      # Count of ether groups
-        #'fr_furan': Descriptors.fr_furan(mol),                      # Count of furan rings
-        'fr_guanido': Descriptors.fr_guanido(mol),                  # Count of guanidine groups
-        'fr_halogen': Descriptors.fr_halogen(mol),                  # Count of halogens
-        #'fr_hdrzine': Descriptors.fr_hdrzine(mol),                  # Count of hydrazine groups
-        #'fr_hdrzone': Descriptors.fr_hdrzone(mol),                  # Count of hydrazone groups
-        #'fr_imidazole': Descriptors.fr_imidazole(mol),              # Count of imidazole rings
-        #'fr_imide': Descriptors.fr_imide(mol),                      # Count of imide groups
-        #'fr_isocyan': Descriptors.fr_isocyan(mol),                  # Count of isocyanates
-        #'fr_isothiocyan': Descriptors.fr_isothiocyan(mol),          # Count of isothiocyanates
-        'fr_ketone': Descriptors.fr_ketone(mol),                    # Count of ketones
-        'fr_ketone_Topliss': Descriptors.fr_ketone_Topliss(mol),    # Count of Topliss ketones
-        #'fr_lactam': Descriptors.fr_lactam(mol),                    # Count of lactam groups
-        #'fr_lactone': Descriptors.fr_lactone(mol),                  # Count of lactone groups
-        'fr_methoxy': Descriptors.fr_methoxy(mol),                  # Count of methoxy groups
-        #'fr_morpholine': Descriptors.fr_morpholine(mol),            # Count of morpholine rings
-        #'fr_nitrile': Descriptors.fr_nitrile(mol),                  # Count of nitriles
-        #'fr_nitro': Descriptors.fr_nitro(mol),                      # Count of nitro groups
-        #'fr_nitro_arom': Descriptors.fr_nitro_arom(mol),            # Count of nitro groups on aromatic rings
-        #'fr_nitro_arom_nonortho': Descriptors.fr_nitro_arom_nonortho(mol),  # Count of non-ortho nitro groups on aromatic rings
-        #'fr_nitroso': Descriptors.fr_nitroso(mol),                          # Count of nitroso groups
-        #'fr_oxazole': Descriptors.fr_oxazole(mol),                          # Count of oxazole rings
-        'fr_oxime': Descriptors.fr_oxime(mol),                              # Count of oxime groups
-        'fr_para_hydroxylation': Descriptors.fr_para_hydroxylation(mol),    # Count of para-hydroxylation sites
-        'fr_phenol': Descriptors.fr_phenol(mol),                            # Count of phenols
-        'fr_phenol_noOrthoHbond': Descriptors.fr_phenol_noOrthoHbond(mol),  # Count of phenols without ortho H-bond
-        #'fr_phos_acid': Descriptors.fr_phos_acid(mol),                      # Count of phosphoric acid groups
-        #'fr_phos_ester': Descriptors.fr_phos_ester(mol),                    # Count of phosphoric ester groups
-        'fr_piperdine': Descriptors.fr_piperdine(mol),                      # Count of piperidine rings
-        #'fr_piperzine': Descriptors.fr_piperzine(mol),                      # Count of piperazine rings
-        #'fr_priamide': Descriptors.fr_priamide(mol),                        # Count of primary amides
-        #'fr_prisulfonamd': Descriptors.fr_prisulfonamd(mol),                # Count of primary sulfonamides
-        'fr_pyridine': Descriptors.fr_pyridine(mol),                        # Count of pyridine rings
-        #'fr_quatN': Descriptors.fr_quatN(mol),                              # Count of quaternary nitrogens
-        'fr_sulfide': Descriptors.fr_sulfide(mol),                          # Count of sulfide groups
-        #'fr_sulfonamd': Descriptors.fr_sulfonamd(mol),                      # Count of sulfonamides
-        #'fr_sulfone': Descriptors.fr_sulfone(mol),                          # Count of sulfone groups
-        'fr_term_acetylene': Descriptors.fr_term_acetylene(mol),            # Count of terminal acetylenes
-        #'fr_tetrazole': Descriptors.fr_tetrazole(mol),                      # Count of tetrazole rings
-        #'fr_thiazole': Descriptors.fr_thiazole(mol),                        # Count of thiazole rings
-        #'fr_thiocyan': Descriptors.fr_thiocyan(mol),                        # Count of thiocyanate groups
-        #'fr_thiophene': Descriptors.fr_thiophene(mol),                      # Count of thiophene rings
-        'fr_unbrch_alkane': Descriptors.fr_unbrch_alkane(mol),              # Count of unbranched alkanes
-        #'fr_urea': Descriptors.fr_urea(mol),                                # Count of urea groups
+        # EXPANDED SET FILTERED                                          
         'EState_VSA1': Descriptors.EState_VSA1(mol),                        
         'EState_VSA2': Descriptors.EState_VSA2(mol),
         'EState_VSA3': Descriptors.EState_VSA3(mol),
@@ -382,7 +300,7 @@ def compute_descriptors(smiles):
         'slogp_VSA12' : rdMolDescriptors.SlogP_VSA_(mol)[11],
 
         'smr_VSA1' : rdMolDescriptors.SMR_VSA_(mol)[0],
-        #'smr_VSA2' : rdMolDescriptors.SMR_VSA_(mol)[1],
+        'smr_VSA2' : rdMolDescriptors.SMR_VSA_(mol)[1],
         'smr_VSA3' : rdMolDescriptors.SMR_VSA_(mol)[2],
         'smr_VSA4' : rdMolDescriptors.SMR_VSA_(mol)[3],
         'smr_VSA5' : rdMolDescriptors.SMR_VSA_(mol)[4],
@@ -412,7 +330,7 @@ def compute_descriptors(smiles):
         #'MQN4' : rdMolDescriptors.MQNs_(mol)[3],
         #'MQN5' : rdMolDescriptors.MQNs_(mol)[4],
         'MQN6' : rdMolDescriptors.MQNs_(mol)[5],
-        #'MQN7' : rdMolDescriptors.MQNs_(mol)[6],
+        'MQN7' : rdMolDescriptors.MQNs_(mol)[6],
         'MQN8' : rdMolDescriptors.MQNs_(mol)[7],
         'MQN9' : rdMolDescriptors.MQNs_(mol)[8],
         'MQN10' : rdMolDescriptors.MQNs_(mol)[9],
@@ -420,7 +338,7 @@ def compute_descriptors(smiles):
         'MQN12' : rdMolDescriptors.MQNs_(mol)[11],
         'MQN13' : rdMolDescriptors.MQNs_(mol)[12],
         'MQN14' : rdMolDescriptors.MQNs_(mol)[13],
-        #'MQN15' : rdMolDescriptors.MQNs_(mol)[14],
+        'MQN15' : rdMolDescriptors.MQNs_(mol)[14],
         'MQN16' : rdMolDescriptors.MQNs_(mol)[15],
         'MQN17' : rdMolDescriptors.MQNs_(mol)[16],
         #'MQN18' : rdMolDescriptors.MQNs_(mol)[17],
@@ -429,7 +347,7 @@ def compute_descriptors(smiles):
         'MQN21' : rdMolDescriptors.MQNs_(mol)[20],
         'MQN22' : rdMolDescriptors.MQNs_(mol)[21],
         'MQN23' : rdMolDescriptors.MQNs_(mol)[22],
-        #'MQN24' : rdMolDescriptors.MQNs_(mol)[23],
+        'MQN24' : rdMolDescriptors.MQNs_(mol)[23],
         'MQN25' : rdMolDescriptors.MQNs_(mol)[24],
         'MQN26' : rdMolDescriptors.MQNs_(mol)[25],
         'MQN27' : rdMolDescriptors.MQNs_(mol)[26],
@@ -439,13 +357,13 @@ def compute_descriptors(smiles):
         'MQN31' : rdMolDescriptors.MQNs_(mol)[30],
         'MQN32' : rdMolDescriptors.MQNs_(mol)[31],
         'MQN33' : rdMolDescriptors.MQNs_(mol)[32],
-        #'MQN34' : rdMolDescriptors.MQNs_(mol)[33],
+        'MQN34' : rdMolDescriptors.MQNs_(mol)[33],
         'MQN35' : rdMolDescriptors.MQNs_(mol)[34],
         'MQN36' : rdMolDescriptors.MQNs_(mol)[35],
         'MQN37' : rdMolDescriptors.MQNs_(mol)[36],
         #'MQN38' : rdMolDescriptors.MQNs_(mol)[37],
         #'MQN39' : rdMolDescriptors.MQNs_(mol)[38],
-        #'MQN40' : rdMolDescriptors.MQNs_(mol)[39],
+        'MQN40' : rdMolDescriptors.MQNs_(mol)[39],
         'MQN41' : rdMolDescriptors.MQNs_(mol)[40],
         'MQN42' : rdMolDescriptors.MQNs_(mol)[41]
         }

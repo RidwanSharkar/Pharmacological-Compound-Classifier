@@ -73,7 +73,7 @@ const App: React.FC = () => {
 
             // SCRAPES IMAGE FROM PUBCHEM
             const imageUrl = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/CID/${searchId}/PNG`;
-            invertImageColors(imageUrl).then(setImageUrl).catch((error) => setError('Failed to process image'));
+            invertImageColors(imageUrl).then(setImageUrl).catch((error) => setError(' '));
         }
     } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -260,7 +260,7 @@ const App: React.FC = () => {
     );
   };
 
-  /*========================================================================================================*/
+  /*LAZY INLINE=============================================================================================*/
 
   const renderResults = () => {
     if (!results) {
@@ -369,7 +369,7 @@ const App: React.FC = () => {
 
     return (
             <div className="container">
-                <h1>🧪 ℃ompound ⌬ Classifie℞ 💊</h1>
+                <h1 style={{ color: '#4CAF50' }}>🧪 ℃ompound ⌬ Classifie℞ 💊</h1>
                 <div className="search-bar">
                     <input
                         type="text"
@@ -377,8 +377,12 @@ const App: React.FC = () => {
                         onChange={(e) => setSearchTerm(e.target.value)}
                         placeholder="Enter Compound Name, CID, or Activity"
                     />
-                    <button onClick={() => handleSearch()} style={{ marginRight: '10px' }}>Search</button>
-                    <button onClick={fetchActivities}>Browse</button>
+                  <button className="button" onClick={() => handleSearch()} style={{ marginRight: '10px' }}>
+                    Search
+                  </button>
+                  <button className="button" onClick={fetchActivities}>
+                    Browse
+                  </button>
                 </div>
                 {error && <p className="error">{error}</p>}
                 {activities.length > 0 && renderActivities()}

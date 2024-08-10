@@ -35,9 +35,35 @@ td:hover {
   padding: 1px;                 
   padding-right: 35px;
   padding-left: 35px;
-  border-radius: 75px;             
+  border-radius: 60px;             
   margin: 0px 0;               
 }
+
+.classifications-container:hover {
+  background-position: 100% 0;
+  background: linear-gradient(135deg, #868686, #4d4d4d, #a9a9a9, #666666); 
+  background-size: 400% 400%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+.button {
+  background-color: #4d4d4d;
+  border: none;
+  color: #e0e0e0; 
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.button:hover {
+  background-color: #45a049;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
 
 /*-----------------------------------------------------------------------------*/
 
@@ -65,7 +91,7 @@ table td button:hover {
 body {
   background-color: #333; /* actual background */
   color: #fff; 
-  font-family: 'Times New Roman', Times, serif, sans-serif; /* font */
+  font-family: 'Times New Roman', Times, serif, sans-serif; 
 }
 
 
@@ -88,6 +114,7 @@ body {
   background-color: #555; /* input field */
   color: #fff; /*  text input  */
   border: none; 
+  border-radius: 20px; 
 }
 
 .search-bar button {
@@ -96,6 +123,7 @@ body {
   color: #fff; /* text */
   border: none; 
   cursor: pointer; 
+  border-radius: 20px; 
 }
 
 .results-container {
