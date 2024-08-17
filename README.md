@@ -47,13 +47,13 @@ ________________________________________________________________________________
 
 ([https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422](https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422)) <br>
 
-Deep Neural Network (DNN) is set up with the following parameters:
+Deep Neural Network (DNN) is set up with the following parameters to achieve highest accuracy and AUC:
 
 • Normalization of Molecular Properties using StandardScalar() (scaling to unit variance) 
 
 • 1st Layer: 1760 Neuron Count
 
-• 2nd Layer: 1024 Neuron Count
+• 2nd Layer: 1240 Neuron Count
 
 • 3rd Layer: 512 Neuron Count
 
@@ -68,8 +68,6 @@ Deep Neural Network (DNN) is set up with the following parameters:
 • Gradient Clipping & Early Stopping 
 
 • BatchNormalization() & L2 Regularizers*
-
-DNN undergoing hyperparameter optimization (Testing combinations of the above parameters to output the the highest model accuracy) 
 
 ________________________________________________________________________________________________________________
 
