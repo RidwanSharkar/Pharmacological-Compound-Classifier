@@ -141,12 +141,11 @@ ________________________________________________________________________________
 ________________________________________________________________________________________________________________
 **TECH STACK:**
 
-Frontend: React, TypeScript
+**Frontend:** React, TypeScript
 
-Backend: Flask, Python
+**Backend:** Flask, Python, RESTful API
 
-Data Storage: AWS S3, Parquet
+**Data Storage:** AWS S3, Parquet
 
-Machine Learning: TensorFlow, Keras, Optuna, Scikit-learn
+**Machine Learning:** TensorFlow, Keras, Optuna, Scikit-learn
 
-RESTful API
