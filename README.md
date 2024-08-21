@@ -47,7 +47,7 @@ ________________________________________________________________________________
 
 ([https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422](https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422)) <br>
 
-Deep Neural Network (DNN) is set up with the following parameters to achieve highest accuracy and AUC:
+Deep Neural Network (DNN) is set up with the following parameters to achieve highest validation accuracy and AUC:
 
 • Normalization of Molecular Properties using StandardScalar() (scaling to unit variance) 
 
