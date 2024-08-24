@@ -25,7 +25,7 @@ ________________________________________________________________________________
 
 • Inspired by this dataset of 635 psychoactive compounds and their 117 molecular properties. 
 [https://www.kaggle.com/datasets/thedevastator/psychedelic-drug-database?resource=download], 
-a webscraper is set up to retrieve data from all compounds listed under PubChem.ncbi that possess a known 'MeSH Pharmacological Classification' (totaling 17,866 entries) to create and store a custom expanded dataset.
+a webscraper is set up to retrieve data from all compounds listed under PubChem.ncbi that possess a known 'MeSH Pharmacological Classification' (totaling 17,866 entries) to create and store a more expansive dataset.
 
 • RD-Kit (Cheminformatics) is then used to retrieve and compute all scraped compounds' molecular popularties, which have been expanded to include 244 molecular porperties - now including counts of all functional groups (amides, halogens, ketones, etc.) as well as electrotopological states (E-state) information that directly correlate molecular behavior with biological receptor activity.
 
