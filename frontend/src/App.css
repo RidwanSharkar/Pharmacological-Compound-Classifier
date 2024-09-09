@@ -39,9 +39,10 @@ td:hover {
   margin: 0px 0;               
 }
 
+
 .classifications-container:hover {
+  background: linear-gradient(135deg, #868686, #4d4d4d, #a9a9a9, #666666);
   background-position: 100% 0;
-  background: linear-gradient(135deg, #868686, #4d4d4d, #a9a9a9, #666666); 
   background-size: 400% 400%;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
