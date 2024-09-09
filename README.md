@@ -8,7 +8,7 @@ ________________________________________________________________________________
 
 • This project employs various machine learning models to identify the Quantitative Structure-Activity Relationships (QSAR) of chemical compounds based on their extensive molecular properties. 
 
-• Users can search and sort the database for pharmacological classifications & compounds - Compounds that DO NOT have any classification data avilable on PubChem will predicted by the model, if possible. 
+• Users can search and sort the database for pharmacological classifications & compounds - Compounds that DO NOT have any classification data available on PubChem will predicted by the model, if possible. 
 
 ________________________________________________________________________________________________________________
 
@@ -25,7 +25,7 @@ ________________________________________________________________________________
 
 • Inspired by this dataset of 635 psychoactive compounds and their 117 molecular properties. 
 [https://www.kaggle.com/datasets/thedevastator/psychedelic-drug-database?resource=download], 
-a webscraper is set up to retrieve data from all compounds listed under PubChem.ncbi that possess a known 'MeSH Pharmacological Classification' (totaling 17,866 entries) to create and store a custom expanded dataset.
+a webscraper is set up to retrieve data from all compounds listed under PubChem.ncbi that possess a known 'MeSH Pharmacological Classification' (totaling 17,866 entries) to create and store a more expansive dataset.
 
 • RD-Kit (Cheminformatics) is then used to retrieve and compute all scraped compounds' molecular popularties, which have been expanded to include 244 molecular porperties - now including counts of all functional groups (amides, halogens, ketones, etc.) as well as electrotopological states (E-state) information that directly correlate molecular behavior with biological receptor activity.
 
@@ -47,13 +47,13 @@ ________________________________________________________________________________
 
 ([https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422](https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422)) <br>
 
-Deep Neural Network (DNN) is set up with the following parameters:
+Deep Neural Network (DNN) is set up with the following parameters to achieve highest validation accuracy and AUC:
 
 • Normalization of Molecular Properties using StandardScalar() (scaling to unit variance) 
 
 • 1st Layer: 1760 Neuron Count
 
-• 2nd Layer: 1024 Neuron Count
+• 2nd Layer: 1240 Neuron Count
 
 • 3rd Layer: 512 Neuron Count
 
@@ -68,8 +68,6 @@ Deep Neural Network (DNN) is set up with the following parameters:
 • Gradient Clipping & Early Stopping 
 
 • BatchNormalization() & L2 Regularizers*
-
-DNN undergoing hyperparameter optimization (Testing combinations of the above parameters to output the the highest model accuracy) 
 
 ________________________________________________________________________________________________________________
 
@@ -143,12 +141,11 @@ ________________________________________________________________________________
 ________________________________________________________________________________________________________________
 **TECH STACK:**
 
-Frontend: React, TypeScript
+**Frontend:** React, TypeScript
 
-Backend: Flask, Python
+**Backend:** Flask, Python, RESTful API
 
-Data Storage: AWS S3, Parquet
+**Data Storage:** AWS S3, Parquet
 
-Machine Learning: TensorFlow, Keras, Optuna, Scikit-learn
+**Machine Learning:** TensorFlow, Keras, Optuna, Scikit-learn
 
-RESTful API
