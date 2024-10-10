@@ -1,7 +1,7 @@
 ________________________________________________________________________________________________________________
-**PHARMACOLOGICAL & CHEMICAL COMPOUND CLASSIFIER**
-- Predictive Modeling of Chemical Compounds' Classifications and Therapeutic Potentials
-- Using Machine Learning to identify Structure-Activity-Relationships (SAR)
+**PHARMACOLOGICAL COMPOUND CLASSIFIER**
+- Predictive Modeling of Chemical Compounds' Drug Classifications
+- Using Machine Learning to identify Structure-Activity-Relationships (QSAR)
 ________________________________________________________________________________________________________________
 
 **OVERVIEW:**
