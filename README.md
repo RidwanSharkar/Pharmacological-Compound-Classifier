@@ -12,12 +12,16 @@ ________________________________________________________________________________
 
 ________________________________________________________________________________________________________________
 
-![image](https://github.com/user-attachments/assets/c5e3794e-f6be-465d-9870-b9c55c131a11)
-![Screenshot 2024-08-09 132916](https://github.com/user-attachments/assets/d33657c3-0700-42d5-bd8b-11eb557b3eac)
+![image](https://github.com/user-attachments/assets/3792cedb-e24c-43db-8b43-d42e24049459)
+
+![image](https://github.com/user-attachments/assets/4658cd73-f9e4-43e6-a2d0-feae73471db9)
+
 ________________________________________________________________________________________________________________
 
-![Screenshot 2024-08-09 132153](https://github.com/user-attachments/assets/f93ea499-dae5-4680-945b-c931e4d41072)
-![Screenshot 2024-08-09 132745](https://github.com/user-attachments/assets/46e86eea-333d-4350-87eb-781ea396024e)
+![image](https://github.com/user-attachments/assets/33332207-f3d2-4048-9620-31d982d3de61)
+
+![image](https://github.com/user-attachments/assets/ecb1c8cc-8aac-44f6-9948-90d5415854d6)
+
 
 ________________________________________________________________________________________________________________
 
@@ -39,7 +43,8 @@ ________________________________________________________________________________
 
 • Hamming Loss - Multi-Label Classification - is utilized to allow independent prediction of each activity within the set of pharmacological activities:
 
-![1](https://github.com/user-attachments/assets/5f151664-3c4a-40bf-be7c-adf9fece44b5)
+![image](https://github.com/user-attachments/assets/5289915e-480f-4cd7-8765-6997cde6edeb)
+
 
 ________________________________________________________________________________________________________________
 
@@ -74,7 +79,8 @@ Feature Selection from Random Forest model is used to guide setup of a Deep Neur
 
 ________________________________________________________________________________________________________________
 
-![2](https://github.com/user-attachments/assets/a55920cb-d1cf-4c30-a347-6b709b1cd671)
+![image](https://github.com/user-attachments/assets/38c7c6ba-6d76-4152-a24e-d227fc59c10b)
+
 
 ________________________________________________________________________________________________________________
 
