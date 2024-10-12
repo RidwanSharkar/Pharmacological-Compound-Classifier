@@ -52,10 +52,8 @@ ________________________________________________________________________________
 
 ([https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422](https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422)) <br>
 
-Feature Selection from Random Forest model is used to guide setup of a Deep Neural Network (DNN) with the following parameters to achieve highest validation accuracy and AUC:
+Feature Selection from Random Forest model is used to guide setup of a Deep Neural Network (DNN) with the following parameters to achieve highest validation accuracy and AUC (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5297997/):
 
-"A higher AUC value corresponds to better prediction, and the AUC value is always more than zero and less than 100 %" <br>
-(https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5297997/)
 
 • Normalization of Molecular Properties using StandardScalar() (scaling to unit variance) 
 
