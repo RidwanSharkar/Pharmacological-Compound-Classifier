@@ -1,31 +1,24 @@
-________________________________________________________________________________________________________________
-**PHARMACOLOGICAL COMPOUND CLASSIFIER**
+# Neuropharmacological Compound Classifier
 - Predictive Modeling of Chemical Compounds' Drug Classifications
 - Using Machine Learning to identify Structure-Activity-Relationships (QSAR)
-________________________________________________________________________________________________________________
 
-**OVERVIEW:**
+## Overview: 
 
 • This project employs an ensemble of machine learning models to examine pharmacological properties by emulating Quantitative Structure-Activity Relationships (QSAR) of chemical compounds based on their extensive molecular properties. 
 
 • Users can search and sort the database for pharmacological classifications & compounds - Compounds that DO NOT have any classification data available on PubChem will predicted by the model, if possible. 
 
-________________________________________________________________________________________________________________
 
 ![image](https://github.com/user-attachments/assets/3792cedb-e24c-43db-8b43-d42e24049459)
 
 ![image](https://github.com/user-attachments/assets/4658cd73-f9e4-43e6-a2d0-feae73471db9)
-
-________________________________________________________________________________________________________________
 
 ![image](https://github.com/user-attachments/assets/33332207-f3d2-4048-9620-31d982d3de61)
 
 ![image](https://github.com/user-attachments/assets/ecb1c8cc-8aac-44f6-9948-90d5415854d6)
 
 
-________________________________________________________________________________________________________________
-
-**METHODS 1:**
+## Methods 1:
 
 • Inspired by this dataset of 635 psychoactive compounds and their 117 molecular properties. 
 [https://www.kaggle.com/datasets/thedevastator/psychedelic-drug-database?resource=download], 
@@ -35,9 +28,8 @@ a webscraper is set up to retrieve data from all compounds listed under PubChem.
 
 • All scraped and computed data is then fed to a Random Forest machine learning model to determine which molecular properties correlate highest with the compounds' pharmacological action. These weighed attributes are then used by the model to predict the pharmacological classification of a novel compound whose official 'MeSH Pharmacological Classification' is NOT listed on PubChem. 
 
-________________________________________________________________________________________________________________
 
-**Example 'MeSH Pharmacological Classification':**
+### Example 'MeSH Pharmacological Classification':
 
 • [Anti-Psychotic Agents, Serotonin Receptor Agonists, Dopamine Uptake Inhibitors, Protein Kinase Inhibitors, Vasoconstrictor Agents, etc.]
 
@@ -46,9 +38,8 @@ ________________________________________________________________________________
 ![image](https://github.com/user-attachments/assets/5289915e-480f-4cd7-8765-6997cde6edeb)
 
 
-________________________________________________________________________________________________________________
 
-**METHODS 2:** DEEP LEARNING MODEL
+## Methods 2: Deep Learning
 
 ([https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422](https://pubs.acs.org/doi/10.1021/acs.jcim.2c01422)) <br>
 
@@ -75,14 +66,10 @@ Feature Selection from Random Forest model is used to guide setup of a Deep Neur
 
 • BatchNormalization() & L2 Regularizers*
 
-________________________________________________________________________________________________________________
-
 ![image](https://github.com/user-attachments/assets/38c7c6ba-6d76-4152-a24e-d227fc59c10b)
 
 
-________________________________________________________________________________________________________________
-
-**METHODS 3:**
+## Methods 3:
 
 To enhance model prediction accuracy for Psychoactive Compounds in particular, the original dataset of 17,866 compounds was pruned down to 5,107 compounds that ONLY include information relevant to Neurotransmitter Receptors within their Classifications: 
 
@@ -120,9 +107,9 @@ To enhance model prediction accuracy for Psychoactive Compounds in particular, t
 • Histamine H1 Antagonists<br>
 • Histamine H2 Antagonists<br>
 • ... (119 Categories Total)
-________________________________________________________________________________________________________________
 
-**Example Molecular Properties:**
+
+## Example Molecular Properties:
 
 • 'SlogP' - represents the compound's Lipophilicity, predicting how well it can cross cell membranes<br>
 • 'SMR' - Molar Refractivity, representing molecule's volume and polarizability (measure of electron cloud's ability to distort)<br>
@@ -145,8 +132,7 @@ ________________________________________________________________________________
 
 [https://cadaster.eu/sites/cadaster.eu/files/challenge/descr.htm]
 
-________________________________________________________________________________________________________________
-**TECH STACK:**
+## Tech Stack:
 
 **Frontend:** React, TypeScript,  Axios
 
