@@ -1,4 +1,4 @@
-# Neuropharmacological Compound Classifier
+# Neurochemical Compound Classifier
 - Predictive Modeling of Chemical Compounds' Drug Classifications
 - Using Machine Learning to identify Structure-Activity-Relationships (QSAR)
 
