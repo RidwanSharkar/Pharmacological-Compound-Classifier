@@ -18,7 +18,7 @@
 ![image](https://github.com/user-attachments/assets/ecb1c8cc-8aac-44f6-9948-90d5415854d6)
 
 
-## Methods 1:
+## Methods 1: Data Scraping & Random Forest
 
 • Inspired by this dataset of 635 psychoactive compounds and their 117 molecular properties. 
 [https://www.kaggle.com/datasets/thedevastator/psychedelic-drug-database?resource=download], 
@@ -69,7 +69,7 @@ Feature Selection from Random Forest model is used to guide setup of a Deep Neur
 ![image](https://github.com/user-attachments/assets/38c7c6ba-6d76-4152-a24e-d227fc59c10b)
 
 
-## Methods 3:
+## Methods 3: Data Pruning
 
 To enhance model prediction accuracy for Psychoactive Compounds in particular, the original dataset of 17,866 compounds was pruned down to 5,107 compounds that ONLY include information relevant to Neurotransmitter Receptors within their Classifications: 
 
