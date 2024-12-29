@@ -17,6 +17,7 @@
 
 ![image](https://github.com/user-attachments/assets/ecb1c8cc-8aac-44f6-9948-90d5415854d6)
 
+---
 
 ## Methods 1: Data Scraping & Random Forest
 
@@ -37,7 +38,7 @@ a webscraper is set up to retrieve data from all compounds listed under PubChem.
 
 ![image](https://github.com/user-attachments/assets/5289915e-480f-4cd7-8765-6997cde6edeb)
 
-
+---
 
 ## Methods 2: Deep Learning
 
@@ -68,6 +69,7 @@ Feature Selection from Random Forest model is used to guide setup of a Deep Neur
 
 ![image](https://github.com/user-attachments/assets/38c7c6ba-6d76-4152-a24e-d227fc59c10b)
 
+---
 
 ## Methods 3: Data Pruning
 
@@ -108,6 +110,7 @@ To enhance model prediction accuracy for Psychoactive Compounds in particular, t
 • Histamine H2 Antagonists<br>
 • ... (119 Categories Total)
 
+---
 
 ## Example Molecular Properties:
 
@@ -131,6 +134,8 @@ To enhance model prediction accuracy for Psychoactive Compounds in particular, t
 • ... (244 Propeties Total)
 
 [https://cadaster.eu/sites/cadaster.eu/files/challenge/descr.htm]
+
+---
 
 ## Tech Stack:
 
