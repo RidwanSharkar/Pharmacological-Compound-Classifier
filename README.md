@@ -1,5 +1,5 @@
 # Neurochemical Compound Classifier
-Predictive modeling of chemical compounds' drug classifications; using machine learning to identify Structure-Activity-Relationships (QSAR)
+Predictive modeling of chemical compounds' drug classifications; using machine learning to identify Quantitative Structure-Activity-Relationships (QSAR)
 
 ## Overview: 
 
